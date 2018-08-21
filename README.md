@@ -3,6 +3,8 @@ p5.js with matter.js Examples
 
 Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http://brm.io/matter-js/).
 
+![x gif](https://user-images.githubusercontent.com/480224/44387710-8bf17e80-a526-11e8-972d-43b6e305765e.gif)
+
 * [01-basics](https://b-g.github.io/p5-matter-examples/01-basics)
 * [02-mouse](https://b-g.github.io/p5-matter-examples/02-mouse)
 * [03-catapult](https://b-g.github.io/p5-matter-examples/03-catapult)
