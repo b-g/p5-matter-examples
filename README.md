@@ -17,6 +17,7 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [10-reverse-gravity](https://b-g.github.io/p5-matter-examples/10-reverse-gravity)
 * [11-sprites](https://b-g.github.io/p5-matter-examples/11-sprites)
 * [12-attractor](https://b-g.github.io/p5-matter-examples/12-attractor)
+* [13-array-boxes-wrap](https://b-g.github.io/p5-matter-examples/13-array-boxes-wrap)
 
 
 The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://twitter.com/hfggmuend_x/) by Benedikt Groß.
