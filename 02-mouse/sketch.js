@@ -35,7 +35,7 @@ function setup() {
   var mouse = Mouse.create(canvas.elt);
   var mouseParams = {
     mouse: mouse,
-    constraint: { stiffness: 0.05 }
+    constraint: { stiffness: 0.05, angularStiffness: 0 }
   }
   mouseConstraint = MouseConstraint.create(engine, mouseParams);
   mouseConstraint.mouse.pixelRatio = pixelDensity();
