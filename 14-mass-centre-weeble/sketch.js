@@ -37,7 +37,7 @@ function setup() {
     min: { x: 0, y: 0 },
     max: { x: width, y: height }
   };
-  setMassCentre(circle, {x: 50, y: 50});
+  setMassCentre(circle, {x: 0, y: 50});
   World.add(engine.world, [circle]);
 
   // ground
@@ -97,10 +97,9 @@ function drawVertices(vertices) {
 
 function drawSprite(body, img, offsetY, w, h) {
   var pos = body.position;
-  var angle = body.angle;
   push();
   translate(pos.x, pos.y);
-  rotate(angle - PI/4);
+  rotate(body.angle);
   imageMode(CENTER);
   image(img, 0, offsetY, w, h);
   pop();
