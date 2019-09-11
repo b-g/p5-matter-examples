@@ -115,6 +115,7 @@ function drawText(body, txt) {
   rotate(angle);
   textAlign(CENTER, CENTER);
   text(txt, 0, 0);
+  ellipse(0, 10, 2, 2);
   pop();
 }
 
