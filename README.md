@@ -19,6 +19,7 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [12-attractor](https://b-g.github.io/p5-matter-examples/12-attractor)
 * [13-array-boxes-wrap](https://b-g.github.io/p5-matter-examples/13-array-boxes-wrap)
 * [14-mass-centre-weeble](https://b-g.github.io/p5-matter-examples/14-mass-centre-weeble)
+* [15-speed-dating-lottery](https://b-g.github.io/p5-matter-examples/15-speed-dating-lottery)
 
 
 The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://twitter.com/hfggmuend_x/) by Benedikt Groß.
