@@ -37,13 +37,13 @@ function setup() {
     pointA: {x: 100, y: 200},
     bodyB: rects.bodies[0],
     pointB: {x: -25, y: 0},
-    stiffness: 0.007
+    stiffness: 0.1
   }));
   Composite.add(rects, Constraint.create({
     pointA: {x: 700, y: 200},
     bodyB: rects.bodies[rects.bodies.length-1],
     pointB: {x: +25, y: 0},
-    stiffness: 0.007
+    stiffness: 0.02
   }));
 
   // add ball
