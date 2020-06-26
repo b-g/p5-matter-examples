@@ -20,6 +20,8 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [13-array-boxes-wrap](https://b-g.github.io/p5-matter-examples/13-array-boxes-wrap)
 * [14-mass-centre-weeble](https://b-g.github.io/p5-matter-examples/14-mass-centre-weeble)
 * [15-speed-dating-lottery](https://b-g.github.io/p5-matter-examples/15-speed-dating-lottery)
+* [16-jumping-ball](https://b-g.github.io/p5-matter-examples/16-jumping-ball)
+* [17-flipper-kicker](https://b-g.github.io/p5-matter-examples/17-flipper-kicker)
 
 
 The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://twitter.com/hfggmuend_x/) by Benedikt Groß.
