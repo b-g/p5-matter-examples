@@ -63,8 +63,8 @@ function keyPressed() {
   if (keyCode === 32) {
     Body.applyForce(
       circle,
-      {x: circle.position.x + 200, y: circle.position.y},
-      {x: 0, y: -0.1}
+      {x: circle.position.x, y: circle.position.y},
+      {x: 0.01, y: -0.1}
     );
   }
 }
