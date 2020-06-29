@@ -69,6 +69,7 @@ function draw() {
   drawVertices(slideLeft.vertices);
   drawVertices(slideRight.vertices);
   drawVertices(ground.vertices);
+  fill(200);
   drawVertices(kicker.vertices);
 
   stroke('magenta');
