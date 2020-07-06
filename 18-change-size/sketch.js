@@ -63,11 +63,20 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === 32) {
-    Body.applyForce(
-      circle,
-      {x: circle.position.x, y: circle.position.y},
-      {x: 0.01, y: -0.1}
-    );
+    if (isSmall) {
+      Body.applyForce(
+        circle,
+        {x: circle.position.x, y: circle.position.y},
+        {x: 0.03, y: -0.45}
+      );
+      console.log('big');
+    } else {
+      Body.applyForce(
+        circle,
+        {x: circle.position.x, y: circle.position.y},
+        {x: 0.01, y: -0.1}
+      );
+    }
   }
   if (key === 's' || key === 'S') {
     if (isSmall) {
@@ -75,7 +84,6 @@ function keyPressed() {
     } else {
       Body.scale(circle, 2, 2);
     }
-    console.log(isSmall);
     isSmall = !isSmall; // toggle isSmall variable
   }
 }
