@@ -11,7 +11,7 @@ var MouseConstraint = Matter.MouseConstraint;
 var engine;
 var boxA;
 var boxB;
-var circle;
+var ball;
 var ground;
 
 var canvas;
@@ -25,11 +25,11 @@ function setup() {
   // create two boxes and a ground
   boxA = Bodies.rectangle(200, 200, 80, 80);
   boxB = Bodies.rectangle(270, 50, 160, 80);
-  circle = Bodies.circle(100, 50, 40);
+  ball = Bodies.circle(100, 50, 40);
   ground = Bodies.rectangle(400, 500, 810, 25, {
     isStatic: true, angle: Math.PI * 0.06
   });
-  World.add(engine.world, [boxA, boxB, circle, ground]);
+  World.add(engine.world, [boxA, boxB, ball, ground]);
 
   // setup mouse
   var mouse = Mouse.create(canvas.elt);
@@ -52,7 +52,7 @@ function draw() {
   fill(255);
   drawVertices(boxA.vertices);
   drawVertices(boxB.vertices);
-  drawVertices(circle.vertices);
+  drawVertices(ball.vertices);
 
   fill(128);
   drawVertices(ground.vertices);
