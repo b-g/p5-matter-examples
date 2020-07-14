@@ -26,7 +26,7 @@ function setup() {
   boxA = Bodies.rectangle(200, 200, 80, 80);
   boxB = Bodies.rectangle(270, 50, 160, 80);
   circle = Bodies.circle(100, 50, 40);
-  ground = Bodies.rectangle(400, 500, 810, 10, {
+  ground = Bodies.rectangle(400, 500, 810, 25, {
     isStatic: true, angle: Math.PI * 0.06
   });
   World.add(engine.world, [boxA, boxB, circle, ground]);
