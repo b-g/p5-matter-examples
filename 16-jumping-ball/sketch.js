@@ -22,14 +22,14 @@ function setup() {
 
   engine = Engine.create();
 
-  circle = Bodies.circle(200, 50, 40, {
+  circle = Bodies.circle(width/2, 50, 40, {
     restitution: 0
   });
   circle.plugin.wrap = {
     min: { x: 0, y: 0 },
     max: { x: width, y: height }
   };
-  slide = Bodies.rectangle(400, 350, 700, 40, {
+  slide = Bodies.rectangle(400, 350, 800, 40, {
     isStatic: true,
     angle: Math.PI * 0.1
   });
@@ -61,10 +61,15 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === 32) {
+    var direction = 1; // circle runs left to right ->
+    if ((circle.position.x - circle.positionPrev.x) < 0) {
+      direction = -1; // circle runs right to left <-
+    }
+    // use current direction and velocity for the jump
     Body.applyForce(
       circle,
       {x: circle.position.x, y: circle.position.y},
-      {x: 0.01, y: -0.1}
+      {x: (0.01 * direction) + circle.velocity.x/100, y: -0.1}
     );
   }
 }
