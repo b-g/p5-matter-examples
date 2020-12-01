@@ -50,3 +50,13 @@ function drawVertices(vertices) {
   }
   endShape(CLOSE);
 }
+
+function drawBody(body) {
+  if (body.parts && body.parts.length > 1) {
+    for (var p = 1; p < body.parts.length; p++) {
+      drawVertices(body.parts[p].vertices)
+    }
+  } else {
+    drawVertices(body.vertices)
+  }
+}
