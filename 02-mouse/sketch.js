@@ -1,20 +1,20 @@
 // Benedikt Groß
 // Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Mouse = Matter.Mouse;
+const MouseConstraint = Matter.MouseConstraint;
 
-var engine;
-var boxA;
-var boxB;
-var ball;
-var ground;
+let engine;
+let boxA;
+let boxB;
+let ball;
+let ground;
 
-var canvas;
+let canvas;
 
 function setup() {
   canvas = createCanvas(800, 600);

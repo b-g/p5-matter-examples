@@ -1,22 +1,22 @@
 // Benedikt Groß
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
-var Constraint = Matter.Constraint;
-var Body = Matter.Body;
-var Composites = Matter.Composites;
-var Composite = Matter.Composite;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Mouse = Matter.Mouse;
+const MouseConstraint = Matter.MouseConstraint;
+const Constraint = Matter.Constraint;
+const Body = Matter.Body;
+const Composites = Matter.Composites;
+const Composite = Matter.Composite;
 
-var engine;
-var ground;
-var bridge;
-var ball;
+let engine;
+let ground;
+let bridge;
+let ball;
 
-var canvas;
+let canvas;
 
 function setup() {
   canvas = createCanvas(800, 600);
@@ -25,8 +25,8 @@ function setup() {
   engine = Engine.create();
 
   // add bridge
-  var group = Body.nextGroup(true);
-  var rects = Composites.stack(100, 200, 10, 1, 10, 10, function(x, y) {
+  const group = Body.nextGroup(true);
+  const rects = Composites.stack(100, 200, 10, 1, 10, 10, function(x, y) {
       return Bodies.rectangle(x, y, 50, 20, { collisionFilter: { group: group } });
   });
   bridge = Composites.chain(rects, 0.5, 0, -0.5, 0, {stiffness: 0.8, length: 2, render: {type: 'line'}});
@@ -55,8 +55,8 @@ function setup() {
   World.add(engine.world, [ground]);
 
   // setup mouse
-  var mouse = Mouse.create(canvas.elt);
-  var mouseParams = {
+  const mouse = Mouse.create(canvas.elt);
+  const mouseParams = {
     mouse: mouse,
     constraint: { stiffness: 0.05 }
   }
@@ -87,25 +87,25 @@ function draw() {
 }
 
 function drawConstraints(constraints) {
-  for (var i = 0; i < constraints.length; i++) {
+  for (let i = 0; i < constraints.length; i++) {
     drawConstraint(constraints[i]);
   }
 }
 
 function drawBodies(bodies) {
-  for (var i = 0; i < bodies.length; i++) {
+  for (let i = 0; i < bodies.length; i++) {
     drawVertices(bodies[i].vertices);
   }
 }
 
 function drawConstraint(constraint) {
-  var offsetA = constraint.pointA;
-  var posA = {x:0, y:0};
+  const offsetA = constraint.pointA;
+  let posA = {x:0, y:0};
   if (constraint.bodyA) {
     posA = constraint.bodyA.position;
   }
-  var offsetB = constraint.pointB;
-  var posB = {x:0, y:0};
+  const offsetB = constraint.pointB;
+  let posB = {x:0, y:0};
   if (constraint.bodyB) {
     posB = constraint.bodyB.position;
   }
@@ -119,9 +119,9 @@ function drawConstraint(constraint) {
 
 function drawMouse(mouseConstraint) {
   if (mouseConstraint.body) {
-    var pos = mouseConstraint.body.position;
-    var offset = mouseConstraint.constraint.pointB;
-    var m = mouseConstraint.mouse.position;
+    const pos = mouseConstraint.body.position;
+    const offset = mouseConstraint.constraint.pointB;
+    const m = mouseConstraint.mouse.position;
     stroke(0, 255, 0);
     strokeWeight(2);
     line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
@@ -130,7 +130,7 @@ function drawMouse(mouseConstraint) {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);

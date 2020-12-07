@@ -5,20 +5,20 @@
 Matter.use('matter-wrap');
 
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Mouse = Matter.Mouse;
+const MouseConstraint = Matter.MouseConstraint;
 
-var engine;
-var trampolineA;
-var trampolineB;
-var ball;
-var ground;
+let engine;
+let trampolineA;
+let trampolineB;
+let ball;
+let ground;
 
-var canvas;
+let canvas;
 
 function setup() {
   canvas = createCanvas(800, 600);
@@ -41,8 +41,8 @@ function setup() {
   World.add(engine.world, [trampolineA, trampolineB, ball, ground]);
 
   // setup mouse
-  var mouse = Mouse.create(canvas.elt);
-  var mouseParams = {
+  const mouse = Mouse.create(canvas.elt);
+  const mouseParams = {
     mouse: mouse,
     constraint: { stiffness: 0.05, angularStiffness: 0 }
   }
@@ -71,9 +71,9 @@ function draw() {
 
 function drawMouse(mouseConstraint) {
   if (mouseConstraint.body) {
-    var pos = mouseConstraint.body.position;
-    var offset = mouseConstraint.constraint.pointB;
-    var m = mouseConstraint.mouse.position;
+    const pos = mouseConstraint.body.position;
+    const offset = mouseConstraint.constraint.pointB;
+    const m = mouseConstraint.mouse.position;
     stroke(0, 255, 0);
     strokeWeight(2);
     line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
@@ -82,7 +82,7 @@ function drawMouse(mouseConstraint) {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);

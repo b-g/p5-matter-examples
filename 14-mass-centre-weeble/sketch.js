@@ -3,20 +3,20 @@
 
 Matter.use('matter-wrap');
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
-var Body = Matter.Body;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+const Mouse = Matter.Mouse;
+const MouseConstraint = Matter.MouseConstraint;
 
-var engine;
-var circle;
-var ground;
-var spriteImg;
+let engine;
+let circle;
+let ground;
+let spriteImg;
 
-var canvas;
+let canvas;
 
 
 function setup() {
@@ -47,8 +47,8 @@ function setup() {
   World.add(engine.world, [ground]);
 
   // setup mouse
-  var mouse = Mouse.create(canvas.elt);
-  var mouseParams = {
+  const mouse = Mouse.create(canvas.elt);
+  const mouseParams = {
     mouse: mouse,
     constraint: { stiffness: 0.05, angularStiffness: 0 }
   }
@@ -89,14 +89,14 @@ function drawMassCenter(body) {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);
 }
 
 function drawSprite(body, img, offsetY, w, h) {
-  var pos = body.position;
+  const pos = body.position;
   push();
   translate(pos.x, pos.y);
   rotate(body.angle);
@@ -107,9 +107,9 @@ function drawSprite(body, img, offsetY, w, h) {
 
 function drawMouse(mouseConstraint) {
   if (mouseConstraint.body) {
-    var pos = mouseConstraint.body.position;
-    var offset = mouseConstraint.constraint.pointB;
-    var m = mouseConstraint.mouse.position;
+    const pos = mouseConstraint.body.position;
+    const offset = mouseConstraint.constraint.pointB;
+    const m = mouseConstraint.mouse.position;
     stroke(0, 255, 0);
     strokeWeight(2);
     line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);

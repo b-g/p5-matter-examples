@@ -3,20 +3,20 @@
 // setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
-var Body = Matter.Body;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Mouse = Matter.Mouse;
+const MouseConstraint = Matter.MouseConstraint;
+const Body = Matter.Body;
 
-var engine;
-var balls = [];
-var rects = [];
-var propellers = [];
+let engine;
+let balls = [];
+let rects = [];
+let propellers = [];
 
-var canvas;
+let canvas;
 
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
@@ -24,8 +24,8 @@ function setup() {
   engine = Engine.create();
 
   // balls
-  for (var i = 0; i < 18; i++) {
-    var ball = Bodies.circle(random(width), -500, 25, {
+  for (let i = 0; i < 18; i++) {
+    let ball = Bodies.circle(random(width), -500, 25, {
       restitution: 0.5,
       density: 0.9
     })
@@ -54,8 +54,8 @@ function setup() {
   World.add(engine.world, propellers);
 
   // setup mouse
-  var mouse = Mouse.create(canvas.elt);
-  var mouseParams = {
+  const mouse = Mouse.create(canvas.elt);
+  const mouseParams = {
     mouse: mouse,
     constraint: {stiffness: 0.05}
   }
@@ -73,8 +73,8 @@ function draw() {
   textSize(20);
   textStyle(BOLD);
   noStroke();
-  for (var i = 0; i < balls.length; i++) {
-    var ball = balls[i];
+  for (let i = 0; i < balls.length; i++) {
+    const ball = balls[i];
     fill(255);
     drawVertices(ball.vertices);
     fill(0);
@@ -82,15 +82,16 @@ function draw() {
   }
 
   fill(255);
-  for (var i = 0; i < rects.length; i++) {
-    drawVertices(rects[i].vertices);
+  for (const rect of rects) {
+    drawVertices(rect.vertices);
   }
 
-  for (var i = 0; i < propellers.length; i++) {
+  for (let i = 0; i < propellers.length; i++) {
+    let propeller = propellers[i];
     // angle of propeller
-    Body.setAngle(propellers[i], propellers[i].angle + 0.50 * (i+1)/10);
-    Body.setAngularVelocity(propellers[i], 0.10);
-    drawVertices(propellers[i].vertices);
+    Body.setAngle(propeller, propeller.angle + 0.50 * (i+1)/10);
+    Body.setAngularVelocity(propeller, 0.10);
+    drawVertices(propeller.vertices);
   }
 
   drawMouse(mouseConstraint);
@@ -98,9 +99,9 @@ function draw() {
 
 function drawMouse(mouseConstraint) {
   if (mouseConstraint.body) {
-    var pos = mouseConstraint.body.position;
-    var offset = mouseConstraint.constraint.pointB;
-    var m = mouseConstraint.mouse.position;
+    const pos = mouseConstraint.body.position;
+    const offset = mouseConstraint.constraint.pointB;
+    const m = mouseConstraint.mouse.position;
     stroke(0, 255, 0);
     strokeWeight(2);
     line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
@@ -108,8 +109,8 @@ function drawMouse(mouseConstraint) {
 }
 
 function drawText(body, txt) {
-  var pos = body.position;
-  var angle = body.angle;
+  const pos = body.position;
+  const angle = body.angle;
   push();
   translate(pos.x, pos.y);
   rotate(angle);
@@ -121,7 +122,7 @@ function drawText(body, txt) {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);

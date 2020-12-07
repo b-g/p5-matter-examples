@@ -1,16 +1,16 @@
 // Benedikt Groß
 // Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
 
-var engine;
+let engine;
 
-var boxA;
-var boxB;
-var ground;
+let boxA;
+let boxB;
+let ground;
 
 function setup() {
   createCanvas(800, 600);
@@ -45,7 +45,7 @@ function draw() {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);
@@ -53,10 +53,10 @@ function drawVertices(vertices) {
 
 function drawBody(body) {
   if (body.parts && body.parts.length > 1) {
-    for (var p = 1; p < body.parts.length; p++) {
+    for (let p = 1; p < body.parts.length; p++) {
       drawVertices(body.parts[p].vertices)
     }
   } else {
-    drawVertices(body.vertices)
+    drawVertices(body.vertices);
   }
 }

@@ -4,20 +4,20 @@
 
 Matter.use('matter-attractors');
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
-var Body = Matter.Body;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
-var Composites = Matter.Composites;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+const Mouse = Matter.Mouse;
+const MouseConstraint = Matter.MouseConstraint;
+const Composites = Matter.Composites;
 
-var engine;
-var attractor;
-var boxes;
+let engine;
+let attractor;
+let boxes;
 
-var canvas;
+let canvas;
 
 function setup() {
   canvas = createCanvas(800, 600);
@@ -52,8 +52,8 @@ function setup() {
   World.add(engine.world, boxes);
 
   // setup mouse
-  var mouse = Mouse.create(canvas.elt);
-  var mouseParams = {
+  const mouse = Mouse.create(canvas.elt);
+  const mouseParams = {
     mouse: mouse,
     constraint: { stiffness: 0.05 }
   }
@@ -84,14 +84,14 @@ function draw() {
 }
 
 function drawBodies(bodies) {
-  for (var i = 0; i < bodies.length; i++) {
+  for (let i = 0; i < bodies.length; i++) {
     drawVertices(bodies[i].vertices);
   }
 }
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);

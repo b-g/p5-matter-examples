@@ -3,22 +3,22 @@
 // setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Body = Matter.Body;
-var Bodies = Matter.Bodies;
-var Constraint = Matter.Constraint;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Body = Matter.Body;
+const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint;
 
-var canvas;
+let canvas;
 
-var engine;
-var circle;
-var slideLeft;
-var slideRight;
-var kicker;
-var kickerConstraint;
-var ground;
+let engine;
+let circle;
+let slideLeft;
+let slideRight;
+let kicker;
+let kickerConstraint;
+let ground;
 
 
 function setup() {
@@ -93,13 +93,13 @@ function keyPressed() {
 }
 
 function drawConstraint(constraint) {
-  var offsetA = constraint.pointA;
-  var posA = {x:0, y:0};
+  const offsetA = constraint.pointA;
+  let posA = {x:0, y:0};
   if (constraint.bodyA) {
     posA = constraint.bodyA.position;
   }
-  var offsetB = constraint.pointB;
-  var posB = {x:0, y:0};
+  const offsetB = constraint.pointB;
+  let posB = {x:0, y:0};
   if (constraint.bodyB) {
     posB = constraint.bodyB.position;
   }
@@ -128,7 +128,7 @@ function setMassCentre(body, offset) {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);

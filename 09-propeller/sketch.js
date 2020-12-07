@@ -3,21 +3,21 @@
 // setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
-var Mouse = Matter.Mouse;
-var MouseConstraint = Matter.MouseConstraint;
-var Body = Matter.Body;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Mouse = Matter.Mouse;
+const MouseConstraint = Matter.MouseConstraint;
+const Body = Matter.Body;
 
-var engine;
-var ball1;
-var ball2;
-var propeller;
-var angle = 0;
+let engine;
+let ball1;
+let ball2;
+let propeller;
+let angle = 0;
 
-var canvas;
+let canvas;
 
 function setup() {
   canvas = createCanvas(800, 600);
@@ -28,7 +28,7 @@ function setup() {
   // add bodies
   ball1 = Bodies.circle(400, 50, 25, {density: 0.01});
   ball2 = Bodies.circle(200, 50, 150, {density: 0.0001});
-  var wrap = {
+  const wrap = {
       min: {x: 0, y: 0},
       max: {x: width, y: height}
   };
@@ -40,8 +40,8 @@ function setup() {
   World.add(engine.world, [ball1, ball2, propeller]);
 
   // setup mouse
-  var mouse = Mouse.create(canvas.elt);
-  var mouseParams = {
+  const mouse = Mouse.create(canvas.elt);
+  const mouseParams = {
     mouse: mouse,
     constraint: {stiffness: 0.05}
   }
@@ -71,9 +71,9 @@ function draw() {
 
 function drawMouse(mouseConstraint) {
   if (mouseConstraint.body) {
-    var pos = mouseConstraint.body.position;
-    var offset = mouseConstraint.constraint.pointB;
-    var m = mouseConstraint.mouse.position;
+    const pos = mouseConstraint.body.position;
+    const offset = mouseConstraint.constraint.pointB;
+    const m = mouseConstraint.mouse.position;
     stroke(0, 255, 0);
     strokeWeight(2);
     line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
@@ -82,7 +82,7 @@ function drawMouse(mouseConstraint) {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);

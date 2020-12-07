@@ -3,20 +3,20 @@
 // setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Body = Matter.Body;
-var Bodies = Matter.Bodies;
+const Engine = Matter.Engine;
+const Render = Matter.Render;
+const World = Matter.World;
+const Body = Matter.Body;
+const Bodies = Matter.Bodies;
 
-var canvas;
+let canvas;
 
-var engine;
-var circle;
-var obstacle;
-var slide;
+let engine;
+let circle;
+let obstacle;
+let slide;
 
-var isSmall = false;
+let isSmall = false;
 
 
 function setup() {
@@ -91,7 +91,7 @@ function keyPressed() {
 
 function drawVertices(vertices) {
   beginShape();
-  for (var i = 0; i < vertices.length; i++) {
+  for (let i = 0; i < vertices.length; i++) {
     vertex(vertices[i].x, vertices[i].y);
   }
   endShape(CLOSE);
