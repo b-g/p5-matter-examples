@@ -24,6 +24,7 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [17-flipper-kicker](https://b-g.github.io/p5-matter-examples/17-flipper-kicker)
 * [18-change-size](https://b-g.github.io/p5-matter-examples/18-change-size)
 * [19-restitution-bouncy-grounds](https://b-g.github.io/p5-matter-examples/19-restitution-bouncy-grounds)
+* [20-complex-path-svg](https://b-g.github.io/p5-matter-examples/20-complex-path-svg)
 
 
 The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://twitter.com/hfggmuend_x/) by Benedikt Groß.
