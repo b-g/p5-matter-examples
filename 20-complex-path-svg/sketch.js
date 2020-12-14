@@ -1,4 +1,7 @@
 // Benno Stäbler, Benedikt Groß
+// additional dependencies 
+// pathseg.js https://github.com/progers/pathseg
+// decomp.js https://github.com/schteppe/poly-decomp.js/
 
 const Engine = Matter.Engine;
 const Render = Matter.Render;
