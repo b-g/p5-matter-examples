@@ -1,4 +1,4 @@
-p5.js with matter.js Examples
+p5.js with matter.js examples
 =============================
 
 Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http://brm.io/matter-js/).
