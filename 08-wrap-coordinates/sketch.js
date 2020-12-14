@@ -28,10 +28,10 @@ function setup() {
       min: { x: 0, y: 0 },
       max: { x: width, y: height }
   };
-  slide = Bodies.rectangle(400, 300, 500, 20, {
+  slide = Bodies.rectangle(400, 300, 500, 30, {
     isStatic: true, angle: Math.PI * 0.06
   });
-  ground = Bodies.rectangle(400, 550, 810, 10, {isStatic: true});
+  ground = Bodies.rectangle(400, 550, 750, 30, {isStatic: true});
   World.add(engine.world, [circle, slide, ground]);
 
   // setup mouse
