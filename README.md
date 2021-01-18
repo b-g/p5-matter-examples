@@ -27,6 +27,7 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [20-complex-path-svg](https://b-g.github.io/p5-matter-examples/20-complex-path-svg/)
 * [21-hit-sound](https://b-g.github.io/p5-matter-examples/21-hit-sound/)
 * [22-scroll-follow](https://b-g.github.io/p5-matter-examples/22-scroll-follow/)
+* [23-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/23-sprites-canvas-sandwich/)
 
 
 The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://twitter.com/hfggmuend_x/) by Benedikt Groß.
