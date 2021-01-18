@@ -32,8 +32,8 @@ function setup() {
   World.add(engine.world, [boxA, boxB, ball, ground]);
 
   // setup mouse
-  var mouse = Mouse.create(canvas.elt);
-  var mouseParams = {
+  let mouse = Mouse.create(canvas.elt);
+  let mouseParams = {
     mouse: mouse,
     constraint: { stiffness: 0.05, angularStiffness: 0 }
   }
