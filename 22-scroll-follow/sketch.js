@@ -39,6 +39,13 @@ function draw() {
   }
 }
 
+function keyPressed(e) {
+  // prevent scrolling of website with SPACE key
+  if(e.keyCode == 32 && e.target == document.body) {
+    e.preventDefault();
+  }
+}
+
 function scrollFollow(matterObj) {
   if (insideViewport(matterObj) == false) {
     const $element = $('html, body');
