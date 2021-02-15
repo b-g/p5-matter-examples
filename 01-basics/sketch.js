@@ -1,10 +1,9 @@
-// Benedikt Groß
-// Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
-
 const Engine = Matter.Engine;
 const Render = Matter.Render;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
+
+const drawVertices = Helpers.drawVertices;
 
 let engine;
 
@@ -41,22 +40,4 @@ function draw() {
 
   fill(128);
   drawVertices(ground.vertices);
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
-}
-
-function drawBody(body) {
-  if (body.parts && body.parts.length > 1) {
-    for (let p = 1; p < body.parts.length; p++) {
-      drawVertices(body.parts[p].vertices)
-    }
-  } else {
-    drawVertices(body.vertices);
-  }
 }
