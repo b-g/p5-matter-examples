@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Studenten Treffen auf Entwerfen und Programmieren">
+  <meta name="description" content="Studenten tippen einfach Programme">
 
   <link rel="shortcut icon" href="img/favicon.png">
 
@@ -13,32 +13,77 @@
 
   <!-- Styles -->
   <style>
-    .progsp {
-      font-family: 'Ubuntu', sans-serif;
-      font-size: 1em;
-      margin: 0;
-      color: #fe9720;
-      background-color: #505050;
-    }
+    body {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    color: #fffba7;
+    background-color: #505050;
+  }
 
-    .progsp h3 {
-      font-size: 2em;
-      text-align: center;
-    }
+  p {
+    color: #80ff00;
+    font-size: 1.5em;
+  }
 
-    .progsp a {
-      color: #00a9fe;
-      text-decoration: none;
-    }
+  a {
+    color: #00a9fe;
+    text-decoration: none;
+  }
 
-    .progsp a:hover {
-      color: #d9e577;
-    }
+  a:hover {
+    color: #ffa312;
+  }
 
-    .progsp li {
-      margin-top: 6px;
-      margin-bottom: 6px;
-    }
+  li {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  pre {
+    color: #ffffff;
+  }
+
+  svg, canvas {
+    position: absolute;
+    top: 0;
+  }
+
+  .overlay {
+    position: relative;
+    margin: 20px;
+  }
+
+  .noscroll {
+    overflow: hidden;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .bunt {
+    color: #80ff00;
+    font-weight: bold;
+  }
+
+  .modalbox {
+    background-color: #404040;
+    margin: 15% auto;
+    padding: 20px;
+    border: 2px solid #a0a0a0;
+    width: 600px;
+  }
   </style>
   <script type="text/javascript">
     function init() {
@@ -48,116 +93,39 @@
 
 </head>
 
-<body class="progsp" onload="init()" style="margin: 20px;">
-  <h3>Kursmaterial Programmiersprachen 1</h3>
-  <p>Hallo und Willkommen im Kurs <strong>Programmiersprachen 1</strong></p>
-  <ul>
-    <li>Diese Seite stammt aus Deinem lokalen Verzeichnis <b>student</b>. Dort sind auch die ersten Übungsaufgaben vorbereitet - für Dich zum Fertigstellen im Kursverlauf.</li>
-    <li>Das immer aktuelle <a href="http://studenten.hfg-gmuend.de/ig1/progsp/index.html" target="kurs">Online Kursmaterial</a> gibt es hier auch zum
-      <a href="http://studenten.hfg-gmuend.de/ig1/progsp/progsp.zip" target="_blank">Herunterladen</a> um damit auf Deinem Rechner lokal arbeiten zu können.
-      <br>Wenn Du es herunterladen möchtest, dann sind folgende Schritte notwendig:
-      <ul>
-        <li>.zip Datei entpacken und dann index.html öffnen
-        <li>Sollte es im Browser Probleme geben (ihr seht auf den Seiten nur "...", weil dabei die Dateien ohne WebServer vom Filesystem geladen werden):
-          <ul>
-            <li>Safari: <strong>Einstellungen - Erweitert - Entwicklermenu</strong> aktivieren und dann <strong>Entwickler - Lokale Dateieinschränkungen deaktivieren</strong>
-            <li>Chrome: <strong>chrome.exe --disable-web-security</strong> (Win) <strong>open /Applications/Google\ Chrome.app/ --args --disable-web-security</strong> (Mac)
-            <li>Firefox: Im Adressfeld "about:config" eingeben und <strong>security.fileuri.strict_origin_policy</strong> auf "false" setzen.</li>
-            <li>Opera: noch keine Probleme bekannt...</li>
-          </ul>
-      </ul>
-    <li>Im <a href="http://studenten.hfg-gmuend.de/ig1/progsp/index.html#Zeitplan" target="kurs">Zeitplan</a> ist der geplante 😇 Ablauf mit den Themen/Aufgabenstellungen.
-    <li>Unter <a href="http://studenten.hfg-gmuend.de/ig1/progsp/index.html#Editor+/+IDE" target="kurs">Editor / IDE</a> ist die einzige Kursvoraussetzung erläutert: ein Texteditor (abgesehen von einem Browser natürlich).</li>
-    <li>Aktuell wollen wir sowohl in
-      <b>Programmiertes Entwerfen</b> als auch in <b>Programmiersprachen</b> denselben Editor verwenden: <a href="https://atom.io" target="_blank">Atom</a> mit Zusatzpaketen
-      <ol>
-        <li><em>atom-live-server</em>: beim Speichern einer Datei wird automatisch die Seite im Browser neu geladen</li>
-        <li><em>atom-beautify</em>: formatiert auf Knopfdruck Deine Sourcecode, damit Du eine besseren Durchblick hast</li>
-      </ol>
-    </li>
-    <li>In deinem lokalen Verzeichnis <b>student</b> ist auch ein Paket zum Abgeben der Hausaufgaben <b>Homeworks.js</b> integriert, das uns allen hoffentlich das Programmierer-Leben erleichtert.
-      Dieses Paket muss Dich am Anfang "kennenlernen" - d.h. Du musst noch eine Teilnehmer ID herunterladen, bevor Du etwas abgeben kannst.<br> Keine Angst, das sollte weitgehend automatisch passieren und wir machen das auch zusammen im Kurs.
-      Da <b>Homeworks.js</b> zum ersten Mal Verwendung findet (brandneu von mir geschrieben), gibt es sicherlich auch noch Kinderkrankheiten, die beseitigt werden müssen.</li>
-    <li>Ausserdem gibt es unter anderem in <b>student</b> Ordner:
-      <ul>
-        <li>die Datei README.md beschreibt (auf Englisch 🙄) die Verzeichisstruktur und wie ein Javascript Programm so aufgebaut ist</li>
-        <li>die HTML Dateien (in progsp_X.html) für die Aufgaben - dort ist im Kurs eher wenig zu tun (X steht für 1,2,...)</li>
-        <li>im Unterverzeichnis <strong>/js</strong> die zugehörigen Javascript Dateien (in progsp_X.js) - da passiert die ganze Magie des Programmierens</li>
-        <li>das Javascript Programm js/cheatsheet.js zeigt so alles, was wir an Javascript Code im Kursverlauf kennenlernen werden und enthält detaillierte Erläuterungen (Kommentare)</li>
-        <li>das Javascript Programm js/cheatsheet_bare.js ist identisch mit js/cheatsheet.js ohne jegliche Kommentare sind es nur 80 Zeilen Sourcecode</li>
-        <li>cheatsheet_js.html ist die im Browser anzeigbare bunte HTML Version des cheatsheet.js Sourcecodes</li>
-        <li>cheatsheet.html zeigt endlich, was das Javascript Programm js/cheatsheet.js im Browser wirklich erzeugt!</li>
-      </ul>
-    </li>
-  </ul>
-  <p>So sieht übrigens ein "einfaches" SVG (unser Grafikelement im Kurs) aus:</p>
-  <div style="text-align: center">
-    <svg version="1.1" id="eye-bee-m" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="256px" height="256px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
-      <rect id="back" fill="#404040" width="256" height="256" />
-      <g id="eye">
-        <path id="eye-brow" fill="#E2552D" d="M82.197,118.01c0-2.591-0.047-2.851-0.782-4.312c-5.588-11.108-17.851-18.695-30.188-18.676
-		c-12.901,0.02-24.447,6.468-31.11,17.375l-0.919,1.505v3.183c0,1.75,0.071,3.182,0.158,3.182s1.302-1.097,2.701-2.438
-		c2.88-2.759,5.432-4.656,9.182-6.826c9.19-5.315,20.438-6.741,30.208-3.83c6.799,2.026,13.135,5.908,18,11.027
-		c1.307,1.375,2.46,2.514,2.562,2.533C82.112,120.752,82.197,119.526,82.197,118.01z" />
-        <path id="eye-white" fill="#FFFFFF" d="M57.947,160.648c6.674-1.486,11.549-4.123,16.746-9.059
-		c3.713-3.521,6.259-7.175,7.633-10.939l0.685-1.879l-1.034-2.151c-6.372-13.281-18.891-20.918-33.25-20.283
-		c-7.55,0.334-15.031,3.518-21.717,9.245c-3.321,2.844-6.224,6.564-8.207,10.52c-1.334,2.659-1.334,2.924-0.019,5.697
-		c2.596,5.471,6.89,10.27,12.536,14.014c4.048,2.685,7.941,4.234,12.75,5.08C46.832,161.378,55.346,161.229,57.947,160.648z" />
-        <path id="eye-iris" fill="#D49E7F" d="M69.093,139.25c0,10.27-8.324,18.593-18.593,18.593s-18.593-8.323-18.593-18.593l0,0
-		c0-10.27,8.324-18.593,18.593-18.593S69.093,128.98,69.093,139.25z" />
-        <path id="eye-pupil" d="M49.072,146.537c-1.514-0.418-2.165-0.787-3.355-1.9c-3.322-3.104-3.065-8.463,0.539-11.211
-		c2.083-1.588,4.967-1.953,7.341-0.93c5.778,2.493,5.901,10.827,0.199,13.507C52.551,146.588,50.212,146.854,49.072,146.537z" />
-      </g>
-      <g id="bee">
-        <path id="bee-body0" fill="#EAA43C" d="M137.648,126.046l1.076-0.029l-0.451-0.79c-0.864-1.512-2.996-3.449-4.646-4.22
-		c-2.346-1.098-5.144-1.582-7.185-1.243c-2.983,0.495-5.691,2.18-7.811,4.86l-1.003,1.267l6.595,0.125
-		C130.08,126.128,134.271,126.137,137.648,126.046L137.648,126.046z" />
-        <path id="bee-body1" fill="#EAA43C" d="M140.197,135.141v-2.877l-12.062,0.063l-12.063,0.065l-0.071,2.479
-		c-0.04,1.364-0.016,2.631,0.055,2.812c0.103,0.27,2.414,0.33,12.133,0.33h12.008V135.141L140.197,135.141z" />
-        <path id="bee-body2" fill="#EAA43C" d="M140.197,147.157v-2.86l-2.938-0.077c-1.616-0.043-7.045-0.077-12.062-0.077h-9.125
-		L116,146.75c-0.039,1.436-0.015,2.756,0.055,2.938c0.103,0.269,2.43,0.33,12.134,0.33h12.008V147.157L140.197,147.157z" />
-        <path id="bee-body3" fill="#EAA43C" d="M130.789,162.141c0.797-0.207,2.057-0.666,2.802-1.018c2.134-1.01,4.856-3.725,4.856-4.844
-		c0-0.18-3.26-0.262-10.25-0.262c-7.112,0-10.25,0.08-10.25,0.267c0,0.487,1.478,2.425,2.552,3.344
-		c1.389,1.188,3.224,2.067,5.213,2.5C127.848,162.592,129.047,162.594,130.789,162.141z" />
-        <path id="bee-wingl" fill="#328442" d="M104.274,152.311c0.885-0.437,2.057-1.275,2.603-1.871c1.89-2.049,1.788-1.797,8.063-20.268
-		c0.975-2.871,1.716-5.278,1.647-5.348c-0.07-0.07-3.252,1.394-7.071,3.252c-3.819,1.857-7.338,3.527-7.819,3.708
-		c-1.868,0.7-5.799,2.807-7.182,3.846c-2.917,2.192-3.946,4.545-3.769,8.608c0.083,1.884,0.23,2.646,0.687,3.527
-		c1.891,3.658,5.18,5.568,9.31,5.407C102.3,153.116,102.97,152.951,104.274,152.311z" />
-        <path id="bee-wingr" fill="#328442" d="M158.089,153.246c3.078-0.564,5.747-2.617,7.068-5.436c0.591-1.265,0.663-1.709,0.651-4.043
-		c-0.021-3.523-0.541-4.875-2.683-6.924c-1.872-1.789-3.562-2.808-7.978-4.783c-1.832-0.824-5.965-2.803-9.182-4.396
-		c-3.219-1.595-5.924-2.9-6.013-2.9c-0.276,0,7.423,22.72,8.073,23.831c1.301,2.216,3.459,3.925,5.731,4.535
-		C155.389,153.568,156.204,153.591,158.089,153.246L158.089,153.246z" />
-        <path id="bee-eyel" fill="#FFBEC7" d="M124.658,118.913c3.63-1.877,4.291-6.953,1.238-9.527c-1.289-1.086-2.362-1.432-4.101-1.321
-		c-2.163,0.138-3.703,1.112-4.672,2.957c-0.629,1.198-0.708,1.583-0.628,3.047c0.075,1.37,0.228,1.87,0.834,2.727
-		c0.882,1.247,1.672,1.868,3.007,2.364C121.514,119.596,123.561,119.479,124.658,118.913L124.658,118.913z" />
-        <path id="bee-eyer" fill="#FFBEC7" d="M136.232,119.227c0.533-0.16,1.408-0.667,1.945-1.125c4.033-3.455,1.606-10.084-3.693-10.084
-		c-3.2,0-5.621,2.41-5.649,5.625C128.799,117.64,132.416,120.37,136.232,119.227L136.232,119.227z" />
-      </g>
-      <g id="m">
-        <polygon id="m-l0" fill="#7992F2" points="171.197,102.267 171.197,106.142 195.673,106.142 194.4,102.267 	" />
-        <polygon id="m-l1" fill="#7992F2" points="171.197,110 171.197,113.875 198.209,113.875 196.938,110 	" />
-        <polygon id="m-l2" fill="#7992F2" points="199.475,117.731 179.125,117.731 179.125,121.606 200.746,121.606 	" />
-        <polygon id="m-l3" fill="#7992F2" points="202.012,125.464 179.125,125.464 179.125,129.339 191.541,129.339 191.541,126.875
-		192.418,129.339 203.283,129.339 	" />
-        <rect id="m-l4" x="179.125" y="133.195" fill="#7992F2" width="12.416" height="3.875" />
-        <rect id="m-l5" x="179.125" y="140.928" fill="#7992F2" width="12.416" height="3.875" />
-        <rect id="m-l6" x="171.197" y="148.66" fill="#7992F2" width="20.344" height="3.875" />
-        <rect id="m-l7" x="171.197" y="156.393" fill="#7992F2" width="20.344" height="3.875" />
-        <polygon id="m-m0" fill="#7992F2" points="193.789,133.195 195.166,137.07 211.861,137.07 213.24,133.195 	" />
-        <polygon id="m-m1" fill="#7992F2" points="196.538,140.928 197.915,144.803 209.111,144.803 210.49,140.928 	" />
-        <polygon id="m-m2" fill="#7992F2" points="199.287,148.66 200.664,152.535 206.363,152.535 207.742,148.66 	" />
-        <polygon id="m-m3" fill="#7992F2" points="202.036,156.393 203.414,160.268 203.615,160.268 204.992,156.393 	" />
-        <polygon id="m-r0" fill="#7992F2" points="235.947,102.267 212.736,102.267 211.436,106.142 235.947,106.142 	" />
-        <polygon id="m-r1" fill="#7992F2" points="235.947,110 210.139,110 208.837,113.875 235.947,113.875 	" />
-        <polygon id="m-r2" fill="#7992F2" points="207.539,117.731 206.236,121.606 227.822,121.606 227.822,117.731 	" />
-        <polygon id="m-r3" fill="#7992F2" points="204.941,125.464 203.639,129.339 214.611,129.339 215.459,126.954 215.459,129.339
-		227.822,129.339 227.822,125.464 	" />
-        <rect id="m-r4" x="215.459" y="133.195" fill="#7992F2" width="12.363" height="3.875" />
-        <rect id="m-r5" x="215.459" y="140.928" fill="#7992F2" width="12.363" height="3.875" />
-        <rect id="m-r6" x="215.459" y="148.66" fill="#7992F2" width="20.488" height="3.875" />
-        <rect id="m-r7" x="215.459" y="156.393" fill="#7992F2" width="20.488" height="3.875" />
-      </g>
-    </svg>
+<body onload="init()">
+  <div class="overlay">
+
+    <h3>Kursmaterial Programmiersprachen 1</h3>
+    <p>Hallo und Willkommen im Kurs <strong>Programmiersprachen 1</strong></p>
+    <ul>
+      <li>Diese Seite stammt aus Deinem lokalen Ordner <span class="bunt">STEP</span>. Das steht für
+        <span class="bunt">Studenten tippen einfach Programme</span> und soll heißen: Jeder der auf dem Computer einen Text schreiben kann, kann auch programmieren!
+        <br>In diesem Ordner sind auch die ersten Übungsaufgaben vorbereitet - für Dich zum Fertigstellen im Kursverlauf.</li>
+      <li>Aktuell wollen wir sowohl in
+        <b>Programmiertes Entwerfen</b> als auch in <b>Programmiersprachen</b> denselben Editor verwenden: <a href="https://atom.io" target="_blank">Atom</a> mit Zusatzpaketen
+        <ol>
+          <li><em>atom-live-server</em>: beim Speichern einer Datei wird automatisch die Seite im Browser neu geladen</li>
+          <li><em>atom-beautify</em>: formatiert auf Knopfdruck Deine Sourcecode, damit Du eine besseren Durchblick hast</li>
+        </ol>
+      </li>
+      <li>Im Ordner <b>STEP</b> sind einige vorgefertigte Javascript Bibliotheken (Unterordner libraries), die uns im Kursverlauf
+        das Leben erleichtern sollen. Es gibt sogar eine Library zum einfachen Abgeben der Hausaufgaben: <b>Homeworks.js</b>.
+        Damit das funktioniert, muss Homeworks.js Dich am Anfang "kennenlernen" - d.h. Du musst noch eine individuelle Teilnehmer ID herunterladen,
+        bevor Du etwas abgeben kannst. <br>Keine Angst, das sollte weitgehend mit automatischer Benutzerführung passieren und wir machen das auch notfalls zusammen im Kurs.
+      </li>
+      <li>Ausserdem gibt es unter anderem im <b>STEP</b> Ordner:
+        <ul>
+          <li>die Datei README.md beschreibt (auf Englisch 🙄) die Verzeichisstruktur und wie ein Javascript Programm so aufgebaut ist</li>
+          <li>die HTML Dateien (in progsp_X.html) für die Aufgaben - dort ist im Kurs eher wenig zu tun (X steht für 1,2,...)</li>
+          <li>im UnterOrdner <strong>/js</strong> die zugehörigen Javascript Dateien (in progsp_X.js) - da passiert die ganze Magie des Programmierens</li>
+          <li>das Javascript Programm js/cheatsheet.js zeigt so alles, was wir an Javascript Code im Kursverlauf kennenlernen werden und enthält detaillierte Erläuterungen (Kommentare)</li>
+          <li>das Javascript Programm js/cheatsheet_bare.js ist identisch mit js/cheatsheet.js ohne jegliche Kommentare sind es nur 80 Zeilen Sourcecode</li>
+          <li>cheatsheet_js.html ist die im Browser anzeigbare bunte HTML Version des cheatsheet.js Sourcecodes</li>
+          <li>cheatsheet.html zeigt endlich, was das Javascript Programm js/cheatsheet.js im Browser wirklich erzeugt!</li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </body>
 

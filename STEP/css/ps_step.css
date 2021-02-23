@@ -1,4 +1,4 @@
-.progsp {
+body {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1em;
   padding: 0;
@@ -7,50 +7,36 @@
   background-color: #505050;
 }
 
-.progsp canvas {
-  vertical-align: top;
+p {
+  color: #80ff00;
+  font-size: 1.5em;
 }
 
-.progsp a {
+a {
   color: #00a9fe;
   text-decoration: none;
 }
 
-.progsp a:hover {
+a:hover {
   color: #ffa312;
 }
 
-.progsp .info {
-  font-size: 0.7em;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  color: #FFF4D8;
+pre {
+  color: #ffffff;
 }
 
-.progsp svg {
+svg, canvas {
   position: absolute;
   top: 0;
 }
 
-.progsp .overlay {
+.overlay {
   position: relative;
   margin: 20px;
 }
 
-.progsp .noscroll {
+.noscroll {
   overflow: hidden;
-}
-
-.hint {
-  margin-left: 10px;
-  padding: 2px 10px 2px 20px;
-  color: #fff745;
-  font-size: 0.875em;
-  font-weight: normal;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.09), 1px 1px 5px 0 rgba(0, 0, 0, 0.8);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.7) url("../img/arrow_d.png") no-repeat 1px center;
 }
 
 .modal {
