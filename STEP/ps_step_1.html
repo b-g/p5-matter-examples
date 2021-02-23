@@ -12,13 +12,17 @@
   <title>Programmiersprachen - STEP 1</title>
 
   <!-- p5js -->
+  <!--
   <script src="libraries/p5.min.js" type="text/javascript"></script>
   <script src="libraries/p5.sound.min.js" type="text/javascript"></script>
+  -->
 
   <!-- matter.js -->
   <!--
-    <script type="text/javascript" src="libraries/matter.js"></script>
-    -->
+  <script type="text/javascript" src="libraries/decomp.min.js"></script>
+  <script type="text/javascript" src="libraries/pathseg.js"></script>
+  <script type="text/javascript" src="libraries/matter.js"></script>
+  -->
 
   <!-- Hausaufgaben Verwaltung -->
   <script type="text/javascript" src="libraries/homeworks.js"></script>
@@ -27,32 +31,87 @@
   <script type="text/javascript" src="js/ps_step_1.js" id="homework"></script>
 
   <!-- Styles in separater Datei -->
-  <link rel="stylesheet" href="css/progsp.css">
-
-  <!-- Inline Styles -->
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
-
-    canvas {
-      vertical-align: top;
-    }
-  </style>
+  <link rel="stylesheet" href="css/ps_step.css">
 </head>
 
-<body>
+<body onload="init()">
+  <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+   <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+   <g>
+    <title>Layer 1</title>
+    <ellipse id="lightbulb" ry="52.5" rx="52.5" id="svg_1" cy="486.5" cx="738" stroke-width="1.5" stroke="#000" fill="#ffff00"/>
+    <ellipse stroke="#fff" ry="8" rx="11.5" id="svg_3" cy="578" cx="738" stroke-width="1.5" fill="#000"/>
+    <rect stroke="#fff" id="svg_2" height="43.999998" width="49" y="533" x="713.5" stroke-width="1.5" fill="#000"/>
+    <text text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="85" id="svg_4" y="534" x="708.5" stroke-width="0" stroke="#fff" fill="#000000">Y</text>
+   </g>
+  </svg>
   <div class="overlay">
-    <h3>Step 1</h3>
-    <ol>
-      <li>Hier "malen" wir mit p5.js auf einem HTML5 &lt;canvas&gt;</li>
-      <li>Dazu muss man das Handbuch lesen <a href="https://p5js.org/reference/" target="info1">p5.js Reference</a></li>
-      <li>Animationen wie beim <a href="https://www.youtube.com/watch?v=Vcq8jWaGlqg" target="info1">Daumenkino</a></li>
-      <li>Pixel Grafik im Browser</li>
-    </ol>
-  </div>
+    <h2>Step 1</h2>
+    <h3>Aufgabe: Interaktive Glühbirne</h3>
+    <p>Wenn der User mit der Maus clickt, dann soll die Glühbirne angehen, wenn sie aus war und ausgehen, wenn sie an war.</p>
+    <h3>Info</h3>
+    <ul>
+      <li>Mit Javascript eine HTML Seite verändern.</li>
+      <li>Dazu muss man unter Umständen ein Handbuch lesen z.B. <a href="https://www.w3schools.com/jsref/default.asp" target="info">JavaScript and HTML DOM Reference</a></li>
+      <li>Wir wollen in die aktive Seite im Browser eingreifen mit Mitteln die die Browser für Javascript extra bereitstellen.</li>
+      <li>ALLES kann verändert werden: Inhalt und Style!</li>
+      <li>Was man dazu in Javascript braucht?</li>
+      <ol>
+        <li>Eine HTML Seite, die das Javascript Programm auch <a href="https://www.w3schools.com/tags/tag_script.asp" target="info">lädt</a> und <a href="https://www.w3schools.com/tags/ref_eventattributes.asp" target="info">startet</a>
+          <pre>
+&lt;script type="text/javascript" src="js/ps_step_1.js" id="homework"&gt;&lt;/script&gt;
 
+&lt;body onload="init()"&gt;
+</pre>
+        </li>
+        <li><a href="https://www.w3schools.com/jsref/jsref_obj_string.asp" target="info">Daten</a>: "wir müssen uns etwas merken":
+          <pre>let hugo = "Hello World!"</pre>
+        </li>
+        <li><a href="https://www.w3schools.com/jsref/jsref_function.asp" target="info">Funktionen</a>: "wir müssen etwas ausführen":
+          <pre>
+function init() {
+  console.log(hugo)
+}
+        </pre>
+        </li>
+        <li>Browser <a href="https://www.w3schools.com/jsref/dom_obj_document.asp" target="info">Schnittstellen</a>: "wir müssen mit dem Browser reden":
+          <pre>
+let lampe = document.getElementById('lightbulb')
+        </pre>
+        </li>
+        <li>Browser <a href="https://www.w3schools.com/jsref/dom_obj_document.asp" target="info">Schnittstellen</a>: "der Browser muss uns etwas mitteilen können":
+          <pre>
+function init() {
+  document.addEventListener('click', onMouseClick)
+}
+
+function onMouseClick() {
+  console.log("Der User hat auf die Seite geklickt!")
+}
+        </pre>
+        <li>Browser <a href="https://www.w3schools.com/jsref/met_element_setattribute.asp" target="info">Schnittstellen</a>: "wir müssen Elemente im Browser verändern können":
+          <pre>
+lampe.setAttribute('fill', '#FFFF00')
+        </pre>
+        </li>
+        <li>Javascript <a href="https://www.w3schools.com/jsref/jsref_statements.asp" target="info">Statements</a>: "wir brauchen so einiges an Programm Logik":
+          <pre>
+function onMouseClick() {
+  console.log("Der User hat auf die Seite geklickt!")
+  if (/* eine Variable "abfragen" */) {
+    // Die Antwort ist wahr
+    // Lampe einschalten
+  } else {
+    // Die Antwort ist falsch
+    // Lampe ausschalten
+  }
+}
+        </pre>
+        </li>
+      </ol>
+    </ul>
+
+  </div>
 </body>
 
 </html>

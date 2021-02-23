@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Hier beginnt der Administrative Teil der Seite -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="ByronStar">
+
+  <title>Programmiersprachen - STEP 7</title>
+
+  <!-- p5js -->
+  <script src="libraries/p5.min.js" type="text/javascript"></script>
+  <script src="libraries/p5.sound.min.js" type="text/javascript"></script>
+
+  <!-- matter.js -->
+  <script type="text/javascript" src="libraries/decomp.min.js"></script>
+  <script type="text/javascript" src="libraries/pathseg.js"></script>
+  <script type="text/javascript" src="libraries/matter.js"></script>
+
+  <!-- Hausaufgaben Verwaltung -->
+  <script type="text/javascript" src="libraries/homeworks.js"></script>
+
+  <!-- Javascript Programm in separater Datei -->
+  <script type="text/javascript" src="js/ps_step_7.js" id="homework"></script>
+
+  <!-- Styles in separater Datei -->
+  <link rel="stylesheet" href="css/ps_step.css">
+</head>
+
+<body>
+  <div id="thecanvas">
+  </div>
+  <svg id="svg" style="display: none" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <path id="puzzle"
+      d="M92.556,359c16.79,0,22.473-9.002,29.312-15.825C135.833,329.159,153,335.128,153,357.71V462h104.29  c22.582,0,28.551-17.167,14.544-31.131c-6.832-6.84-15.834-12.523-15.834-29.321C256,382.889,275.028,359,307.5,359  s51.5,23.889,51.5,42.548c0,16.798-9.002,22.481-15.825,29.321C329.159,444.833,335.128,462,357.71,462H462V357.71  c0-22.582-17.167-28.551-31.131-14.535c-6.84,6.823-12.523,15.825-29.321,15.825C382.889,359,359,339.972,359,307.5  s23.889-51.5,42.548-51.5c16.798,0,22.481,9.002,29.321,15.834C444.833,285.841,462,279.872,462,257.29V153H357.71  c-22.582,0-28.551-17.167-14.535-31.131c6.823-6.84,15.825-12.523,15.825-29.312C359,73.889,339.972,50,307.5,50  S256,73.889,256,92.556c0,16.79,9.002,22.473,15.834,29.312C285.841,135.833,279.872,153,257.29,153H153v104.29  c0,22.582-17.167,28.551-31.131,14.544C115.029,265.002,109.346,256,92.556,256C73.889,256,50,275.028,50,307.5  S73.889,359,92.556,359z" />
+    <path stroke="#000" id="ramp" d="m3.06976,0.19999c107.95291,416.10158 304.27014,347.79613 450.7851,308.31631c146.51495,-39.47983 123.74487,90.16794 123.74487,90.16794c-22.7215,0.00381 -505.80488,2.49927 -575.59047,-0.24268" fill-opacity="null"
+      stroke-opacity="null" stroke-width="1.5" fill="none" /> </svg>
+  <div class="overlay">
+    <h2>Step 7</h2>
+    <h3>Aufgabe: Wir arbeiten mit Physik</h3>
+    <p>Ab sofort können unsere Objekte fallen, springen und kollidieren.</p>
+    <h3>Info</h3>
+    <ul>
+      <li>Wir verwenden wieder das Handbuch <a href="https://p5js.org/reference/" target="info1">p5.js Reference</a></li>
+      <li>noch ein weiteres Handbuch <a href="https://brm.io/matter-js/docs/index.html" target="info3">Matter.js</a></li>
+      <li>und natürlich Javascript <a href="https://www.w3schools.com/jsref/jsref_classes.asp" target="info2">Classes</a></li>
+    </ul>
+
+  </div>
+</body>
+
+</html>

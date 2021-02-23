@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Hier beginnt der Administrative Teil der Seite -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="ByronStar">
+
+  <title>Programmiersprachen - STEP 2</title>
+
+  <!-- p5js -->
+  <script src="libraries/p5.min.js" type="text/javascript"></script>
+  <script src="libraries/p5.sound.min.js" type="text/javascript"></script>
+
+  <!-- matter.js -->
+  <!--
+  <script type="text/javascript" src="libraries/decomp.min.js"></script>
+  <script type="text/javascript" src="libraries/pathseg.js"></script>
+  <script type="text/javascript" src="libraries/matter.js"></script>
+  -->
+
+  <!-- Hausaufgaben Verwaltung -->
+  <script type="text/javascript" src="libraries/homeworks.js"></script>
+
+  <!-- Javascript Programm in separater Datei -->
+  <script type="text/javascript" src="js/ps_step_2.js" id="homework"></script>
+
+  <!-- Styles in separater Datei -->
+  <link rel="stylesheet" href="css/ps_step.css">
+</head>
+
+<body>
+  <div id="thecanvas">
+  </div>
+  <div class="overlay">
+    <h2>Step 2</h2>
+    <h3>Aufgabe: Konfetti</h3>
+    <p>Die Maus Clicks des Users zählen, und dann folgendes machen:</p>
+    <ol>
+      <li> Click: Konfetti wird größer</li>
+      <li> Click: Konfetti ändert die Farbe (d.h. erstmal hat es nur eine Farbe und wechselt NICHT)</li>
+      <li> Click: Animation wird schneller</li>
+      <li> Click: Alles geht auf den Anfangszustand und die Clicks zählen von vorn</li>
+    </ol>
+
+    <h3>Info</h3>
+    <ul>
+      <li>Hier "malen" wir mit p5.js auf einem HTML5 &lt;canvas&gt;</li>
+      <li>Dazu muss man unter Umständen ein Handbuch lesen <a href="https://p5js.org/reference/" target="info1">p5.js Reference</a></li>
+      <li>Das ist Pixel Grafik im Browser. Wir erzeugen Animationen wie beim <a href="https://www.youtube.com/watch?v=Vcq8jWaGlqg" target="info1">Daumenkino</a></li>
+      <li>Es gibt 3 vordefinierte Funktionen, die p5js in einer bestimmten Reihenfolge aufruft:
+      <ol>
+        <li><a href="https://p5js.org/reference/#/p5/preload">preload</a> zum Laden von externen Dateien</li>
+        <li><a href="https://p5js.org/reference/#/p5/setup">setup</a> zum einmaligen Festlegen von Parametern</li>
+        <li><a href="https://p5js.org/reference/#/p5/draw">draw</a> wird regelmäßig mit der aktuellen frame rate aufgerufen</li>
+      </ol>
+      Diese Funktionen können wir in unserem Programm definieren und damit eigene Logik ausführen:
+      <pre>
+function prelaod() {
+  // Einige Images laden
+}
+
+function setup() {
+  let canvas = createCanvas(windowWidth, windowHeight)
+  canvas.parent('thecanvas')
+}
+
+function draw() {
+  background(40, 10)
+  let c = color(Math.random() * 256, Math.random() * 256, Math.random() * 256)
+  fill(c)
+  ellipse(Math.random() * windowWidth, Math.random() * windowHeight, 20, 20)
+}
+    </pre>
+      </li>
+    </ul>
+
+  </div>
+</body>
+
+</html>
