@@ -1,43 +1,29 @@
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-
-const drawBody = Helpers.drawBody;
-
 let engine;
 
-let boxA;
-let boxB;
+let blockA;
+let blockB;
 let ground;
 
 function setup() {
   createCanvas(800, 600);
 
   // create an engine
-  engine = Engine.create();
+  engine = Matter.Engine.create();
 
   // create two boxes and a ground
-  boxA = Bodies.rectangle(200, 200, 80, 80);
-  boxB = Bodies.rectangle(270, 50, 160, 80);
-  ground = Bodies.rectangle(400, 500, 810, 10, {
+  blockA = new Block({ x: 200, y: 200, w: 80, h: 80, color: 'white' }, { isStatic: false });
+  blockB = new Block({ x: 270, y: 50, w: 160, h: 80, color: 'white' }, { isStatic: false });
+  ground = new Block({ x: 400, y: 500, w: 810, h: 15, color: 'grey' }, {
     isStatic: true, angle: Math.PI * 0.06
   });
 
-  // add all of the bodies to the world
-  World.add(engine.world, [boxA, boxB, ground]);
-
   // run the engine
-  Engine.run(engine);
+  Matter.Engine.run(engine);
 }
 
 function draw() {
   background(0);
-
-  fill(255);
-  drawBody(boxA);
-  drawBody(boxB);
-
-  fill(128);
-  drawBody(ground);
+  blockA.draw();
+  blockB.draw();
+  ground.draw();
 }
