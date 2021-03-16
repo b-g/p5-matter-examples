@@ -171,7 +171,7 @@ var Homeworks = {};
             (gc.online ?
               (gc.version == Homeworks.version ?
                 (gc.res ? modal + '<span id="receive" style="cursor: pointer;font-size: 2em;">📥</span>' : '') + '<span id="send" style="cursor: pointer;font-size: 2em;">📤</span>' :
-                'Bitte neue Homeworks Version "' + gc.version + '" herunterladen und nach "student/lib" kopieren <a href="https://' + gc.server + ':11204/homeworks.js" target="_blank">🎁</a>') :
+                'Bitte neue Homeworks Version "' + gc.version + '" herunterladen und nach "STEP/libraries" kopieren <a href="https://' + gc.server + ':11204/homeworks.js" target="_blank">🎁</a>') :
               '<span id="send" style="cursor: pointer;font-size: 2em;">🔴</span>') :
             'Datei "data/student.id" fehlt <a href="https://' + gc.server + ':11204/studentIds.html" target="_blank">⚠️</a>') :
           '<span id="send" style="cursor: pointer;font-size: 2em;">🔗</span>') :
