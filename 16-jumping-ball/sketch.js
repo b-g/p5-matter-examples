@@ -22,7 +22,7 @@ function setup() {
 
   engine = Engine.create();
 
-  circle = Bodies.circle(width/2, 50, 40, {
+  circle = Bodies.circle(300, 50, 40, {
     restitution: 0
   });
   circle.plugin.wrap = {
