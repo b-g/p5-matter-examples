@@ -10,6 +10,8 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
+const drawBody = Helpers.drawBody;
+
 let hitSound;
 
 let engine;
@@ -22,17 +24,20 @@ let canvas;
 function setup() {
   canvas = createCanvas(800, 600);
 
+  engine = Engine.create();
+
   // bodies and world
-  ball = Bodies.circle(200, 50, 150, {density: 0.0001});
+  ball = Bodies.circle(200, 50, 150, { density: 0.0001 });
   const wrap = {
       min: {x: 0, y: 0},
       max: {x: width, y: height}
   };
   ball.plugin.wrap = wrap;
+
   propeller = Bodies.rectangle(400, 300, 650, 25, {
     isStatic: true, angle: angle, label: "propeller"
   });
-  engine = Engine.create();
+  
   World.add(engine.world, [ball, propeller]);
 
   // load sound
@@ -63,7 +68,7 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(ball.vertices);
+  drawBody(ball);
 
   // visualize collision
   const collided = Matter.SAT.collides(propeller, ball).collided;
@@ -72,13 +77,5 @@ function draw() {
   } else {
     fill('white');
   }
-  drawVertices(propeller.vertices);
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
+  drawBody(propeller);
 }

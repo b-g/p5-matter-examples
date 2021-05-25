@@ -10,6 +10,9 @@ const Body = Matter.Body;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
+const drawConstraint = Helpers.drawConstraint;
+const drawBody = Helpers.drawBody;
+
 let canvas;
 
 let engine;
@@ -63,14 +66,14 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(circle.vertices);
+  drawBody(circle);
 
   fill(128);
-  drawVertices(slideLeft.vertices);
-  drawVertices(slideRight.vertices);
-  drawVertices(ground.vertices);
+  drawBody(slideLeft);
+  drawBody(slideRight);
+  drawBody(ground);
   fill(200);
-  drawVertices(kicker.vertices);
+  drawBody(kicker);
 
   stroke('magenta');
   strokeWeight(3);
@@ -92,44 +95,9 @@ function keyPressed() {
   }
 }
 
-function drawConstraint(constraint) {
-  const offsetA = constraint.pointA;
-  let posA = {x:0, y:0};
-  if (constraint.bodyA) {
-    posA = constraint.bodyA.position;
-  }
-  const offsetB = constraint.pointB;
-  let posB = {x:0, y:0};
-  if (constraint.bodyB) {
-    posB = constraint.bodyB.position;
-  }
-  line(
-    posA.x + offsetA.x,
-    posA.y + offsetA.y,
-    posB.x + offsetB.x,
-    posB.y + offsetB.y
-  );
-  point(
-    posA.x + offsetA.x,
-    posA.y + offsetA.y
-  );
-  point(
-    posB.x + offsetB.x,
-    posB.y + offsetB.y
-  );
-}
-
 function setMassCentre(body, offset) {
   body.position.x += offset.x;
   body.position.y += offset.y;
   body.positionPrev.x += offset.x;
   body.positionPrev.y += offset.y;
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }

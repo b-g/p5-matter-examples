@@ -9,6 +9,8 @@ const World = Matter.World;
 const Body = Matter.Body;
 const Bodies = Matter.Bodies;
 
+const drawBody = Helpers.drawBody;
+
 let canvas;
 
 let engine;
@@ -50,11 +52,11 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(circle.vertices);
+  drawBody(circle);
 
   fill(128);
-  drawVertices(slide.vertices);
-  drawVertices(obstacle.vertices);
+  drawBody(slide);
+  drawBody(obstacle);
 
   fill(255);
   textAlign(CENTER, CENTER);
@@ -86,13 +88,4 @@ function keyPressed() {
     }
     isSmall = !isSmall; // toggle isSmall variable
   }
-}
-
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }

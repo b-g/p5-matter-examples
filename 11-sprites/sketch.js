@@ -6,6 +6,9 @@ const Render = Matter.Render;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 
+const drawBody = Helpers.drawBody;
+const drawSprite = Helpers.drawSprite;
+
 let engine;
 let box;
 let boxImg;
@@ -45,24 +48,5 @@ function draw() {
 
   fill(128);
   noStroke();
-  drawVertices(ground.vertices);
-}
-
-function drawSprite(body, img) {
-  const pos = body.position;
-  const angle = body.angle;
-  push();
-  translate(pos.x, pos.y);
-  rotate(angle);
-  imageMode(CENTER);
-  image(img, 0, 0);
-  pop();
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
+  drawBody(ground);
 }

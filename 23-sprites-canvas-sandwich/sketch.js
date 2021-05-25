@@ -7,6 +7,10 @@ const Bodies = Matter.Bodies;
 const Mouse = Matter.Mouse;
 const MouseConstraint = Matter.MouseConstraint;
 
+const drawBody = Helpers.drawBody;
+const drawSprite = Helpers.drawSprite;
+const drawMouse = Helpers.drawMouse;
+
 let engine;
 
 let box;
@@ -61,39 +65,9 @@ function draw() {
   stroke('blue');
   strokeWeight(1);
   fill('orange');
-  drawVertices(ramp.vertices);
+  drawBody(ramp);
   noFill();
-  drawVertices(ground.vertices);
+  drawBody(ground);
 
   drawMouse(mouseConstraint);
-}
-
-function drawSprite(body, img) {
-  const pos = body.position;
-  const angle = body.angle;
-  push();
-  translate(pos.x, pos.y);
-  rotate(angle);
-  imageMode(CENTER);
-  image(img, 0, 0);
-  pop();
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
-}
-
-function drawMouse(mouseConstraint) {
-  if (mouseConstraint.body) {
-    var pos = mouseConstraint.body.position;
-    var offset = mouseConstraint.constraint.pointB;
-    var m = mouseConstraint.mouse.position;
-    stroke(0, 255, 0);
-    strokeWeight(2);
-    line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
-  }
 }

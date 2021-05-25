@@ -6,6 +6,8 @@ const Render = Matter.Render;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 
+const drawBody = Helpers.drawBody;
+
 let engine;
 
 let box;
@@ -37,16 +39,8 @@ function draw() {
   background(0);
 
   fill(255);
-  drawVertices(box.vertices);
+  drawBody(box);
 
   fill(128);
-  drawVertices(ground.vertices);
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
+  drawBody(ground);
 }

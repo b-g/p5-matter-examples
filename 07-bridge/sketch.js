@@ -11,6 +11,11 @@ const Body = Matter.Body;
 const Composites = Matter.Composites;
 const Composite = Matter.Composite;
 
+const drawMouse = Helpers.drawMouse;
+const drawBody = Helpers.drawBody;
+const drawBodies = Helpers.drawBodies;
+const drawConstraints = Helpers.drawConstraints;
+
 let engine;
 let ground;
 let bridge;
@@ -73,7 +78,7 @@ function draw() {
 
   stroke(255);
   fill(255);
-  drawVertices(ball.vertices);
+  drawBody(ball);
   drawBodies(bridge.bodies);
   stroke(128);
   strokeWeight(2);
@@ -81,57 +86,7 @@ function draw() {
 
   noStroke();
   fill(128);
-  drawVertices(ground.vertices);
+  drawBody(ground);
 
   drawMouse(mouseConstraint);
-}
-
-function drawConstraints(constraints) {
-  for (let i = 0; i < constraints.length; i++) {
-    drawConstraint(constraints[i]);
-  }
-}
-
-function drawBodies(bodies) {
-  for (let i = 0; i < bodies.length; i++) {
-    drawVertices(bodies[i].vertices);
-  }
-}
-
-function drawConstraint(constraint) {
-  const offsetA = constraint.pointA;
-  let posA = {x:0, y:0};
-  if (constraint.bodyA) {
-    posA = constraint.bodyA.position;
-  }
-  const offsetB = constraint.pointB;
-  let posB = {x:0, y:0};
-  if (constraint.bodyB) {
-    posB = constraint.bodyB.position;
-  }
-  line(
-    posA.x + offsetA.x,
-    posA.y + offsetA.y,
-    posB.x + offsetB.x,
-    posB.y + offsetB.y
-  );
-}
-
-function drawMouse(mouseConstraint) {
-  if (mouseConstraint.body) {
-    const pos = mouseConstraint.body.position;
-    const offset = mouseConstraint.constraint.pointB;
-    const m = mouseConstraint.mouse.position;
-    stroke(0, 255, 0);
-    strokeWeight(2);
-    line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
-  }
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }

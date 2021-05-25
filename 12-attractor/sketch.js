@@ -13,6 +13,9 @@ const Mouse = Matter.Mouse;
 const MouseConstraint = Matter.MouseConstraint;
 const Composites = Matter.Composites;
 
+const drawBody = Helpers.drawBody;
+const drawBodies = Helpers.drawBodies;
+
 let engine;
 let attractor;
 let boxes;
@@ -80,19 +83,5 @@ function draw() {
   strokeWeight(1);
   fill(255);
   drawBodies(boxes.bodies);
-  drawVertices(attractor.vertices);
-}
-
-function drawBodies(bodies) {
-  for (let i = 0; i < bodies.length; i++) {
-    drawVertices(bodies[i].vertices);
-  }
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
+  drawBody(attractor);
 }

@@ -9,6 +9,8 @@ const World = Matter.World;
 const Body = Matter.Body;
 const Bodies = Matter.Bodies;
 
+const drawBody = Helpers.drawBody;
+
 let canvas;
 
 let engine;
@@ -48,11 +50,11 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(circle.vertices);
+  drawBody(circle);
 
   fill(128);
-  drawVertices(slide.vertices);
-  drawVertices(obstacle.vertices);
+  drawBody(slide);
+  drawBody(obstacle);
 
   fill(255);
   textAlign(CENTER, CENTER);
@@ -60,6 +62,7 @@ function draw() {
 }
 
 function keyPressed() {
+  // is SPACE pressed?
   if (keyCode === 32) {
     let direction = 1; // circle runs left to right ->
     if ((circle.position.x - circle.positionPrev.x) < 0) {
@@ -72,13 +75,4 @@ function keyPressed() {
       {x: (0.01 * direction) + circle.velocity.x/100, y: -0.1}
     );
   }
-}
-
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }

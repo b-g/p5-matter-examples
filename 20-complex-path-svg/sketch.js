@@ -1,5 +1,5 @@
 // Benno Stäbler, Benedikt Groß
-// additional dependencies 
+// additional dependencies
 // pathseg.js https://github.com/progers/pathseg
 // decomp.js https://github.com/schteppe/poly-decomp.js/
 
@@ -7,6 +7,9 @@ const Engine = Matter.Engine;
 const Render = Matter.Render;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
+
+const drawBody = Helpers.drawBody;
+const bodyFromPath = Helpers.bodyFromPath;
 
 let engine;
 
@@ -34,51 +37,23 @@ function setupMatter(svgPathElement) {
   // use the path from the svg file to create the corresponding matter object
   path = bodyFromPath(svgPathElement, 180, 300, { isStatic: true, friction: 0.0 });
 
-  ball = Bodies.circle(100, 50, 25, {friction: 0.0});
+  ball = Bodies.circle(100, 50, 40, {friction: 0.0});
   engine = Engine.create();
   World.add(engine.world, [ball, path]);
   Engine.run(engine);
 }
 
 function draw() {
-  // do nothing if variable path is empty
+  // do nothing if variable path is empty and not yet loaded
   if (!path) return;
 
   background(0);
 
   fill(255);
   noStroke();
-  drawVertices(ball.vertices);
+  drawBody(ball);
 
   strokeWeight(0.5);
   stroke(255);
   drawBody(path);
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
-}
-
-function drawBody(body) {
-  if (body.parts && body.parts.length > 1) {
-    for (let p = 1; p < body.parts.length; p++) {
-      drawVertices(body.parts[p].vertices)
-    }
-  } else {
-    drawVertices(body.vertices);
-  }
-}
-
-function bodyFromPath(path, x, y, options) {
-  const body = Matter.Bodies.fromVertices(
-    x,
-    y,
-    Matter.Svg.pathToVertices(path, 10),
-    options
-  );
-  return body;
 }

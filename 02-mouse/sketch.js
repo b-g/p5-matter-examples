@@ -8,6 +8,9 @@ const Bodies = Matter.Bodies;
 const Mouse = Matter.Mouse;
 const MouseConstraint = Matter.MouseConstraint;
 
+const drawBody = Helpers.drawBody;
+const drawMouse = Helpers.drawMouse;
+
 let engine;
 let boxA;
 let boxB;
@@ -50,31 +53,12 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(boxA.vertices);
-  drawVertices(boxB.vertices);
-  drawVertices(ball.vertices);
+  drawBody(boxA);
+  drawBody(boxB);
+  drawBody(ball);
 
   fill(128);
-  drawVertices(ground.vertices);
+  drawBody(ground);
 
   drawMouse(mouseConstraint);
-}
-
-function drawMouse(mouseConstraint) {
-  if (mouseConstraint.body) {
-    var pos = mouseConstraint.body.position;
-    var offset = mouseConstraint.constraint.pointB;
-    var m = mouseConstraint.mouse.position;
-    stroke(0, 255, 0);
-    strokeWeight(2);
-    line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
-  }
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (var i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }

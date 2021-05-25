@@ -3,7 +3,7 @@ const Render = Matter.Render;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 
-const drawVertices = Helpers.drawVertices;
+const drawBody = Helpers.drawBody;
 
 let engine;
 
@@ -35,9 +35,9 @@ function draw() {
   background(0);
 
   fill(255);
-  drawVertices(boxA.vertices);
-  drawVertices(boxB.vertices);
+  drawBody(boxA);
+  drawBody(boxB);
 
   fill(128);
-  drawVertices(ground.vertices);
+  drawBody(ground);
 }

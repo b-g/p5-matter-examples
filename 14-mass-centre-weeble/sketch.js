@@ -11,6 +11,9 @@ const Body = Matter.Body;
 const Mouse = Matter.Mouse;
 const MouseConstraint = Matter.MouseConstraint;
 
+const drawMouse = Helpers.drawMouse;
+const drawBody = Helpers.drawBody;
+
 let engine;
 let circle;
 let ground;
@@ -65,12 +68,12 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(circle.vertices);
-  drawSprite(circle, spriteImg, -70, 200, 200);
+  drawBody(circle);
+  drawSpriteWithOffset(circle, spriteImg, -70, 200, 200);
   drawMassCenter(circle);
 
   fill(128);
-  drawVertices(ground.vertices);
+  drawBody(ground);
 
   drawMouse(mouseConstraint);
 }
@@ -87,15 +90,7 @@ function drawMassCenter(body) {
   ellipse(body.position.x, body.position.y, 5, 5);
 }
 
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
-}
-
-function drawSprite(body, img, offsetY, w, h) {
+function drawSpriteWithOffset(body, img, offsetY, w, h) {
   const pos = body.position;
   push();
   translate(pos.x, pos.y);
@@ -103,15 +98,4 @@ function drawSprite(body, img, offsetY, w, h) {
   imageMode(CENTER);
   image(img, 0, offsetY, w, h);
   pop();
-}
-
-function drawMouse(mouseConstraint) {
-  if (mouseConstraint.body) {
-    const pos = mouseConstraint.body.position;
-    const offset = mouseConstraint.constraint.pointB;
-    const m = mouseConstraint.mouse.position;
-    stroke(0, 255, 0);
-    strokeWeight(2);
-    line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
-  }
 }

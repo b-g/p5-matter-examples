@@ -5,6 +5,9 @@ const Render = Matter.Render;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 
+const drawBody = Helpers.drawBody;
+const drawBodies = Helpers.drawBodies;
+
 let canvas;
 let engine;
 let ball;
@@ -32,11 +35,10 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(ball.vertices);
+  drawBody(ball);
+  
   fill(128);
-  for (const l of layers) {
-    drawVertices(l.vertices);
-  }
+  drawBodies(layers);
 }
 
 function keyPressed(e) {
@@ -69,12 +71,4 @@ function insideViewport(matterObj) {
   } else {
     return false;
   }
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (var i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }

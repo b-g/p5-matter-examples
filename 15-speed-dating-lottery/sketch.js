@@ -11,6 +11,10 @@ const Mouse = Matter.Mouse;
 const MouseConstraint = Matter.MouseConstraint;
 const Body = Matter.Body;
 
+const drawMouse = Helpers.drawMouse;
+const drawBody = Helpers.drawBody;
+const drawText = Helpers.drawText;
+
 let engine;
 let balls = [];
 let rects = [];
@@ -76,14 +80,14 @@ function draw() {
   for (let i = 0; i < balls.length; i++) {
     const ball = balls[i];
     fill(255);
-    drawVertices(ball.vertices);
+    drawBody(ball);
     fill(0);
     drawText(ball, i);
   }
 
   fill(255);
   for (const rect of rects) {
-    drawVertices(rect.vertices);
+    drawBody(rect);
   }
 
   for (let i = 0; i < propellers.length; i++) {
@@ -91,39 +95,8 @@ function draw() {
     // angle of propeller
     Body.setAngle(propeller, propeller.angle + 0.50 * (i+1)/10);
     Body.setAngularVelocity(propeller, 0.10);
-    drawVertices(propeller.vertices);
+    drawBody(propeller);
   }
 
   drawMouse(mouseConstraint);
-}
-
-function drawMouse(mouseConstraint) {
-  if (mouseConstraint.body) {
-    const pos = mouseConstraint.body.position;
-    const offset = mouseConstraint.constraint.pointB;
-    const m = mouseConstraint.mouse.position;
-    stroke(0, 255, 0);
-    strokeWeight(2);
-    line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
-  }
-}
-
-function drawText(body, txt) {
-  const pos = body.position;
-  const angle = body.angle;
-  push();
-  translate(pos.x, pos.y);
-  rotate(angle);
-  textAlign(CENTER, CENTER);
-  text(txt, 0, 0);
-  ellipse(0, 10, 2, 2);
-  pop();
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }

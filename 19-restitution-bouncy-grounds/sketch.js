@@ -12,6 +12,9 @@ const Bodies = Matter.Bodies;
 const Mouse = Matter.Mouse;
 const MouseConstraint = Matter.MouseConstraint;
 
+const drawBody = Helpers.drawBody;
+const drawMouse = Helpers.drawMouse;
+
 let engine;
 let trampolineA;
 let trampolineB;
@@ -59,31 +62,12 @@ function draw() {
 
   noStroke();
   fill(255);
-  drawVertices(trampolineA.vertices);
-  drawVertices(trampolineB.vertices);
-  drawVertices(ball.vertices);
+  drawBody(trampolineA);
+  drawBody(trampolineB);
+  drawBody(ball);
 
   fill(128);
-  drawVertices(ground.vertices);
+  drawBody(ground);
 
   drawMouse(mouseConstraint);
-}
-
-function drawMouse(mouseConstraint) {
-  if (mouseConstraint.body) {
-    const pos = mouseConstraint.body.position;
-    const offset = mouseConstraint.constraint.pointB;
-    const m = mouseConstraint.mouse.position;
-    stroke(0, 255, 0);
-    strokeWeight(2);
-    line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
-  }
-}
-
-function drawVertices(vertices) {
-  beginShape();
-  for (let i = 0; i < vertices.length; i++) {
-    vertex(vertices[i].x, vertices[i].y);
-  }
-  endShape(CLOSE);
 }
