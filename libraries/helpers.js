@@ -99,8 +99,6 @@ const Helpers = (function() {
     return body;
   }
 
-
-
   return {
     drawVertices: drawVertices,
     drawBody: drawBody,
