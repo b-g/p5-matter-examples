@@ -48,6 +48,10 @@ function setup() {
 function draw() {
   background(0);
 
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text('Click: New Body\nDouble Click: Remove Body', width/2, 50);
+
   noStroke();
   fill(255);
   for (const ball of balls) {
