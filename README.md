@@ -28,9 +28,10 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [21-hit-sound](https://b-g.github.io/p5-matter-examples/21-hit-sound/)
 * [22-scroll-follow](https://b-g.github.io/p5-matter-examples/22-scroll-follow/)
 * [23-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/23-sprites-canvas-sandwich/)
+* [24-add-remove-bodies](https://b-g.github.io/p5-matter-examples/24-add-remove-bodies/)
 
 
-The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://twitter.com/hfggmuend_x/) by Benedikt Groß.
+The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://www.hfg-gmuend.de/) by Benedikt Groß.
 
 Some of the examples are based on the [matter.js demos](http://brm.io/matter-js/demo) and [p5-matter](https://github.com/shiffman/p5-matter) by Daniel Shiffman.
 
