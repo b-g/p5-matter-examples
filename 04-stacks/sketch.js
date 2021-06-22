@@ -18,10 +18,9 @@ let ground;
 let balls;
 let boxes;
 
-let canvas;
 
 function setup() {
-  canvas = createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   // create an engine
   engine = Engine.create();

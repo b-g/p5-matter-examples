@@ -20,10 +20,9 @@ let ball2;
 let propeller;
 let angle = 0;
 
-let canvas;
 
 function setup() {
-  canvas = createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   // create an engine
   engine = Engine.create();

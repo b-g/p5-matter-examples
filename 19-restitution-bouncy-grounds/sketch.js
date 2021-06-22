@@ -21,10 +21,9 @@ let trampolineB;
 let ball;
 let ground;
 
-let canvas;
 
 function setup() {
-  canvas = createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   engine = Engine.create();
 

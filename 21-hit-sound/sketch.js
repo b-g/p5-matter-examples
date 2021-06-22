@@ -19,10 +19,9 @@ let ball;
 let propeller;
 let angle = 0;
 
-let canvas;
 
 function setup() {
-  canvas = createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   engine = Engine.create();
 
@@ -37,7 +36,7 @@ function setup() {
   propeller = Bodies.rectangle(400, 300, 650, 25, {
     isStatic: true, angle: angle, label: "propeller"
   });
-  
+
   World.add(engine.world, [ball, propeller]);
 
   // load sound

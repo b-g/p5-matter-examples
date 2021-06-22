@@ -19,11 +19,9 @@ let circle;
 let ground;
 let spriteImg;
 
-let canvas;
-
 
 function setup() {
-  canvas = createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   // load image
   spriteImg = loadImage('1F51D.png');

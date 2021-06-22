@@ -13,8 +13,6 @@ const Constraint = Matter.Constraint;
 const drawConstraint = Helpers.drawConstraint;
 const drawBody = Helpers.drawBody;
 
-let canvas;
-
 let engine;
 let circle;
 let slideLeft;
@@ -25,7 +23,7 @@ let ground;
 
 
 function setup() {
-  canvas = createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   engine = Engine.create();
 

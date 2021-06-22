@@ -8,13 +8,12 @@ const Bodies = Matter.Bodies;
 const drawBody = Helpers.drawBody;
 const drawBodies = Helpers.drawBodies;
 
-let canvas;
 let engine;
 let ball;
 let layers = [];
 
 function setup() {
-  canvas = createCanvas(1000, 2000);
+  const canvas = createCanvas(1000, 2000);
 
   for (let i = 0; i < 9; i++) {
     const x = (i % 2 == 0) ? 250 : 650;
@@ -36,7 +35,7 @@ function draw() {
   noStroke();
   fill(255);
   drawBody(ball);
-  
+
   fill(128);
   drawBodies(layers);
 }

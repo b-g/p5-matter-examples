@@ -20,10 +20,9 @@ let ballImg;
 let ramp;
 let ground;
 
-let canvas;
 
 function setup() {
-  canvas = createCanvas(600, 385);
+  const canvas = createCanvas(600, 385);
 
   // load images
   ballImg = loadImage('ball.png');

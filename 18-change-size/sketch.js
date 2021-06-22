@@ -11,8 +11,6 @@ const Bodies = Matter.Bodies;
 
 const drawBody = Helpers.drawBody;
 
-let canvas;
-
 let engine;
 let circle;
 let obstacle;
@@ -22,7 +20,7 @@ let isSmall = false;
 
 
 function setup() {
-  canvas = createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   engine = Engine.create();
 

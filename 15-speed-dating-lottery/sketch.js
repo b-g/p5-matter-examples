@@ -20,10 +20,9 @@ let balls = [];
 let rects = [];
 let propellers = [];
 
-let canvas;
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight);
+  const canvas = createCanvas(windowWidth, windowHeight);
 
   engine = Engine.create();
 
