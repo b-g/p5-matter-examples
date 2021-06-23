@@ -29,6 +29,7 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [22-scroll-follow](https://b-g.github.io/p5-matter-examples/22-scroll-follow/)
 * [23-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/23-sprites-canvas-sandwich/)
 * [24-add-remove-bodies](https://b-g.github.io/p5-matter-examples/24-add-remove-bodies/)
+* [25-ribbon-queue](https://b-g.github.io/p5-matter-examples/25-ribbon-queue/)
 
 
 The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://www.hfg-gmuend.de/) by Benedikt Groß.
