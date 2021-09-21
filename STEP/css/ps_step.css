@@ -25,7 +25,12 @@ pre {
   color: #ffffff;
 }
 
-svg, canvas {
+canvas {
+  position: absolute;
+  top: 0;
+}
+
+.absolute {
   position: absolute;
   top: 0;
 }
