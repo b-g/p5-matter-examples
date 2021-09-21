@@ -35,7 +35,7 @@
 </head>
 
 <body onload="init()">
-  <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <svg class="absolute" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
    <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
    <g>
     <title>Layer 1</title>
@@ -65,28 +65,28 @@
 </pre>
         </li>
         <li><a href="https://www.w3schools.com/jsref/jsref_obj_string.asp" target="info">Daten</a>: "wir müssen uns etwas merken":
-          <pre>let hugo = "Hello World!"</pre>
+          <pre>let hugo = "Hello World!";</pre>
         </li>
         <li><a href="https://www.w3schools.com/jsref/jsref_function.asp" target="info">Funktionen</a>: "wir müssen etwas ausführen":
           <pre>
 function init() {
-  console.log(hugo)
+  console.log(hugo);
 }
         </pre>
         </li>
         <li>Browser <a href="https://www.w3schools.com/jsref/dom_obj_document.asp" target="info">Schnittstellen</a>: "wir müssen mit dem Browser reden":
           <pre>
-let lampe = document.getElementById('lightbulb')
+let lampe = document.getElementById('lightbulb');
         </pre>
         </li>
         <li>Browser <a href="https://www.w3schools.com/jsref/dom_obj_document.asp" target="info">Schnittstellen</a>: "der Browser muss uns etwas mitteilen können":
           <pre>
 function init() {
-  document.addEventListener('click', onMouseClick)
+  document.addEventListener('click', onMouseClick);
 }
 
 function onMouseClick() {
-  console.log("Der User hat auf die Seite geklickt!")
+  console.log("Der User hat auf die Seite geklickt!");
 }
         </pre>
         <li>Browser <a href="https://www.w3schools.com/jsref/met_element_setattribute.asp" target="info">Schnittstellen</a>: "wir müssen Elemente im Browser verändern können":
@@ -97,7 +97,7 @@ lampe.setAttribute('fill', '#FFFF00')
         <li>Javascript <a href="https://www.w3schools.com/jsref/jsref_statements.asp" target="info">Statements</a>: "wir brauchen so einiges an Programm Logik":
           <pre>
 function onMouseClick() {
-  console.log("Der User hat auf die Seite geklickt!")
+  console.log("Der User hat auf die Seite geklickt!");
   if (/* eine Variable "abfragen" */) {
     // Die Antwort ist wahr
     // Lampe einschalten
