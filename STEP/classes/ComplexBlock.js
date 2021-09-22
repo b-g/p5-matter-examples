@@ -1,3 +1,8 @@
+/*
+Usage:
+// define block parts via parts array option
+let block = new ComplexBlock({ x: 900, y: 730, color: 'blue' }, { parts: [ Bodies.rectangle(4, 20, 5, 20), Bodies.rectangle(40 - 4, 20, 5, 20), Bodies.rectangle(20, +40 - 4, 50, 5) ], isStatic: true });
+*/
 class ComplexBlock extends Block {
 
   constructor(attrs, options) {
@@ -5,8 +10,8 @@ class ComplexBlock extends Block {
   }
 
   addBody() {
-    this.body = Body.create(this.options);
-    Body.setPosition(this.body, this.attrs);
+    this.body = Matter.Body.create(this.options);
+    Matter.Body.setPosition(this.body, this.attrs);
   }
 
 }
