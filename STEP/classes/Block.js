@@ -1,13 +1,18 @@
+/*
+This class allows the block
+- to drawn with various attributes
+- to be placed as a rectangle in the world as a physical Matter body 
+*/
 class BaseBlock {
   // attrs: visual properties of the block e.g. position and dimensions
   // options: definies the behaviour of the block e.g. mass and bouncyness
   constructor(attrs, options) {
     this.attrs = attrs;
     this.options = options;
-    this.options.plugin = { block: this, update: this.update };
+    this.options.plugin = { block: this };
     this.addBody();
     if (this.body) {
-      World.add(engine.world, [this.body]);
+      Matter.World.add(engine.world, [this.body]);
     }
   }
 
@@ -49,9 +54,18 @@ class BaseBlock {
 
 }
 
+/*
+This class allows the block
+- to be constrained to other blocks or to the scene itself 
+- to apply a force from other blocks it collides with
+- to rotate around its center via attribute rotate
+- trigger an actions from other blocks it collides with
+let block = new Block({ x: 640, y: 440, w: 100, h: 5, color: 'white', rotate: { angle: 0, delta: 0.07 } }, { isStatic: true });
+*/
 class Block extends BaseBlock {
   constructor(attrs, options) {
     super(attrs, options);
+    this.collisions = [];
   }
 
   draw() {
@@ -60,39 +74,53 @@ class Block extends BaseBlock {
   }
 
   update() {
+    this.collisions.forEach(block => {
+      if (block.attrs.force) {
+        Matter.Body.applyForce(this.body, this.body.position, block.attrs.force);
+      }
+      if (block.attrs.trigger) {
+        block.attrs.trigger(this, block);
+      }
+    });
+    this.collisions = [];
+    
+    
     if (this.attrs.chgStatic) {
-      Body.setStatic(this.body, false);
+      Matter.Body.setStatic(this.body, false);
     }
 
     if (this.attrs.rotate) {
-      // angle of propeller
-      Body.setAngle(this.body, this.attrs.rotate.angle);
-      Body.setAngularVelocity(this.body, 0.15);
+      // set angle of propeller
+      Matter.Body.setAngle(this.body, this.attrs.rotate.angle);
+      Matter.Body.setAngularVelocity(this.body, 0.15);
+      // increase angle
       this.attrs.rotate.angle += this.attrs.rotate.delta;
     }
   }
 
-  constrainTo(block) {
+  constrainTo(block, options) {
+    //options = options | {};
+    options.bodyA = this.body;
     let constraint;
     if (block) {
-      // an einen anderen Block binden
-      constraint = Constraint.create({
-        bodyA: this.body,
-        bodyB: block.body
-      });
+      // constrain to another block
+      if (!options.bodyB) {
+        options.bodyB = block.body;
+      }
+      constraint = Matter.Constraint.create(options);
     } else {
-      // an den Hintergrund binden
-      constraint = Constraint.create({
-        bodyA: this.body,
-        pointB: { x: this.body.position.x, y: this.body.position.y }
-      });
+      // constrain to scene
+      if (!options.pointB) {
+        options.pointB = {x:this.body.position.x, y: this.body.position.y};
+      }
+      constraint = Matter.Constraint.create(options);
     }
-    World.add(engine.world, [constraint]);
+    Matter.World.add(engine.world, [constraint]);
   }
 
-  collide(block) {
-    if (this.attrs.force) {
-      Body.applyForce(block, block.position, this.attrs.force);
+  collideWith(block) {
+    if (block) {
+      this.collisions.push(block);
     }
   }
 
