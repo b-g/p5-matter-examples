@@ -171,10 +171,8 @@ function setup() {
       }
     })
   })
-
   // run the engine
   Engine.run(engine);
-  console.log(engine.world.constraints)
 }
 
 function draw() {
