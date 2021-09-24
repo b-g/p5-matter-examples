@@ -1,12 +1,11 @@
 /*
 Usage:
 // define block parts via parts array option
-let block = new ComplexBlock({ x: 900, y: 730, color: 'blue' }, { parts: [ Bodies.rectangle(4, 20, 5, 20), Bodies.rectangle(40 - 4, 20, 5, 20), Bodies.rectangle(20, +40 - 4, 50, 5) ], isStatic: true });
+let block = new ComplexBlock(world, { x: 900, y: 730, color: 'blue' }, { parts: [ Bodies.rectangle(4, 20, 5, 20), Bodies.rectangle(40 - 4, 20, 5, 20), Bodies.rectangle(20, +40 - 4, 50, 5) ], isStatic: true });
 */
 class ComplexBlock extends Block {
-
-  constructor(attrs, options) {
-    super(attrs, options);
+  constructor(world, attrs, options) {
+    super(world, attrs, options);
   }
 
   addBody() {
