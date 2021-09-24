@@ -4,11 +4,11 @@ This class allows the block
 - to apply a force from other blocks it collides with
 - to rotate around its center via attribute rotate
 - trigger an actions from other blocks it collides with
-let block = new Block({ x: 400, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 })
+let block = new Block(world, { x: 400, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 })
 */
 class Block extends BaseBlock {
-  constructor(attrs, options) {
-    super(attrs, options);
+  constructor(world, attrs, options) {
+    super(world, attrs, options);
     this.collisions = [];
   }
 

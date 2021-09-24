@@ -1,18 +1,19 @@
 /*
 This class allows the block
 - to drawn with various attributes
-- to be placed as a rectangle in the world as a physical Matter body 
+- to be placed as a rectangle in the world as a physical Matter body
 */
 class BaseBlock {
   // attrs: visual properties of the block e.g. position and dimensions
   // options: definies the behaviour of the block e.g. mass and bouncyness
-  constructor(attrs, options) {
+  constructor(world, attrs, options) {
+    this.world = world;
     this.attrs = attrs;
     this.options = options;
     this.options.plugin = { block: this };
     this.addBody();
     if (this.body) {
-      Matter.World.add(engine.world, [this.body]);
+      Matter.World.add(this.world, [this.body]);
     }
   }
 
