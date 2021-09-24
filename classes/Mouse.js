@@ -1,28 +1,30 @@
 class Mouse {
-  constructor(world, engine, canvas, color) {
-    this.world = world;
-    this.engine = engine;
-    this.canvas = canvas;
-    this.color = color || "green";
+  constructor(engine, canvas, attrs) {
+    this.attrs = attrs || {stroke: "green", strokeWeight: 2};
 
     const mouseOptions = {
-      mouse: Matter.Mouse.create(this.canvas.elt),
+      mouse: Matter.Mouse.create(canvas.elt),
       constraint: {
         stiffness: 0.05,
         angularStiffness: 0
       }
     }
-    this.mouseConstraint = Matter.MouseConstraint.create(this.engine, mouseOptions);
+    this.mouseConstraint = Matter.MouseConstraint.create(engine, mouseOptions);
     this.mouseConstraint.mouse.pixelRatio = window.devicePixelRatio;
 
-    Matter.World.add(this.world, this.mouseConstraint);
+    Matter.World.add(engine.world, this.mouseConstraint);
+  }
+
+  on(event, action) {
+    Matter.Events.on(this.mouseConstraint, event, action );
   }
 
   draw() {
-    stroke(0, 255, 0);
-    strokeWeight(2);
+    push();
+    stroke(this.attrs.stroke);
+    strokeWeight(this.attrs.strokeWeight);
     this.drawMouse();
-    noStroke();
+    pop();
   }
 
   drawMouse() {
@@ -30,8 +32,6 @@ class Mouse {
       const pos = this.mouseConstraint.body.position;
       const offset = this.mouseConstraint.constraint.pointB;
       const m = this.mouseConstraint.mouse.position;
-      stroke(0, 255, 0);
-      strokeWeight(2);
       line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
     }
   }
