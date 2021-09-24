@@ -1,10 +1,10 @@
 /*
 This class allows the block
-- to be constrained to other blocks or to the scene itself 
+- to be constrained to other blocks or to the scene itself
 - to apply a force from other blocks it collides with
 - to rotate around its center via attribute rotate
 - trigger an actions from other blocks it collides with
-let block = new Block({ x: 640, y: 440, w: 100, h: 5, color: 'white', rotate: { angle: 0, delta: 0.07 } }, { isStatic: true });
+let block = new Block({ x: 400, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 })
 */
 class Block extends BaseBlock {
   constructor(attrs, options) {
@@ -27,8 +27,8 @@ class Block extends BaseBlock {
       }
     });
     this.collisions = [];
-    
-    
+
+
     if (this.attrs.chgStatic) {
       Matter.Body.setStatic(this.body, false);
     }
