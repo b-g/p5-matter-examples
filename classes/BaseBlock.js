@@ -9,11 +9,11 @@ class BaseBlock {
   constructor(world, attrs, options) {
     this.world = world;
     this.attrs = attrs;
-    this.options = options;
+    this.options = options || {};
     this.options.plugin = { block: this };
     this.addBody();
     if (this.body) {
-      Matter.World.add(this.world, [this.body]);
+      Matter.World.add(this.world, this.body);
     }
   }
 

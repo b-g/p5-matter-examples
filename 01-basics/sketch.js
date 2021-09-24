@@ -10,8 +10,8 @@ function setup() {
   let world = engine.world;
 
   // create two boxes and a ground
-  blockA = new Block(world, { x: 200, y: 200, w: 80, h: 80, color: 'white' }, { isStatic: false });
-  blockB = new Block(world, { x: 270, y: 50, w: 160, h: 80, color: 'white' }, { isStatic: false });
+  blockA = new Block(world, { x: 200, y: 200, w: 80, h: 80, color: 'white' });
+  blockB = new Block(world, { x: 270, y: 50, w: 160, h: 80, color: 'white' });
   ground = new Block(world, { x: 400, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 });
 
   // run the engine
