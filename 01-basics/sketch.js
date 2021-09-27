@@ -19,7 +19,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background('black');
   blockA.draw();
   blockB.draw();
   ground.draw();
