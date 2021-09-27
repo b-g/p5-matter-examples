@@ -24,14 +24,15 @@ function setup() {
     { isStatic: true, angle: PI/36 }
   );
 
-  mouse = new Mouse(world, engine, canvas, 'green');
+  // add a mouse to manipulate Matter objects
+  mouse = new Mouse(engine, canvas, { stroke: 'magenta', strokeWeight: 2 });
 
   // run the engine
   Matter.Engine.run(engine);
 }
 
 function draw() {
-  background(0);
+  background('black');
   blockA.draw();
   blockB.draw();
   ground.draw();

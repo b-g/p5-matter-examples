@@ -1,6 +1,6 @@
 class Mouse {
   constructor(engine, canvas, attrs) {
-    this.attrs = attrs || {stroke: "green", strokeWeight: 2};
+    this.attrs = attrs || {stroke: "magenta", strokeWeight: 2};
 
     const mouseOptions = {
       mouse: Matter.Mouse.create(canvas.elt),
@@ -16,7 +16,7 @@ class Mouse {
   }
 
   on(event, action) {
-    Matter.Events.on(this.mouseConstraint, event, action );
+    Matter.Events.on(this.mouseConstraint, event, action);
   }
 
   draw() {
