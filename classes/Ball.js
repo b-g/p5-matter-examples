@@ -9,6 +9,6 @@ class Ball extends Block {
   }
 
   addBody() {
-    this.body = Matter.Bodies.circle(this.attrs.x, this.attrs.y, this.attrs.r, this.options)
+    this.body = Matter.Bodies.circle(this.attrs.x, this.attrs.y, this.attrs.r, this.options);
   }
 }
