@@ -1,124 +1,74 @@
 // Benedikt Groß
 // Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
 
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Mouse = Matter.Mouse;
-const MouseConstraint = Matter.MouseConstraint;
-const Constraint = Matter.Constraint;
+let swingStiff;
+let swingStreched;
+let propeller;
+let polyConnectedA;
+let polyConnectedB;
 
-const drawMouse = Helpers.drawMouse;
-const drawBody = Helpers.drawBody;
-const drawConstraint = Helpers.drawConstraint;
-
-let engine;
+let ball;
 let ground;
-
-let constraint1;
-let poly1;
-
-let constraint2;
-let poly2;
-
-let constraint3;
-let rect3;
-let ball3;
-
-let constraint4;
-let polyA4;
-let polyB4;
+let mouse;
 
 
 function setup() {
   const canvas = createCanvas(800, 600);
 
   // create an engine
-  engine = Engine.create();
+  let engine = Matter.Engine.create();
+  let world = engine.world;
 
   // add stiff global constraint
-  poly1 = Bodies.polygon(300, 200, 5, 40);
-  constraint1 = Constraint.create({
-    pointA: { x: 150, y: 50 },
-    bodyB: poly1,
-    pointB: { x: -10, y: -20 }
+  swingStiff = new Polygon(world, {x: 300, y: 200, s: 5, r: 100, color: 'white'});
+  swingStiff.constrainTo(null, {
+    pointA: { x: -10, y: -20 }, length: 150
   });
-  World.add(engine.world, [poly1, constraint1]);
 
   // add damped soft global constraint
-  poly2 = Bodies.polygon(400, 100, 4, 30);
-  constraint2 = Constraint.create({
-    pointA: { x: 400, y: 120 },
-    bodyB: poly2,
-    pointB: { x: -10, y: -10 },
-    stiffness: 0.001,
-    damping: 0.05
+  swingStreched = new Polygon(world, {x: 400, y: 100, s: 8, r: 50, color: 'white'});
+  swingStreched.constrainTo(null, {
+    pointA: { x: -10, y: -20 }, length: 150, stiffness: 0.001, damping: 0.05
   });
-  World.add(engine.world, [poly2, constraint2]);
 
   // add revolute constraint
-  rect3 = Bodies.rectangle(600, 200, 200, 20);
-  constraint3 = Constraint.create({
-    pointA: { x: 600, y: 200 },
-    bodyB: rect3,
-    length: 0
-  });
-  // add a ball3 to play with the constraint
-  ball3 = Bodies.circle(550, 150, 20);
-  World.add(engine.world, [rect3, ball3, constraint3]);
+  propeller = new Block(world, { x: 600, y: 200, w: 300, h: 20, color: 'white' });
+  propeller.constrainTo(null, { length: 0, stiffness: 1 });
 
   // add stiff multi-body constraint
-  polyA4 = Bodies.polygon(100, 400, 6, 20);
-  polyB4 = Bodies.polygon(200, 400, 1, 50);
-  constraint4 = Constraint.create({
-    bodyA: polyA4,
-    pointA: { x: 0, y: 0 },
-    bodyB: polyB4,
-    pointB: { x: -10, y: -10 },
-    stiffness: 0.01
-  });
-  World.add(engine.world, [polyA4, polyB4, constraint4]);
+  polyConnectedA = new Polygon(world, {x: 100, y: 400, s: 6, r: 20, color: 'white'});
+  polyConnectedB = new Polygon(world, {x: 200, y: 400, s: 6, r: 20, color: 'white'});
+  polyConnectedA.constrainTo(polyConnectedB, { length: 100, stiffness: 0.01 });
+
+  // add a ball3 to play with the constraint
+  ball = new Ball(world, {x: 550, y:150, r:20, color: 'white'});
 
   // ground
-  ground = Bodies.rectangle(400, height-10, 810, 30, {isStatic: true});
-  World.add(engine.world, [ground]);
+  ground = new Block(world, {x:400, y: height-10, w: 810, h: 30, color: 'white'}, {isStatic: true});
 
   // setup mouse
-  const mouse = Mouse.create(canvas.elt);
-  const mouseParams = {
-    mouse: mouse,
-    constraint: { stiffness: 0.05 }
-  }
-  mouseConstraint = MouseConstraint.create(engine, mouseParams);
-  mouseConstraint.mouse.pixelRatio = pixelDensity();
-  World.add(engine.world, mouseConstraint);
+  mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Engine.run(engine);
+  Matter.Engine.run(engine);
 }
 
 function draw() {
-  background(0);
+  background('black');
 
-  stroke(255);
-  fill(255);
-  drawBody(poly1);
-  drawBody(poly2);
-  drawBody(rect3);
-  drawBody(ball3);
-  drawBody(polyA4);
-  drawBody(polyB4);
-  stroke(128);
-  strokeWeight(2);
-  drawConstraint(constraint1);
-  drawConstraint(constraint2);
-  drawConstraint(constraint3);
-  drawConstraint(constraint4);
+  swingStiff.draw();
+  swingStiff.drawConstraint();
 
-  noStroke();
-  fill(128);
-  drawBody(ground);
+  swingStreched.draw();
+  swingStreched.drawConstraint();
 
-  drawMouse(mouseConstraint);
+  polyConnectedA.draw();
+  polyConnectedB.draw();
+  polyConnectedA.drawConstraint();
+
+  propeller.draw();
+  propeller.drawConstraint();
+  ball.draw();
+  ground.draw();
+  mouse.draw();
 }
