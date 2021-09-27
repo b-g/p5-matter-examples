@@ -10,11 +10,42 @@ class Block extends BaseBlock {
   constructor(world, attrs, options) {
     super(world, attrs, options);
     this.collisions = [];
+    this.constraint = undefined;
   }
 
   draw() {
     this.update();
     super.draw();
+  }
+
+  drawConstraint() {
+    if (this.constraint) {
+      stroke("magenta");
+      strokeWeight(2);
+
+      const offsetA = this.constraint.pointA;
+      let posA = {
+        x: 0,
+        y: 0
+      };
+      if (this.constraint.bodyA) {
+        posA = this.constraint.bodyA.position;
+      }
+      const offsetB = this.constraint.pointB;
+      let posB = {
+        x: 0,
+        y: 0
+      };
+      if (this.constraint.bodyB) {
+        posB = this.constraint.bodyB.position;
+      }
+      line(
+        posA.x + offsetA.x,
+        posA.y + offsetA.y,
+        posB.x + offsetB.x,
+        posB.y + offsetB.y
+      );
+    }
   }
 
   update() {
@@ -43,23 +74,21 @@ class Block extends BaseBlock {
   }
 
   constrainTo(block, options) {
-    //options = options | {};
     options.bodyA = this.body;
-    let constraint;
     if (block) {
       // constrain to another block
       if (!options.bodyB) {
         options.bodyB = block.body;
       }
-      constraint = Matter.Constraint.create(options);
+      this.constraint = Matter.Constraint.create(options);
     } else {
       // constrain to scene
       if (!options.pointB) {
         options.pointB = {x:this.body.position.x, y: this.body.position.y};
       }
-      constraint = Matter.Constraint.create(options);
+      this.constraint = Matter.Constraint.create(options);
     }
-    Matter.World.add(engine.world, [constraint]);
+    Matter.World.add(this.world, this.constraint);
   }
 
   collideWith(block) {
