@@ -24,6 +24,7 @@ class BaseBlock {
   draw() {
     if (this.body) {
       fill(this.attrs.color);
+      noStroke();
       this.drawBody();
     }
   }
