@@ -10,7 +10,7 @@ class Block extends BlockCore {
   constructor(world, attrs, options) {
     super(world, attrs, options);
     this.collisions = [];
-    this.constraint = undefined;
+    this.constraints = [];
   }
 
   draw() {
@@ -18,33 +18,34 @@ class Block extends BlockCore {
     super.draw();
   }
 
-  drawConstraint() {
-    if (this.constraint) {
+  drawConstraints() {
+    if (this.constraints.length > 0) {
       stroke("magenta");
       strokeWeight(2);
-
-      const offsetA = this.constraint.pointA;
-      let posA = {
-        x: 0,
-        y: 0
-      };
-      if (this.constraint.bodyA) {
-        posA = this.constraint.bodyA.position;
+      for (let constraint of this.constraints) {
+        const offsetA = constraint.pointA;
+        let posA = {
+          x: 0,
+          y: 0
+        };
+        if (constraint.bodyA) {
+          posA = constraint.bodyA.position;
+        }
+        const offsetB = constraint.pointB;
+        let posB = {
+          x: 0,
+          y: 0
+        };
+        if (constraint.bodyB) {
+          posB = constraint.bodyB.position;
+        }
+        line(
+          posA.x + offsetA.x,
+          posA.y + offsetA.y,
+          posB.x + offsetB.x,
+          posB.y + offsetB.y
+        );
       }
-      const offsetB = this.constraint.pointB;
-      let posB = {
-        x: 0,
-        y: 0
-      };
-      if (this.constraint.bodyB) {
-        posB = this.constraint.bodyB.position;
-      }
-      line(
-        posA.x + offsetA.x,
-        posA.y + offsetA.y,
-        posB.x + offsetB.x,
-        posB.y + offsetB.y
-      );
     }
   }
 
@@ -80,15 +81,15 @@ class Block extends BlockCore {
       if (!options.bodyB) {
         options.bodyB = block.body;
       }
-      this.constraint = Matter.Constraint.create(options);
     } else {
-      // constrain to scene
+      // constrain to "background" scene
       if (!options.pointB) {
-        options.pointB = {x:this.body.position.x, y: this.body.position.y};
+        options.pointB = { x: this.body.position.x, y: this.body.position.y };
       }
-      this.constraint = Matter.Constraint.create(options);
     }
-    Matter.World.add(this.world, this.constraint);
+    const contraint = Matter.Constraint.create(options);
+    this.constraints.push(contraint);
+    Matter.World.add(this.world, contraint);
   }
 
   collideWith(block) {

@@ -49,7 +49,7 @@ function draw() {
   ground.draw();
   rect1.draw();
   rect2.draw();
-  rect1.drawConstraint();
-  rect2.drawConstraint();
+  rect1.drawConstraints();
+  rect2.drawConstraints();
   mouse.draw();
 }

@@ -57,17 +57,17 @@ function draw() {
   background('black');
 
   swingStiff.draw();
-  swingStiff.drawConstraint();
+  swingStiff.drawConstraints();
 
   swingStreched.draw();
-  swingStreched.drawConstraint();
+  swingStreched.drawConstraints();
 
   polyConnectedA.draw();
   polyConnectedB.draw();
-  polyConnectedA.drawConstraint();
+  polyConnectedA.drawConstraints();
 
   propeller.draw();
-  propeller.drawConstraint();
+  propeller.drawConstraints();
   ball.draw();
   ground.draw();
   mouse.draw();

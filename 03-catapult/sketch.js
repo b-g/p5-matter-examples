@@ -41,6 +41,6 @@ function draw() {
   ball1.draw();
   ball2.draw();
   catapult.draw();
-  catapult.drawConstraint();
+  catapult.drawConstraints();
   catapultSpacer.draw();
 }
