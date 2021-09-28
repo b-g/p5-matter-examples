@@ -6,7 +6,7 @@ This class allows the block
 - trigger an actions from other blocks it collides with
 let block = new Block(world, { x: 400, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 })
 */
-class Block extends BaseBlock {
+class Block extends BlockCore {
   constructor(world, attrs, options) {
     super(world, attrs, options);
     this.collisions = [];

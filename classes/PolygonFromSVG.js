@@ -5,7 +5,7 @@ let block = new SVGBlock(world, { x: 300, y: 500, elem: 'puzzle', scale: 0.6, co
 // SVG in separate file path defined via file attribute
 let block = new SVGBlock(world, { x: 580, y: 710, file: './path.svg', scale: 0.6, color: 'yellow' }, { isStatic: true, friction: 0.0 });
 */
-class SVGBlock extends Block {
+class PolygonFromSVG extends Block {
   constructor(world, attrs, options) {
     super(world, attrs, options);
   }

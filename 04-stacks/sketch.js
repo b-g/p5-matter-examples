@@ -16,11 +16,11 @@ function setup() {
   let world = engine.world;
 
   // add stacks
-  boxes = new CompositeBlock(world, {
+  boxes = new Stack(world, {
     x: 200, y: 0, cols: 3, rows: 10, colGap: 3, rowGap: 3, color: 'white',
     create: (x, y) => Matter.Bodies.rectangle(x, y, 50, 50)
   });
-  balls = new CompositeBlock(world, {
+  balls = new Stack(world, {
     x: 550, y: 0, cols: 3, rows: 10, colGap: 3, rowGap: 3, color: 'white',
     create: (x, y) => Matter.Bodies.circle(x, y, 25, { restitution: 1 })
   });
