@@ -90,6 +90,7 @@ class Block extends BlockCore {
     const contraint = Matter.Constraint.create(options);
     this.constraints.push(contraint);
     Matter.World.add(this.world, contraint);
+    return contraint;
   }
 
   collideWith(block) {

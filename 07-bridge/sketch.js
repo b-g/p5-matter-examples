@@ -1,91 +1,63 @@
 // Benedikt Groß
 
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Mouse = Matter.Mouse;
-const MouseConstraint = Matter.MouseConstraint;
-const Constraint = Matter.Constraint;
-const Body = Matter.Body;
-const Composites = Matter.Composites;
-const Composite = Matter.Composite;
-
-const drawMouse = Helpers.drawMouse;
-const drawBody = Helpers.drawBody;
-const drawBodies = Helpers.drawBodies;
-const drawConstraints = Helpers.drawConstraints;
-
-let engine;
 let ground;
 let bridge;
 let ball;
-
+let blocks;
 
 function setup() {
   const canvas = createCanvas(800, 600);
 
   // create an engine
-  engine = Engine.create();
+  const engine = Matter.Engine.create();
+  let world = engine.world;
 
+  // create a few chain links
+  blocks = [];
+  const group = Matter.Body.nextGroup(true);
+  for (let i = 0; i < 10; i++) {
+    blocks.push(
+      new Block(world, { x: 100 + i*50, y: 200, w: 50, h: 30, color: 'white' }, { collisionFilter: { group: group } })
+    );
+  }
   // add bridge
-  const group = Body.nextGroup(true);
-  const rects = Composites.stack(100, 200, 10, 1, 10, 10, function(x, y) {
-      return Bodies.rectangle(x, y, 50, 20, { collisionFilter: { group: group } });
-  });
-  bridge = Composites.chain(rects, 0.5, 0, -0.5, 0, {stiffness: 0.8, length: 2, render: {type: 'line'}});
-  World.add(engine.world, [bridge]);
+  bridge = new Chain(
+    world,
+    { blocks: blocks, xOffsetA: 0.5, yOffsetA: 0, xOffsetB: -0.5, yOffsetB: 0, color: 'white' },
+    { stiffness: 0.1, length: 2 }
+  );
 
   // left and right fix point of bridge
-  Composite.add(rects, Constraint.create({
-    pointA: {x: 100, y: 200},
-    bodyB: rects.bodies[0],
-    pointB: {x: -25, y: 0},
-    stiffness: 0.1
-  }));
-  Composite.add(rects, Constraint.create({
-    pointA: {x: 700, y: 200},
-    bodyB: rects.bodies[rects.bodies.length-1],
-    pointB: {x: +25, y: 0},
+  const fixedPointLeft = blocks[0].constrainTo(null, {
+    pointA: { x: -25, y: 0 },
     stiffness: 0.02
-  }));
+  });
+  bridge.addConstraint(fixedPointLeft);
+
+  const fixedPointRight = blocks[blocks.length-1].constrainTo(null, {
+    pointA: { x: +25, y: 0 },
+    stiffness: 0.02
+  });
+  bridge.addConstraint(fixedPointRight);
 
   // add ball
-  ball = Bodies.circle(400, 0, 50);
-  World.add(engine.world, [ball]);
+  ball = new Ball(world, { x: 400, y: 0, r: 50, color: 'white' });
 
   // ground
-  ground = Bodies.rectangle(400, height, 810, 100, {isStatic: true});
-  World.add(engine.world, [ground]);
+  ground = new Block(world, { x:400, y: height, w: 810, h: 100, color: 'white' }, { isStatic: true });
 
   // setup mouse
-  const mouse = Mouse.create(canvas.elt);
-  const mouseParams = {
-    mouse: mouse,
-    constraint: { stiffness: 0.05 }
-  }
-  mouseConstraint = MouseConstraint.create(engine, mouseParams);
-  mouseConstraint.mouse.pixelRatio = pixelDensity();
-  World.add(engine.world, mouseConstraint);
+  mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Engine.run(engine);
+  Matter.Engine.run(engine);
 }
 
 function draw() {
   background(0);
-
-  stroke(255);
-  fill(255);
-  drawBody(ball);
-  drawBodies(bridge.bodies);
-  stroke(128);
-  strokeWeight(2);
-  drawConstraints(bridge.constraints);
-
-  noStroke();
-  fill(128);
-  drawBody(ground);
-
-  drawMouse(mouseConstraint);
+  ground.draw();
+  bridge.draw();
+  bridge.drawConstraints();
+  ball.draw();
+  mouse.draw();
 }
