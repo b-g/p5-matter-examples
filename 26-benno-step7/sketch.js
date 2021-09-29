@@ -1,5 +1,3 @@
-Homeworks.aufgabe = 7;
-
 const Engine = Matter.Engine;
 const Bodies = Matter.Bodies;
 const Events = Matter.Events;
@@ -21,7 +19,7 @@ function setup() {
 
   // create some blocks
   // the blue box triggers a function on collisions
-  blocks.push(new BaseBlock(
+  blocks.push(new BlockCore(
     world,
     {
       x: 200, y: 200, w: 60, h: 60,
@@ -56,7 +54,7 @@ function setup() {
   fixed2.constrainTo(fixed1, { length: 150, stiffness: 0.1 });
   blocks.push(fixed2);
 
-  blocks.push(new BaseBlock(
+  blocks.push(new BlockCore(
     world,
     {
       x: windowWidth / 2, y: 800, w: windowWidth, h: 10,
@@ -65,7 +63,7 @@ function setup() {
     { isStatic: true }
   ));
 
-  blocks.push(new BaseBlock(
+  blocks.push(new BlockCore(
     world,
     {
       x: -100, y: 450, w: 800, h: 10,
@@ -74,7 +72,7 @@ function setup() {
     { angle: PI / 3, isStatic: true }
   ));
 
-  blocks.push(new BaseBlock(
+  blocks.push(new BlockCore(
     world,
     {
       x: windowWidth + 100, y: 450, w: 800, h: 10,
@@ -105,7 +103,7 @@ function setup() {
   ));
 
   // create a body from multiple parts
-  blocks.push(new ComplexBlock(
+  blocks.push(new Parts(
     world,
     {
       x: 900, y: 730,
@@ -123,7 +121,7 @@ function setup() {
   ));
 
   // create a body from points
-  blocks.push(new FreehandBlock(
+  blocks.push(new PolygonFromPoints(
     world,
     {
       x: 600,
@@ -136,7 +134,7 @@ function setup() {
 
   // create a body from a SVG path
   // the puzzle can apply a force on collisions 
-  const puzzle = new SVGBlock(
+  const puzzle = new PolygonFromSVG(
     world,
     {
       x: 300, y: 500,
@@ -148,7 +146,7 @@ function setup() {
   );
   blocks.push(puzzle);
 
-  blocks.push(new SVGBlock(
+  blocks.push(new PolygonFromSVG(
     world,
     {
       x: 580, y: 710,
@@ -159,7 +157,7 @@ function setup() {
   ));
 
   // create a group of identical bodies
-  blocks.push(new CompositeBlock(
+  blocks.push(new Stack(
     world,
     {
       x: 550,
@@ -200,28 +198,10 @@ function setup() {
 function draw() {
   background(0, 20);
   noStroke();
-  blocks.forEach(block => block.draw());
-  stroke('white');
-  engine.world.constraints.forEach(constraints => drawConstraint(constraints));
-}
-
-function drawConstraint(constraint) {
-  if (constraint.label == "Mouse Constraint") {
-    mouse.draw();
-  } else {
-    let posA = { x: 0, y: 0 };
-    if (constraint.bodyA) {
-      posA = constraint.bodyA.position;
+  blocks.forEach(block => {
+    block.draw();
+    if (block.drawConstraints) {
+      block.drawConstraints();
     }
-    let posB = { x: 0, y: 0 };
-    if (constraint.bodyB) {
-      posB = constraint.bodyB.position;
-    }
-    line(
-      posA.x + constraint.pointA.x,
-      posA.y + constraint.pointA.y,
-      posB.x + constraint.pointB.x,
-      posB.y + constraint.pointB.y
-    );
-  }
+  });
 }
