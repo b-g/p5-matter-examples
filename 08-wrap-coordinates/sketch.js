@@ -3,63 +3,42 @@
 // setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Mouse = Matter.Mouse;
-const MouseConstraint = Matter.MouseConstraint;
-
-const drawMouse = Helpers.drawMouse;
-const drawBody = Helpers.drawBody;
-
-let engine;
-let circle;
+let ball;
 let slide;
-let ground;
 
 
 function setup() {
   const canvas = createCanvas(800, 600);
 
   // create an engine
-  engine = Engine.create();
+  const engine = Matter.Engine.create();
+  const world = engine.world;
 
-  circle = Bodies.circle(200, 50, 40);
-  circle.plugin.wrap = {
+  const wrap = {
       min: { x: 0, y: 0 },
       max: { x: width, y: height }
   };
-  slide = Bodies.rectangle(400, 300, 500, 30, {
-    isStatic: true, angle: Math.PI * 0.06
-  });
-  ground = Bodies.rectangle(400, 550, 750, 30, {isStatic: true});
-  World.add(engine.world, [circle, slide, ground]);
+  ball = new Ball(world,
+    { x: 200, y: 50, r: 50, color: 'white' },
+    // { plugin: { wrap: wrap }}
+  );
+  ball.body.plugin.wrap = wrap;
+
+  slide = new Block(world,
+    { x: 400, y: 300, w: 700, h: 50, color: 'white' },
+    { isStatic: true, angle: PI/10 }
+  );
 
   // setup mouse
-  const mouse = Mouse.create(canvas.elt);
-  const mouseParams = {
-    mouse: mouse,
-    constraint: { stiffness: 0.05 }
-  }
-  mouseConstraint = MouseConstraint.create(engine, mouseParams);
-  mouseConstraint.mouse.pixelRatio = pixelDensity();
-  World.add(engine.world, mouseConstraint);
+  mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Engine.run(engine);
+  Matter.Engine.run(engine);
 }
 
 function draw() {
   background(0);
-
-  noStroke();
-  fill(255);
-  drawBody(circle);
-
-  fill(128);
-  drawBody(slide);
-  drawBody(ground);
-
-  drawMouse(mouseConstraint);
+  slide.draw();
+  ball.draw();
+  mouse.draw();
 }
