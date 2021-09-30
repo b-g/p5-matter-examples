@@ -10,7 +10,8 @@ class BlockCore {
     this.world = world;
     this.attrs = attrs;
     this.options = options || {};
-    this.options.plugin = { block: this };
+    this.options.plugin = options.plugin || {};
+    this.options.plugin.block = this;
     this.addBody();
     if (this.body) {
       Matter.World.add(this.world, this.body);

@@ -20,9 +20,8 @@ function setup() {
   };
   ball = new Ball(world,
     { x: 200, y: 50, r: 50, color: 'white' },
-    // { plugin: { wrap: wrap }}
+    { friction: 0.01, plugin: { wrap: wrap } }
   );
-  ball.body.plugin.wrap = wrap;
 
   slide = new Block(world,
     { x: 400, y: 300, w: 700, h: 50, color: 'white' },
