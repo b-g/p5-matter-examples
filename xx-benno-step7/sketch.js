@@ -40,7 +40,8 @@ function setup() {
     },
     { isStatic: false }
   );
-  fixed1.constrainTo(null, { pointB: { x: 900, y: 300 }, length: 300 });
+  let check = fixed1.constrainTo(null, { pointB: { x: 900, y: 300 }, length: 300, draw: true });
+  console.log(check);
   blocks.push(fixed1);
 
   const fixed2 = new Block(
@@ -197,11 +198,11 @@ function setup() {
 
 function draw() {
   background(0, 20);
-  noStroke();
   blocks.forEach(block => {
     block.draw();
     if (block.drawConstraints) {
       block.drawConstraints();
     }
   });
+  mouse.draw();
 }

@@ -16,6 +16,7 @@ class Block extends BlockCore {
   draw() {
     this.update();
     super.draw();
+    this.drawConstraints();
   }
 
   drawConstraints() {
@@ -23,28 +24,30 @@ class Block extends BlockCore {
       stroke("magenta");
       strokeWeight(2);
       for (let constraint of this.constraints) {
-        const offsetA = constraint.pointA;
-        let posA = {
-          x: 0,
-          y: 0
-        };
-        if (constraint.bodyA) {
-          posA = constraint.bodyA.position;
-        }
-        const offsetB = constraint.pointB;
-        let posB = {
-          x: 0,
-          y: 0
-        };
-        if (constraint.bodyB) {
-          posB = constraint.bodyB.position;
-        }
-        line(
-          posA.x + offsetA.x,
-          posA.y + offsetA.y,
-          posB.x + offsetB.x,
-          posB.y + offsetB.y
-        );
+        if (constraint.draw) {
+          const offsetA = constraint.pointA;
+          let posA = {
+            x: 0,
+            y: 0
+          };
+          if (constraint.bodyA) {
+            posA = constraint.bodyA.position;
+          }
+          const offsetB = constraint.pointB;
+          let posB = {
+            x: 0,
+            y: 0
+          };
+          if (constraint.bodyB) {
+            posB = constraint.bodyB.position;
+          }
+          line(
+            posA.x + offsetA.x,
+            posA.y + offsetA.y,
+            posB.x + offsetB.x,
+            posB.y + offsetB.y
+          );
+          }
       }
     }
   }
