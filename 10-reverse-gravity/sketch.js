@@ -1,46 +1,50 @@
-// Benedikt Groß
-// Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
-
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-
-const drawBody = Helpers.drawBody;
+let box;
+let ceiling;
+let obstacle;
+let ground;
 
 let engine;
 
-let box;
-let ground;
 
 function setup() {
-  createCanvas(800, 600);
+  const canvas = createCanvas(800, 600);
 
   // create an engine
-  engine = Engine.create();
+  engine = Matter.Engine.create();
+  let world = engine.world;
 
   // reverse gravity
-  engine.world.gravity.y = -1;
+  engine.world.gravity.y *= -1;
 
-  // add bodies
-  box = Bodies.rectangle(600, 500, 80, 80);
-  ground = Bodies.rectangle(400, 200, 810, 10, {
-    isStatic: true, angle: Math.PI * 0.06
-  });
+  // add block and ground
+  box = new Block(world, { x: 600, y: 500, w: 50, h: 50, color: 'white' });
+  obstacle = new Block(world,
+    { x: 400, y: 200, w: 500, h: 50, color: 'white' },
+    { isStatic: true, angle: PI/10 }
+  );
+  ceiling = new Block(world, { x: 400, y: 0, w: 1000, h: 30, color: 'grey' }, { isStatic: true });
+  ground = new Block(world, { x: 400, y: height, w: 1000, h: 30, color: 'grey' }, { isStatic: true });
 
-  // add all of the bodies to the world
-  World.add(engine.world, [box, ground]);
+  // setup mouse
+  mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Engine.run(engine);
+  Matter.Engine.run(engine);
 }
 
 function draw() {
   background(0);
+  ceiling.draw();
+  ground.draw();
+  obstacle.draw();
+  box.draw();
+  mouse.draw();
+}
 
-  fill(255);
-  drawBody(box);
-
-  fill(128);
-  drawBody(ground);
+function keyPressed() {
+  // is SPACE pressed?
+  if (keyCode === 32) {
+    // reverse gravity
+    engine.world.gravity.y *= -1;
+  }
 }
