@@ -17,6 +17,7 @@ class Chain extends Block {
   }
 
   addConstraint(constraint) {
-    Matter.Composite.addConstraint(this.composite, constraint);
+    this.constraints.push(constraint);
+    //atter.Composite.addConstraint(this.composite, constraint);
   }
 }

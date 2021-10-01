@@ -17,26 +17,29 @@ function setup() {
   const group = Matter.Body.nextGroup(true);
   for (let i = 0; i < 10; i++) {
     blocks.push(
-      new Block(world, { x: 100 + i*50, y: 200, w: 50, h: 30, color: 'white' }, { collisionFilter: { group: group } })
+      new Block(world, { x: 125 + i*60, y: 210, w: 50, h: 30, color: 'white' }, { collisionFilter: { group: group } })
     );
   }
   // add bridge
   bridge = new Chain(
     world,
-    { blocks: blocks, xOffsetA: 0.5, yOffsetA: 0, xOffsetB: -0.5, yOffsetB: 0, color: 'white' },
-    { stiffness: 0.1, length: 2 }
+    { blocks: blocks, xOffsetA: 0.5, yOffsetA: 0, xOffsetB: -0.5, yOffsetB: 0, color: 'red' },
+    { stiffness: 0.1, length: 2, draw: true }
   );
 
   // left and right fix point of bridge
+
   const fixedPointLeft = blocks[0].constrainTo(null, {
-    pointA: { x: -25, y: 0 },
-    stiffness: 0.02
+    pointA: { x: 0, y: -200 },
+    stiffness: 0.02,
+    draw: true
   });
   bridge.addConstraint(fixedPointLeft);
 
   const fixedPointRight = blocks[blocks.length-1].constrainTo(null, {
-    pointA: { x: +25, y: 0 },
-    stiffness: 0.02
+    pointA: { x: 0, y: -200 },
+    stiffness: 0.02,
+    draw: true
   });
   bridge.addConstraint(fixedPointRight);
 
@@ -50,7 +53,7 @@ function setup() {
   mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Matter.Engine.run(engine);
+  //Matter.Engine.run(engine);
 }
 
 function draw() {
