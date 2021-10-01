@@ -10,7 +10,7 @@ class BlockCore {
     this.world = world;
     this.attrs = attrs;
     this.options = options || {};
-    this.options.plugin = "plugin" in this.options ? options.plugin : {};
+    this.options.plugin = this.options.plugin || {};
     this.options.plugin.block = this;
     this.addBody();
     if (this.body) {
