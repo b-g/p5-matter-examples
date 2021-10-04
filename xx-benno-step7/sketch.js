@@ -7,6 +7,7 @@ const World = Matter.World;
 let engine;
 let world;
 let mouse;
+let isDrag = false;
 // an array to contain all the blocks created
 let blocks = [];
 
@@ -40,8 +41,7 @@ function setup() {
     },
     { isStatic: false }
   );
-  let check = fixed1.constrainTo(null, { pointB: { x: 900, y: 300 }, length: 300, draw: true });
-  console.log(check);
+  fixed1.constrainTo(null, { pointB: { x: 900, y: 300 }, length: 300, draw: true });
   blocks.push(fixed1);
 
   const fixed2 = new Block(
@@ -174,10 +174,16 @@ function setup() {
   // add a mouse so that we can manipulate Matter objects
   mouse = new Mouse(engine, canvas, { stroke: 'blue', strokeWeight: 3 });
 
-  // process mouseup events in order to - add more balls
+  // process mouseup events in order to drag objects or add more balls
+  mouse.on("startdrag", evt => {
+    isDrag = true;
+  });
   mouse.on("mouseup", evt => {
-    let ball = new Ball(world, { x: evt.mouse.position.x, y: evt.mouse.position.y, r: 15, color: 'yellow' }, { isStatic: false, restitution: 0.9, label: 'Murmel' });
-    blocks.push(ball);
+    if (!isDrag) {
+      let ball = new Ball(world, { x: evt.mouse.position.x, y: evt.mouse.position.y, r: 15, color: 'yellow' }, { isStatic: false, restitution: 0.9, label: 'Murmel' });
+      blocks.push(ball);
+    }
+    isDrag = false;
   });
 
   // process collisions - check whether block "Murmel" hits another Block
@@ -198,11 +204,6 @@ function setup() {
 
 function draw() {
   background(0, 20);
-  blocks.forEach(block => {
-    block.draw();
-    if (block.drawConstraints) {
-      block.drawConstraints();
-    }
-  });
+  blocks.forEach(block => block.draw());
   mouse.draw();
 }
