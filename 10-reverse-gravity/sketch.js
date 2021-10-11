@@ -41,10 +41,12 @@ function draw() {
   mouse.draw();
 }
 
-function keyPressed() {
+function keyPressed(event) {
   // is SPACE pressed?
-  if (keyCode === 32) {
+  if (event.keyCode === 32) {
     // reverse gravity
     engine.world.gravity.y *= -1;
+    // prevent SPACE bar from scrolling page
+    event.preventDefault();
   }
 }
