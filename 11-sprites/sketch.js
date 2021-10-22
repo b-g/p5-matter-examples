@@ -1,20 +1,9 @@
-// Benedikt Groß
-// Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
-
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-
-const drawBody = Helpers.drawBody;
-const drawSprite = Helpers.drawSprite;
-
-let engine;
 let box;
 let boxImg;
 let ball;
 let ballImg;
 let ground;
+let mouse;
 
 
 function setup() {
@@ -25,27 +14,28 @@ function setup() {
   boxImg = loadImage('box.png');
 
   // create an engine
-  engine = Engine.create();
+  let engine = Matter.Engine.create();
+  let world = engine.world;
 
   // add bodies
-  box = Bodies.rectangle(200, 200, 64, 64);
-  ball = Bodies.circle(100, 50, 45);
-  ground = Bodies.rectangle(400, 500, 810, 20, {
-    isStatic: true, angle: Math.PI * 0.06
-  });
-  World.add(engine.world, [box, ball, ground]);
+  box = new SpriteBlock(world, { x: 200, y: 200, w: 64, h: 64, image: boxImg});
+  ball = new SpriteBall(world, { x: 100, y: 50, r: 45, image: ballImg});
+  ground = new Block(world,
+    { x: 400, y: 500, w: 810, h: 20, color: 'white'},
+    { isStatic: true, angle: Math.PI * 0.06 }
+  );
+
+  // setup mouse
+  mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Engine.run(engine);
+  Matter.Engine.run(engine);
 }
 
 function draw() {
   background(0);
-
-  drawSprite(ball, ballImg);
-  drawSprite(box, boxImg);
-
-  fill(128);
-  noStroke();
-  drawBody(ground);
+  box.draw();
+  ball.draw();
+  ground.draw();
+  mouse.draw();
 }
