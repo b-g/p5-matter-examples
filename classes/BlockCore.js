@@ -15,6 +15,9 @@ class BlockCore {
     this.addBody();
     if (this.body) {
       Matter.World.add(this.world, this.body);
+      if (this.options.restitution) {
+        this.body.restitution = this.options.restitution;
+      }
     }
   }
 
@@ -24,7 +27,11 @@ class BlockCore {
 
   draw() {
     if (this.body) {
-      fill(this.attrs.color);
+      if (this.attrs.color) {
+        fill(this.attrs.color);
+      } else {
+        noFill();
+      }
       noStroke();
       this.drawBody();
     }
