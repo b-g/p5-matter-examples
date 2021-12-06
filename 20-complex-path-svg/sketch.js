@@ -3,57 +3,51 @@
 // pathseg.js https://github.com/progers/pathseg
 // decomp.js https://github.com/schteppe/poly-decomp.js/
 
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-
-const drawBody = Helpers.drawBody;
-const bodyFromPath = Helpers.bodyFromPath;
-
-let engine;
+Matter.use('matter-wrap');
 
 let ball;
-let path;
-
-
-function preload() {
-  httpGet("./path.svg", "text", false, function(response) {
-    // when the HTTP request completes ...
-    // 1. parse the svg and get the path
-    const parser = new DOMParser();
-    const svgDoc = parser.parseFromString(response, "image/svg+xml");
-    const svgPathElement = svgDoc.querySelector("path");
-    // 2. setup all matter.js related things
-    setupMatter(svgPathElement);
-  });
-}
+let polygon;
+let ground;
 
 function setup() {
-  createCanvas(700, 450);
-}
+  createCanvas(700, 600);
 
-function setupMatter(svgPathElement) {
-  // use the path from the svg file to create the corresponding matter object
-  path = bodyFromPath(svgPathElement, 180, 300, { isStatic: true, friction: 0.0 });
+  // create an engine
+  const engine = Matter.Engine.create();
+  const world = engine.world;
 
-  ball = Bodies.circle(100, 50, 40, {friction: 0.0});
-  engine = Engine.create();
-  World.add(engine.world, [ball, path]);
-  Engine.run(engine);
+  // use svg file to create the corresponding polygon
+  polygon = new PolygonFromSVG(world,
+    { x: 180, y: 300, fromFile: './path.svg', scale: 0.8, color: 'white' },
+    { isStatic: true, friction: 0.0 }
+  );
+
+  // ball and ground
+  const wrap = {
+    min: { x: 0, y: 0 },
+    max: { x: width, y: height }
+  };
+  ball = new Ball(world,
+    { x: 100, y: 50, r: 40, color: 'white' },
+    { friction: 0.0, plugin: { wrap: wrap } }
+  );
+  ground = new Block(world,
+    { x: 550, y: 500, w: 500, h: 25, color: 'grey' },
+    { isStatic: true, angle: PI * -0.1 }
+  );
+
+  // setup mouse
+  mouse = new Mouse(engine, canvas);
+
+  // run the engine
+  Matter.Engine.run(engine);
 }
 
 function draw() {
-  // do nothing if variable path is empty and not yet loaded
-  if (!path) return;
+  background('black');
 
-  background(0);
-
-  fill(255);
-  noStroke();
-  drawBody(ball);
-
-  strokeWeight(0.5);
-  stroke(255);
-  drawBody(path);
+  ground.draw();
+  polygon.draw();
+  ball.draw();
+  mouse.draw()
 }

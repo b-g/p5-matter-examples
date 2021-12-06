@@ -4,18 +4,6 @@
 // setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
-
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Mouse = Matter.Mouse;
-const MouseConstraint = Matter.MouseConstraint;
-
-const drawBody = Helpers.drawBody;
-const drawMouse = Helpers.drawMouse;
-
-let engine;
 let trampolineA;
 let trampolineB;
 let ball;
@@ -25,48 +13,50 @@ let ground;
 function setup() {
   const canvas = createCanvas(800, 600);
 
-  engine = Engine.create();
+  // create an engine
+  const engine = Matter.Engine.create();
+  const world = engine.world;
 
-  // ball
-  ball = Bodies.circle(300, 50, 40);
-  ball.plugin.wrap = {
-      min: { x: 0, y: 0 },
-      max: { x: width, y: height }
+  // config wrap area
+  const wrap = {
+    min: { x: 0, y: 0 },
+    max: { x: width, y: height }
   };
 
+  // ball
+  ball = new Ball(world,
+    { x: 300, y: 50, r: 40, color: 'white' },
+    { plugin: { wrap: wrap } }
+  );
+
   // create two trampolines and a ground
-  trampolineA = Bodies.rectangle(600, 500, 200, 50, {isStatic: true});
-  trampolineA.restitution = 0.5;
-  trampolineB = Bodies.rectangle(200, 500, 200, 50, {isStatic: true});
-  trampolineB.restitution = 1;
-  ground = Bodies.rectangle(400, height-25, 810, 25, {isStatic: true});
-  World.add(engine.world, [trampolineA, trampolineB, ball, ground]);
+  trampolineA = new Block(world,
+    { x: 600, y: 500, w: 200, h: 50, color: 'white' },
+    { isStatic: true, restitution: 0.5 }
+  );
+  trampolineB = new Block(world,
+    { x: 200, y: 500, w: 200, h: 50, color: 'white' },
+    { isStatic: true, restitution: 1 }
+  );
+  ground = new Block(world,
+    { x: 400, y: height-25, w: 810, h: 25, color: 'grey' },
+    { isStatic: true }
+  );
 
   // setup mouse
-  const mouse = Mouse.create(canvas.elt);
-  const mouseParams = {
-    mouse: mouse,
-    constraint: { stiffness: 0.05, angularStiffness: 0 }
-  }
-  mouseConstraint = MouseConstraint.create(engine, mouseParams);
-  mouseConstraint.mouse.pixelRatio = pixelDensity();
-  World.add(engine.world, mouseConstraint);
+  mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Engine.run(engine);
+  Matter.Engine.run(engine);
 }
 
 function draw() {
-  background(0);
+  background('black');
 
-  noStroke();
-  fill(255);
-  drawBody(trampolineA);
-  drawBody(trampolineB);
-  drawBody(ball);
+  trampolineA.draw();
+  trampolineB.draw();
+  ball.draw();
+  ground.draw();
 
-  fill(128);
-  drawBody(ground);
-
-  drawMouse(mouseConstraint);
+  mouse.draw();
 }

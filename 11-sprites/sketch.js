@@ -9,13 +9,13 @@ let mouse;
 function setup() {
   const canvas = createCanvas(800, 600);
 
-  // load images
-  ballImg = loadImage('ball.png');
-  boxImg = loadImage('box.png');
-
   // create an engine
   let engine = Matter.Engine.create();
   let world = engine.world;
+
+  // load images
+  ballImg = loadImage('ball.png');
+  boxImg = loadImage('box.png');
 
   // add bodies
   box = new SpriteBlock(world, { x: 200, y: 200, w: 64, h: 64, image: boxImg});
