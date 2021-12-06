@@ -2,14 +2,15 @@ const Helpers = (function() {
 
   function drawVertices(vertices) {
     beginShape();
-    for (let i = 0; i < vertices.length; i++) {
-      vertex(vertices[i].x, vertices[i].y);
+    for (const vertice of vertices) {
+      vertex(vertice.x, vertice.y);
     }
     endShape(CLOSE);
   }
 
   function drawBody(body) {
     if (body.parts && body.parts.length > 1) {
+      // skip index 0
       for (let p = 1; p < body.parts.length; p++) {
         drawVertices(body.parts[p].vertices)
       }
