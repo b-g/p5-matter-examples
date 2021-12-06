@@ -11,7 +11,7 @@ const Helpers = (function() {
   function drawBody(body) {
     if (body.parts && body.parts.length > 1) {
       // skip index 0
-      for (const p = 1; p < body.parts.length; p++) {
+      for (let p = 1; p < body.parts.length; p++) {
         drawVertices(body.parts[p].vertices)
       }
     } else {
