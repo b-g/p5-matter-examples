@@ -26,7 +26,7 @@ function setup() {
   });
 
   // ground
-  ground = new Block(world, { x: 400, y: height, w: 810, h: 50, color: 'white' }, {isStatic: true });
+  ground = new Block(world, { x: 400, y: height, w: 810, h: 50, color: 'grey' }, {isStatic: true });
 
   // setup mouse
   mouse = new Mouse(engine, canvas);
