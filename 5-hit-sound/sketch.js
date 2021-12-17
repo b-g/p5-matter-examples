@@ -49,7 +49,7 @@ function setup() {
   mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Matter.Engine.run(engine);
+  Matter.Runner.run(engine);
 }
 
 function draw() {
@@ -61,7 +61,7 @@ function draw() {
   angle += 0.07;
 
   // visualize collision
-  const collided = Matter.SAT.collides(propeller.body, ball.body).collided;
+  const collided = Matter.Collision.collides(propeller.body, ball.body);
   if (collided) {
     propeller.attrs.color = 'red';
   } else {
