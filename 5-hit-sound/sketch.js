@@ -10,6 +10,12 @@ let propeller;
 let angle = 0;
 
 
+function preload() {
+  // load sound
+  hitSound = loadSound('./slap-soundmaster13-49669815.mp3');
+  hitSound.playMode('sustain');
+}
+
 function setup() {
   const canvas = createCanvas(800, 600);
 
@@ -30,10 +36,6 @@ function setup() {
     { x: 400, y: 300, w: 650, h: 30, color: 'white' },
     { isStatic: true, angle: angle, label: 'propeller' }
   );
-
-  // load sound
-  hitSound = loadSound("./slap-soundmaster13-49669815.mp3");
-  hitSound.playMode('sustain');
 
   // setup hit sound
   Matter.Events.on(engine, 'collisionStart', function(event) {
