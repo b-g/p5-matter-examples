@@ -10,6 +10,11 @@ let mouse;
 let isDrag = false;
 // an array to contain all the blocks created
 let blocks = [];
+let poly;
+
+function preload() {
+  poly = loadImage('poly.png');
+}
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -134,12 +139,12 @@ function setup() {
     }, { isStatic: true }));
 
   // create a body from a SVG path
-  // the puzzle can apply a force on collisions 
+  // the puzzle can apply a force on collisions
   const puzzle = new PolygonFromSVG(
     world,
     {
       x: 300, y: 500,
-      elem: 'puzzle',
+      fromId: 'puzzle',
       scale: 0.6, color: 'lime',
       force: { x: 0.0, y: -0.04 }
     },
@@ -151,12 +156,23 @@ function setup() {
     world,
     {
       x: 580, y: 710,
-      file: './path.svg',
+      fromFile: './path.svg',
       scale: 0.6, color: 'yellow'
     },
     { isStatic: true, friction: 0.0 }
   ));
 
+  poly = new PolygonSpriteFromSVG(
+    world,
+    {
+      x: 500, y: 200,
+      file: './poly.svg',
+      scale: 1, color: '#FFFFFF40', image: poly
+    },
+    { isStatic: false, friction: 0.0 }
+  )
+
+  blocks.push(poly);
   // create a group of identical bodies
   blocks.push(new Stack(
     world,
