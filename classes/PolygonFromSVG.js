@@ -38,12 +38,12 @@ class PolygonFromSVG extends Block {
           const path = svgDoc.querySelector("path");
           let vertices = Matter.Svg.pathToVertices(path, 10);
           that.body = Matter.Bodies.fromVertices(0, 0, Matter.Vertices.scale(vertices, that.attrs.scale, that.attrs.scale), that.options);
-          if (this.attrs.x) {
-            Matter.Body.setPosition(this.body, this.attrs);
+          if (that.attrs.x) {
+            Matter.Body.setPosition(that.body, that.attrs);
           } else {
-            Matter.Body.setPosition(this.body, this.getCenter(vertices));
+            Matter.Body.setPosition(that.body, that.getCenter(vertices));
           }
-          Matter.World.add(engine.world, [that.body]);
+          Matter.World.add(that.world, [that.body]);
         });
       }
     }
