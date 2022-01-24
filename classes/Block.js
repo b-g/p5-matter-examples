@@ -32,7 +32,11 @@ class Block extends BlockCore {
   }
 
   drawConstraint(constraint) {
-    stroke("magenta");
+    if (constraint.color) {
+      stroke(constraint.color);
+    } else {
+      stroke("magenta");
+    }
     strokeWeight(2);
     const offsetA = constraint.pointA;
     let posA = {
@@ -93,7 +97,10 @@ class Block extends BlockCore {
     } else {
       // constrain to "background" scene
       if (!options.pointB) {
-        options.pointB = { x: this.body.position.x, y: this.body.position.y };
+        options.pointB = {
+          x: this.body.position.x,
+          y: this.body.position.y
+        };
       }
     }
     const contraint = Matter.Constraint.create(options);
