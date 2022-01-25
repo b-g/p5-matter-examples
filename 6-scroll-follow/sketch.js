@@ -36,6 +36,17 @@ function draw() {
 
   // follow the ball by scrolling the window
   scrollFollow(ball);
+
+  // debug values
+  const pageXOffset = window.pageXOffset || document.documentElement.scrollLeft;
+  const pageYOffset  = window.pageYOffset || document.documentElement.scrollTop;
+  const textString = `
+  ball x: ${round(ball.body.position.x)}
+  ball y: ${round(ball.body.position.y)}
+  pageXOffset: ${pageXOffset}
+  pageYOffset: ${pageYOffset}
+  `;
+  text(textString, 10 + pageXOffset, 10 + pageYOffset);
 }
 
 function keyPressed(e) {
