@@ -10,5 +10,8 @@ class Stack extends Block {
 
   addBody() {
     this.body = Matter.Composites.stack(this.attrs.x, this.attrs.y, this.attrs.cols, this.attrs.rows, this.attrs.colGap, this.attrs.rowGap, this.attrs.create);
+    for (let body of this.body.bodies) {
+      body.plugin = this.options.plugin;
+    }
   }
 }

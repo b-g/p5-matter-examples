@@ -32,7 +32,14 @@ class BlockCore {
       } else {
         noFill();
       }
-      noStroke();
+      if (this.attrs.stroke) {
+        stroke(this.attrs.stroke);
+        if (this.attrs.weight) {
+          strokeWeight(this.attrs.weight);
+        }
+      } else {
+        noStroke();
+      }
       this.drawBody();
     }
   }

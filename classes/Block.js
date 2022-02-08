@@ -11,14 +11,22 @@ class Block extends BlockCore {
     super(world, attrs, options);
     this.collisions = [];
     this.constraints = [];
+    this.offset = this.attrs.offset || { x: 0, y: 0 };
   }
 
   draw() {
-    this.update();
-    super.draw();
-    if (this.constraints.length > 0) {
-      for (let c of this.constraints) {
-        if (c.draw === true) this.drawConstraint(c);
+    if (this.body) {
+      this.update();
+      if (this.attrs.image) {
+        this.drawSprite();
+      }
+      if (this.attrs.color) {
+        super.draw();
+      }
+      if (this.constraints.length > 0) {
+        for (let c of this.constraints) {
+          if (c.draw === true) this.drawConstraint(c);
+        }
       }
     }
   }
@@ -72,19 +80,6 @@ class Block extends BlockCore {
       }
     });
     this.collisions = [];
-
-
-    if (this.attrs.chgStatic) {
-      Matter.Body.setStatic(this.body, false);
-    }
-
-    if (this.attrs.rotate) {
-      // set angle of propeller
-      Matter.Body.setAngle(this.body, this.attrs.rotate.angle);
-      Matter.Body.setAngularVelocity(this.body, 0.15);
-      // increase angle
-      this.attrs.rotate.angle += this.attrs.rotate.delta;
-    }
   }
 
   constrainTo(block, options) {
@@ -113,6 +108,17 @@ class Block extends BlockCore {
     if (block) {
       this.collisions.push(block);
     }
+  }
+
+  drawSprite() {
+    const pos = this.body.position;
+    const angle = this.body.angle;
+    push();
+    translate(pos.x, pos.y);
+    rotate(angle);
+    imageMode(CENTER);
+    image(this.attrs.image, this.offset.x, this.offset.y);
+    pop();
   }
 
 }

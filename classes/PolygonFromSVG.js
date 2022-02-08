@@ -14,20 +14,14 @@ class PolygonFromSVG extends Block {
     if (this.attrs.fromPath) {
         // use a path provided directly
         let vertices = Matter.Svg.pathToVertices(this.attrs.fromPath, 10);
-        this.body = Matter.Bodies.fromVertices(0, 0, Matter.Vertices.scale(vertices, this.attrs.scale, this.attrs.scale), this.options);
-        Matter.Body.setPosition(this.body, this.getCenter(vertices));
+        this.addBodyVertices(vertices)
     } else {
       if (this.attrs.fromId) {
         // use a path of SVG embedded in current HTML page
         let path = document.getElementById(this.attrs.fromId);
         if (null != path) {
           let vertices = Matter.Svg.pathToVertices(path, 10);
-          this.body = Matter.Bodies.fromVertices(0, 0, Matter.Vertices.scale(vertices, this.attrs.scale, this.attrs.scale), this.options);
-          if (this.attrs.x) {
-            Matter.Body.setPosition(this.body, this.attrs);
-          } else {
-            Matter.Body.setPosition(this.body, this.getCenter(vertices));
-          }
+          this.addBodyVertices(vertices)
         }
       } else {
         // use a path in separate SVG file
@@ -37,14 +31,24 @@ class PolygonFromSVG extends Block {
           const svgDoc = parser.parseFromString(response, "image/svg+xml");
           const path = svgDoc.querySelector("path");
           let vertices = Matter.Svg.pathToVertices(path, 10);
-          that.body = Matter.Bodies.fromVertices(0, 0, Matter.Vertices.scale(vertices, that.attrs.scale, that.attrs.scale), that.options);
-          if (that.attrs.x) {
-            Matter.Body.setPosition(that.body, that.attrs);
-          } else {
-            Matter.Body.setPosition(that.body, that.getCenter(vertices));
-          }
+          that.addBodyVertices(vertices)
           Matter.World.add(that.world, [that.body]);
         });
+      }
+    }
+  }
+
+  addBodyVertices(vertices) {
+    this.body = Matter.Bodies.fromVertices(0, 0, Matter.Vertices.scale(vertices, this.attrs.scale, this.attrs.scale), this.options);
+    if (this.attrs.x) {
+      Matter.Body.setPosition(this.body, this.attrs);
+    } else {
+      Matter.Body.setPosition(this.body, this.getCenter(vertices));
+    }
+    if (this.attrs.image) {
+      this.offset = {
+        x: this.attrs.image.width / 2 - (this.body.position.x - this.body.bounds.min.x),
+        y: this.attrs.image.height / 2 - (this.body.position.y - this.body.bounds.min.y)
       }
     }
   }

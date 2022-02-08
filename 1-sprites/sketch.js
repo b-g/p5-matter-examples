@@ -18,8 +18,8 @@ function setup() {
   boxImg = loadImage('box.png');
 
   // add bodies
-  box = new SpriteBlock(world, { x: 200, y: 200, w: 64, h: 64, image: boxImg});
-  ball = new SpriteBall(world, { x: 100, y: 50, r: 45, image: ballImg});
+  box = new Block(world, { x: 200, y: 200, w: 64, h: 64, image: boxImg});
+  ball = new Ball(world, { x: 100, y: 50, r: 45, image: ballImg});
   ground = new Block(world,
     { x: 400, y: 500, w: 810, h: 20, color: 'white'},
     { isStatic: true, angle: Math.PI * 0.06 }
