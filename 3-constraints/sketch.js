@@ -50,7 +50,7 @@ function setup() {
   mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Matter.Engine.run(engine);
+  Matter.Runner.run(engine);
 }
 
 function draw() {

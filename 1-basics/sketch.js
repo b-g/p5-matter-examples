@@ -15,7 +15,7 @@ function setup() {
   ground = new Block(world, { x: 400, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 });
 
   // run the engine
-  Matter.Engine.run(engine);
+  Matter.Runner.run(engine);
 }
 
 function draw() {

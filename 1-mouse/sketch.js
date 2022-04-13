@@ -28,7 +28,7 @@ function setup() {
   mouse = new Mouse(engine, canvas, { stroke: 'magenta', strokeWeight: 2 });
 
   // run the engine
-  Matter.Engine.run(engine);
+  Matter.Runner.run(engine);
 }
 
 function draw() {

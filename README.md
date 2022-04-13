@@ -1,5 +1,5 @@
-p5.js with matter.js examples
-=============================
+p5.js × matter.js examples
+==========================
 
 Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http://brm.io/matter-js/).
 
@@ -11,7 +11,8 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [1-stacks](https://b-g.github.io/p5-matter-examples/1-stacks/)
 * [1-wrap-coordinates](https://b-g.github.io/p5-matter-examples/1-wrap-coordinates/)
 * [2-array-boxes-wrap](https://b-g.github.io/p5-matter-examples/2-array-boxes-wrap/)
-* [2-propeller](https://b-g.github.io/p5-matter-examples/2-propeller/)
+* [2-animated-elevator](https://b-g.github.io/p5-matter-examples/2-animated-elevator/)
+* [2-animated-propeller](https://b-g.github.io/p5-matter-examples/2-animated-propeller/)
 * [2-restitution-bouncy-grounds](https://b-g.github.io/p5-matter-examples/2-restitution-bouncy-grounds/)
 * [3-catapult](https://b-g.github.io/p5-matter-examples/3-catapult/)
 * [3-constraints](https://b-g.github.io/p5-matter-examples/3-constraints/)
@@ -21,11 +22,12 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [4-reverse-gravity](https://b-g.github.io/p5-matter-examples/4-reverse-gravity/)
 * [5-complex-path-svg](https://b-g.github.io/p5-matter-examples/5-complex-path-svg/)
 * [5-hit-sound](https://b-g.github.io/p5-matter-examples/5-hit-sound/)
-* [5-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/5-sprites-canvas-sandwich/)
+* [6-scroll-follow](https://b-g.github.io/p5-matter-examples/6-scroll-follow/)
+* [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
 
 
-The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://www.hfg-gmuend.de/) by Benedikt Groß and Benno Stäbler.
+The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://www.hfg-gmuend.de/) by [Benedikt Groß](https://benedikt-gross.de/) and Benno Stäbler.
 
-Some of the examples are based on the [matter.js demos](http://brm.io/matter-js/demo) and [p5-matter](https://github.com/shiffman/p5-matter) by Daniel Shiffman.
+Some of the examples are based on the [matter.js demos](http://brm.io/matter-js/demo) by [liabru](http://brm.io) and [p5-matter](https://github.com/shiffman/p5-matter) by [Daniel Shiffman](https://shiffman.net/).
 
 👀 It is also highly recommended to watch the [Introduction to Matter.js](https://www.youtube.com/watch?v=urR596FsU68&index=21&t=0s&list=PLRqwX-V7Uu6akvoNKE4GAxf6ZeBYoJ4uh) videos by [Coding Train](https://thecodingtrain.com/) to complement the examples here.

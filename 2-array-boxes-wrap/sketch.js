@@ -16,7 +16,7 @@ function setup() {
     min: { x: 0, y: 0 },
     max: { x: width, y: height }
   };
-  
+
   // create boxes
   for (let i = 0; i < 10; i++) {
     let newBox = new Block(world,
@@ -36,7 +36,7 @@ function setup() {
   mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Matter.Engine.run(engine);
+  Matter.Runner.run(engine);
 }
 
 function draw() {

@@ -10,6 +10,12 @@ let propeller;
 let angle = 0;
 
 
+function preload() {
+  // load sound
+  hitSound = loadSound('./slap-soundmaster13-49669815.mp3');
+  hitSound.playMode('sustain');
+}
+
 function setup() {
   const canvas = createCanvas(800, 600);
 
@@ -31,10 +37,6 @@ function setup() {
     { isStatic: true, angle: angle, label: 'propeller' }
   );
 
-  // load sound
-  hitSound = loadSound("./slap-soundmaster13-49669815.mp3");
-  hitSound.playMode('sustain');
-
   // setup hit sound
   Matter.Events.on(engine, 'collisionStart', function(event) {
     const pairs = event.pairs[0];
@@ -49,7 +51,7 @@ function setup() {
   mouse = new Mouse(engine, canvas);
 
   // run the engine
-  Matter.Engine.run(engine);
+  Matter.Runner.run(engine);
 }
 
 function draw() {
@@ -61,7 +63,7 @@ function draw() {
   angle += 0.07;
 
   // visualize collision
-  const collided = Matter.SAT.collides(propeller.body, ball.body).collided;
+  const collided = Matter.Collision.collides(propeller.body, ball.body);
   if (collided) {
     propeller.attrs.color = 'red';
   } else {
