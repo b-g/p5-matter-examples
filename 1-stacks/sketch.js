@@ -1,6 +1,3 @@
-// Benedikt Groß
-// Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
-
 let engine;
 let balls;
 let boxes;

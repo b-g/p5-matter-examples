@@ -1,5 +1,4 @@
-// Benno Stäbler, Benedikt Groß
-// additional dependencies
+// needs additional dependencies
 // pathseg.js https://github.com/progers/pathseg
 // decomp.js https://github.com/schteppe/poly-decomp.js/
 

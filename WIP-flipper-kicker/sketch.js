@@ -1,6 +1,3 @@
-// Benedikt Groß
-
-// setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
 const Engine = Matter.Engine;

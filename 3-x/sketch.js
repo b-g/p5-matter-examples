@@ -1,5 +1,3 @@
-// Benedikt Groß
-
 let rect1;
 let rect2;
 let ground;
