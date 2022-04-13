@@ -26,7 +26,7 @@ Examples showing how to combine [p5.js](https://p5js.org/) and [matter.js](http:
 * [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
 
 
-The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://www.hfg-gmuend.de/) by [Benedikt Groß](https://benedikt-gross.de/) and Benno Stäbler.
+The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://www.hfg-gmuend.de/) by [Benedikt Groß](https://benedikt-gross.de/), Benno Stäbler and [Stephan Bogner](https://stephanbogner.de/).
 
 Some of the examples are based on the [matter.js demos](http://brm.io/matter-js/demo) by [liabru](http://brm.io) and [p5-matter](https://github.com/shiffman/p5-matter) by [Daniel Shiffman](https://shiffman.net/).
 
