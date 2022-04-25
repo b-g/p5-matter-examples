@@ -1,3 +1,12 @@
+/**
+Used to create blocks from a SVG-file
+
+@param {world} world - Pass the Matter.js world
+@param {svg-file} file - Pass the SVG-file
+@param {array} blocks - Some blocks
+@param {BodyOptions} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+*/
+
 class BlocksFromSVG {
   constructor(world, file, blocks, options) {
     this.blocks = blocks;
@@ -16,45 +25,45 @@ class BlocksFromSVG {
   createBlocks(type, list) {
     let block
     for (let r = 0; r < list.length; r++) {
-      let opts = {
+      let options = {
         ...this.options
       }
-      let attrs = this.attrs2object(list[r])
-      if (attrs.transform) {
-        opts.angle = radians(attrs.transform.split(/[ \(\)]/)[1]);
+      let attributes = this.attributes2object(list[r])
+      if (attributes.transform) {
+        options.angle = radians(attributes.transform.split(/[ \(\)]/)[1]);
       }
       if (type == 'rect') {
         block = new Block(
           this.world, {
-            x: attrs.x + attrs.width / 2,
-            y: attrs.y + attrs.height / 2,
-            w: attrs.width,
-            h: attrs.height,
-            color: attrs.fill,
+            x: attributes.x + attributes.width / 2,
+            y: attributes.y + attributes.height / 2,
+            w: attributes.width,
+            h: attributes.height,
+            color: attributes.fill,
           },
-          opts
+          options
         );
-        if (opts.angle) {
+        if (options.angle) {
           Matter.Body.translate(block.body, {
-            x: attrs.height * Math.sin(-opts.angle) + attrs.width * Math.sin(1 - opts.angle),
-            y: attrs.height * Math.sin(opts.angle) + attrs.width * Math.sin(1 - opts.angle)
+            x: attributes.height * Math.sin(-options.angle) + attributes.width * Math.sin(1 - options.angle),
+            y: attributes.height * Math.sin(options.angle) + attributes.width * Math.sin(1 - options.angle)
           });
         }
       } else
       if (type == 'circle') {
         block = new Ball(
           this.world, {
-            x: attrs.cx,
-            y: attrs.cy,
-            r: attrs.r,
-            color: attrs.fill,
+            x: attributes.cx,
+            y: attributes.cy,
+            r: attributes.r,
+            color: attributes.fill,
           },
-          opts
+          options
         );
-        if (opts.angle) {
+        if (options.angle) {
           Matter.Body.translate(block.body, {
-            x: attrs.height * Math.sin(-opts.angle) + attrs.width * Math.sin(1 - opts.angle),
-            y: attrs.height * Math.sin(opts.angle) + attrs.width * Math.sin(1 - opts.angle)
+            x: attributes.height * Math.sin(-options.angle) + attributes.width * Math.sin(1 - options.angle),
+            y: attributes.height * Math.sin(options.angle) + attributes.width * Math.sin(1 - options.angle)
           });
         }
       } else
@@ -65,23 +74,23 @@ class BlocksFromSVG {
             y: 0,
             scale: 1.0,
             fromPath: list[r],
-            color: attrs.fill,
+            color: attributes.fill,
           },
-          opts
+          options
         );
       }
       this.blocks.push(block);
     }
   }
 
-  attrs2object(elem) {
+  attributes2object(elem) {
     let o = {}
     for (let a = 0; a < elem.attributes.length; a++) {
-      let attr = elem.attributes[a]
-      if (isNaN(+attr.nodeValue)) {
-        o[attr.nodeName] = attr.nodeValue;
+      let attribute = elem.attributes[a]
+      if (isNaN(+attribute.nodeValue)) {
+        o[attribute.nodeName] = attribute.nodeValue;
       } else {
-        o[attr.nodeName] = +attr.nodeValue;
+        o[attribute.nodeName] = +attribute.nodeValue;
       }
     }
     return o

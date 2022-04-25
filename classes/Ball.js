@@ -1,14 +1,43 @@
-/*
-Usage:
-// define ball radius via r attribute
-let block = new Ball(world, { x: 300, y: 300, r: 30, color: 'magenta' }, { isStatic: true });
+/**
+Used to create a (circular) ball
+
+@param {world} world - The Matter.js world object
+@param {object} attributes - Visual properties e.g. position, radius and color
+@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+
+@example
+const attributes = {
+  x: 300,
+  y: 300,
+  r: 30,
+  color: "magenta",
+}
+
+const options = {
+  isStatic: true,
+}
+
+let magentaColoredBall = new Ball(world, attributes, options)
+
+@tutorial
+<h3>1 - Mouse Example</h3>
+<a target="_blank" href="https://b-g.github.io/p5-matter-examples/1-mouse/">Open preview</a>
+, 
+<a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/1-mouse/sketch.js">open code</a>
+
+@tutorial
+<h3>4 - Jumping Ball Example</h3>
+<a target="_blank" href="https://b-g.github.io/p5-matter-examples/4-jumping-ball/">Open preview</a>
+, 
+<a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/4-jumping-ball/sketch.js">open code</a>
 */
+
 class Ball extends Block {
-  constructor(world, attrs, options) {
-    super(world, attrs, options);
+  constructor(world, attributes, options) {
+    super(world, attributes, options);
   }
 
   addBody() {
-    this.body = Matter.Bodies.circle(this.attrs.x, this.attrs.y, this.attrs.r, this.options);
+    this.body = Matter.Bodies.circle(this.attributes.x, this.attributes.y, this.attributes.r, this.options);
   }
 }
