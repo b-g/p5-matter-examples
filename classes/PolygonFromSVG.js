@@ -1,7 +1,7 @@
 /**
 Creates a new polygon from an SVG. Either from inside the HTML file or from a file.
 
-@param {World} world - The Matter.js world object
+@param {world} world - The Matter.js world object
 @param {object} attributes - Visual properties e.g. position, radius and color
 @param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
 
@@ -42,7 +42,7 @@ let block = new PolygonFromSVG(world, attributes, options)
 @tutorial
 <h3>5 - Complex path SVG Example</h3>
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/5-complex-path-svg/">Open preview</a>
-, 
+,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/5-complex-path-svg/sketch.js">open code</a>
 */
 

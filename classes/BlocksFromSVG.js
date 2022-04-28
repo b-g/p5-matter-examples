@@ -2,7 +2,7 @@
 Used to create blocks from a SVG-file
 
 @param {world} world - Pass the Matter.js world
-@param {svg-file} file - Pass the SVG-file
+@param {file} file - Pass a path or URL to a SVG-file
 @param {array} blocks - Some blocks
 @param {BodyOptions} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
 */
