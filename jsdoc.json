@@ -1,11 +1,10 @@
 {
     "source": {
-        "include": ["classes", "README.md"]
+        "include": ["classes", "README-detailed.md"]
     },
 
     "opts": {
         "encoding": "utf8",
-        "readme": "./README.md",
         "destination": "docs/",
         "recurse": true,
         "verbose": true,
