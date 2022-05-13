@@ -1,8 +1,6 @@
 p5.js × matter.js
 =================
 
-> 💡 View this page on [b-g.github.io/p5-matter-examples](https://b-g.github.io/p5-matter-examples/)
-
 Examples and documentation on how to combine [p5.js](https://p5js.org/) and [matter.js](http://brm.io/matter-js/).
 
 ![x gif](https://user-images.githubusercontent.com/480224/44387710-8bf17e80-a526-11e8-972d-43b6e305765e.gif)
@@ -29,7 +27,7 @@ Examples and documentation on how to combine [p5.js](https://p5js.org/) and [mat
 * [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
 
 ## Documentation
-⬅️ If you are on [b-g.github.io/p5-matter-examples](https://b-g.github.io/p5-matter-examples/) you can find documentation for all classes on the left
+⬅️ If you are on [b-g.github.io/p5-matter-examples/docs](https://b-g.github.io/p5-matter-examples/docs) you can find documentation for all classes on the left
 
 ## About
 The examples have been derived from the course Programmiertes Entwerfen (Sketching with Code) @ the [HfG Schwäbisch Gmünd](https://www.hfg-gmuend.de/) by [Benedikt Groß](https://benedikt-gross.de/), Benno Stäbler and [Stephan Bogner](https://stephanbogner.de/).
