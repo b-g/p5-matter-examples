@@ -18,8 +18,8 @@ function setup() {
   boxImg = loadImage('box.png');
 
   // add box, ball, ramp and ground
-  box = new SpriteBlock(world, { x: 200, y: 0, w: 64, h: 64, image: boxImg});
-  ball = new SpriteBall(world, { x: 100, y: 50, r: 45, image: ballImg});
+  box = new Block(world, { x: 200, y: 0, w: 64, h: 64, image: boxImg});
+  ball = new Ball(world, { x: 100, y: 50, r: 45, image: ballImg});
   ramp = new Block(world,
     { x: 300, y: 200, w: 310, h: 30, color: 'pink'},
     { isStatic: true, angle: PI * 0.08 }

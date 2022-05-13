@@ -1,5 +1,3 @@
-// Benedikt Groß
-
 let ground;
 let bridge;
 let ball;

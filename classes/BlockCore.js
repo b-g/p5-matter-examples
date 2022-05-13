@@ -1,14 +1,29 @@
+/**
+Used to create a BlockCore.
+
+@param {world} world - The Matter.js world object
+@param {object} attributes - Visual properties e.g. position, dimensions and color
+@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+
+@tutorial
+<h3>XX - Benno Step 7</h3>
+<a target="_blank" href="https://b-g.github.io/p5-matter-examples/xx-benno-step7/">Open example</a>
+, 
+<a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/xx-benno-step7/sketch.js">open code</a>
+*/
+
 /*
+
 This class allows the block
 - to drawn with various attributes
 - to be placed as a rectangle in the world as a physical Matter body
+
 */
+
 class BlockCore {
-  // attrs: visual properties of the block e.g. position and dimensions
-  // options: definies the behaviour of the block e.g. mass and bouncyness
-  constructor(world, attrs, options) {
+  constructor(world, attributes, options) {
     this.world = world;
-    this.attrs = attrs;
+    this.attributes = attributes;
     this.options = options || {};
     this.options.plugin = this.options.plugin || {};
     this.options.plugin.block = this;
@@ -22,17 +37,24 @@ class BlockCore {
   }
 
   addBody() {
-    this.body = Matter.Bodies.rectangle(this.attrs.x, this.attrs.y, this.attrs.w, this.attrs.h, this.options);
+    this.body = Matter.Bodies.rectangle(this.attributes.x, this.attributes.y, this.attributes.w, this.attributes.h, this.options);
   }
 
   draw() {
     if (this.body) {
-      if (this.attrs.color) {
-        fill(this.attrs.color);
+      if (this.attributes.color) {
+        fill(this.attributes.color);
       } else {
         noFill();
       }
-      noStroke();
+      if (this.attributes.stroke) {
+        stroke(this.attributes.stroke);
+        if (this.attributes.weight) {
+          strokeWeight(this.attributes.weight);
+        }
+      } else {
+        noStroke();
+      }
       this.drawBody();
     }
   }

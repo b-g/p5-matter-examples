@@ -1,6 +1,7 @@
 let ball;
 let slides = [];
 
+
 function setup() {
   const canvas = createCanvas(1000, 2000);
 

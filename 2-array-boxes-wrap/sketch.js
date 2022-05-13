@@ -1,4 +1,4 @@
-Matter.use('matter-wrap'); // setup wrap coordinates plugin
+Matter.use('matter-wrap');
 
 let boxes = [];
 let ground;

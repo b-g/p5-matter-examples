@@ -1,7 +1,3 @@
-// Benedikt Groß
-// Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
-
-// setup wrap coordinates plugin
 Matter.use('matter-wrap');
 
 let trampolineA;

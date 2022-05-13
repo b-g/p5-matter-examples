@@ -1,7 +1,4 @@
-// Benedikt Groß
-
-// setup wrap coordinates plugin
-Matter.use('matter-wrap');
+Matter.use('matter-wrap'); // setup wrap coordinates plugin
 
 let ball;
 let slide;

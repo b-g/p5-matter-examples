@@ -1,6 +1,3 @@
-// Benedikt Groß
-// Example shows how to offset the centre of the mass to create a "Weeble"
-
 Matter.use('matter-wrap');
 
 const Engine = Matter.Engine;

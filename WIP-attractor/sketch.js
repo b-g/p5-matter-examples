@@ -1,5 +1,4 @@
-// Benedikt Groß
-// Example for matter-attractors an attractors plugin for matter.js
+// needs additional dependencies
 // https://github.com/liabru/matter-attractors
 
 Matter.use('matter-attractors');
