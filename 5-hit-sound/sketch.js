@@ -65,9 +65,9 @@ function draw() {
   // visualize collision
   const collided = Matter.Collision.collides(propeller.body, ball.body);
   if (collided) {
-    propeller.attrs.color = 'red';
+    propeller.attributes.color = 'red';
   } else {
-    propeller.attrs.color = 'white';
+    propeller.attributes.color = 'white';
   }
 
   propeller.draw();
