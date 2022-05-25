@@ -19,6 +19,7 @@ p5.js × matter.js
 * [4-reverse-gravity](https://b-g.github.io/p5-matter-examples/4-reverse-gravity/)
 * [5-complex-path-svg](https://b-g.github.io/p5-matter-examples/5-complex-path-svg/)
 * [5-hit-sound](https://b-g.github.io/p5-matter-examples/5-hit-sound/)
+* [6-add-remove-bodies](https://b-g.github.io/p5-matter-examples/6-add-remove-bodies/)
 * [6-scroll-follow](https://b-g.github.io/p5-matter-examples/6-scroll-follow/)
 * [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
 
