@@ -18,12 +18,12 @@ function setup() {
     { x: 350, y: 50, r: 100, color: 'white', image: spriteImg },
     { restitution: 0.5, frictionAir: 0.001 } // bouncy
   );
-  setMassCentre(ball, {x: 0, y: 50});
+  setMassCentre(ball, { x: 0, y: 50 });
 
   ground = new Block(
     world,
     { x: 400, y: height, w: 1000, h: 59, color: 'grey' },
-    { isStatic: true}
+    { isStatic: true }
   );
 
   // add a mouse to manipulate Matter objects
