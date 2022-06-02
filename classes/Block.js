@@ -24,7 +24,7 @@ let box = new Block(world, attributes, options)
 @tutorial
 <h3>1 - Mouse Example</h3>
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/1-mouse/">Open preview</a>
-, 
+,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/1-mouse/sketch.js">open code</a>
 */
 
@@ -49,11 +49,11 @@ class Block extends BlockCore {
   draw() {
     if (this.body) {
       this.update();
-      if (this.attributes.image) {
-        this.drawSprite();
-      }
       if (this.attributes.color) {
         super.draw();
+      }
+      if (this.attributes.image) {
+        this.drawSprite();
       }
       if (this.constraints.length > 0) {
         for (let c of this.constraints) {
