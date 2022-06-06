@@ -15,9 +15,9 @@ function setup() {
   let world = engine.world;
 
   // create two boxes and a ground
-  blockA = new Block(world, { x: 200, y: 200, w: 80, h: 80, color: '#F6C780' });
-  blockB = new Block(world, { x: 270, y: 50, w: 160, h: 80, color: '#9DD9F2' });
-  ground = new Block(world, { x: 400, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 });
+  blockA = new Block(world, { x: 400, y: 200, w: 80, h: 80, color: '#F6C780' });
+  blockB = new Block(world, { x: 470, y: 50, w: 160, h: 80, color: '#9DD9F2' });
+  ground = new Block(world, { x: 600, y: 500, w: 810, h: 15, color: 'grey' }, { isStatic: true, angle: PI/36 });
 
   // run the engine
   Matter.Runner.run(engine);
@@ -32,16 +32,19 @@ function setup() {
 }
 
 function draw() {
+  const moveSpeed = -0.3;
+  const horizontalMove = mouseX * moveSpeed;
 
-  const horizontalMove = -mouseX
-
-  bg2[0].elt.style.transform = 'translateX(' + horizontalMove * 0.002 + 'px)';
-  bg1[0].elt.style.transform = 'translateX(' + horizontalMove * 0.03 + 'px)';
-  fg1[0].elt.style.transform = 'translateX(' + horizontalMove * 0.1 + 'px)';
+  bg2[0].elt.style.transform = 'translateX(' + horizontalMove * 0.05 + 'px)';
+  bg1[0].elt.style.transform = 'translateX(' + horizontalMove * 0.5 + 'px)';
+  fg1[0].elt.style.transform = 'translateX(' + horizontalMove * 1.3 + 'px)';
 
   clear();
+  push();
+  translate(horizontalMove, 0);
   blockA.draw();
   blockB.draw();
   ground.draw();
   mouse.draw();
+  pop();
 }
