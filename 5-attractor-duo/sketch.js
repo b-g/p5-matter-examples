@@ -30,7 +30,7 @@ function setup() {
   magnetA.addAttracted(boxes.body.bodies);
   magnetB = new Magnet(
     world,
-    { x: 600, y: height/2, r: 75, color: 'grey', attraction: 0.30e-5 },
+    { x: 600, y: height/2, r: 75, color: 'grey', attraction: 0.40e-5 },
     { isStatic: true }
   );
   magnetB.addAttracted(boxes.body.bodies);
