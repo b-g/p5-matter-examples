@@ -15,13 +15,18 @@ p5.js × matter.js
 * [3-constraints](https://b-g.github.io/p5-matter-examples/3-constraints/)
 * [3-x](https://b-g.github.io/p5-matter-examples/3-x/)
 * [4-change-size](https://b-g.github.io/p5-matter-examples/4-change-size/)
+* [4-flappy-ball](https://b-g.github.io/p5-matter-examples/4-flappy-ball/)
 * [4-jumping-ball](https://b-g.github.io/p5-matter-examples/4-jumping-ball/)
+* [4-mass-centre-weeble](https://b-g.github.io/p5-matter-examples/4-mass-centre-weeble/)
 * [4-reverse-gravity](https://b-g.github.io/p5-matter-examples/4-reverse-gravity/)
 * [5-complex-path-svg](https://b-g.github.io/p5-matter-examples/5-complex-path-svg/)
+* [5-attractor](https://b-g.github.io/p5-matter-examples/5-attractor/)
+* [5-attractor-duo](https://b-g.github.io/p5-matter-examples/5-attractor-duo/)
 * [5-hit-sound](https://b-g.github.io/p5-matter-examples/5-hit-sound/)
 * [6-add-remove-bodies](https://b-g.github.io/p5-matter-examples/6-add-remove-bodies/)
 * [6-scroll-follow](https://b-g.github.io/p5-matter-examples/6-scroll-follow/)
 * [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
+* [6-parallax](https://b-g.github.io/p5-matter-examples/6-parallax/)
 
 ## Class reference
 👈 Click on a class in the sidebar (under "classes") for detailed information
