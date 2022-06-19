@@ -3,7 +3,7 @@ let slides = [];
 
 
 function setup() {
-  const canvas = createCanvas(1000, 2000);
+  const canvas = createCanvas(800, 600);
 
   // create an engine
   let engine = Matter.Engine.create();
@@ -20,64 +20,25 @@ function setup() {
   }
   ball = new Ball(world, { x: 100, y: 50, r: 40, color: 'white' });
 
-  // add a mouse to manipulate Matter objects
-  mouse = new Mouse(engine, canvas, { stroke: 'magenta', strokeWeight: 2 });
-
   // run the engine
   Matter.Runner.run(engine);
 }
 
 function draw() {
+  const zoom = map(mouseX, 0, width, 0.5, 2)
+  const shiftX = -ball.body.position.x * zoom + width / 2;
+  const shiftY = -ball.body.position.y * zoom + height / 2;
+  
+
+  console.log(shiftX, shiftY)
+
+  push()
+  translate(shiftX, shiftY)
+  scale(zoom)
   background(0);
   for (let s of slides) {
     s.draw();
   }
   ball.draw();
-  mouse.draw();
-
-  // follow the ball by scrolling the window
-  scrollFollow(ball);
-
-  // debug values
-  const pageXOffset = window.pageXOffset || document.documentElement.scrollLeft;
-  const pageYOffset  = window.pageYOffset || document.documentElement.scrollTop;
-  const textString = `
-  ball x: ${round(ball.body.position.x)}
-  ball y: ${round(ball.body.position.y)}
-  pageXOffset: ${pageXOffset}
-  pageYOffset: ${pageYOffset}
-  `;
-  text(textString, 10 + pageXOffset, 10 + pageYOffset);
-}
-
-function keyPressed(e) {
-  // prevent accidentally scrolling of website with SPACE key
-  if(e.keyCode == 32 && e.target == document.body) {
-    e.preventDefault();
-  }
-}
-
-function scrollFollow(object) {
-  if (insideViewport(object) == false) {
-    const $element = $('html, body');
-    if ($element.is(':animated') == false) {
-      $element.animate({
-        scrollLeft: object.body.position.x,
-        scrollTop: object.body.position.y
-      }, 750);
-    }
-  }
-}
-
-function insideViewport(object) {
-  const x = object.body.position.x;
-  const y = object.body.position.y;
-  const pageXOffset = window.pageXOffset || document.documentElement.scrollLeft;
-  const pageYOffset  = window.pageYOffset || document.documentElement.scrollTop;
-  if (x >= pageXOffset && x <= pageXOffset + windowWidth &&
-      y >= pageYOffset && y <= pageYOffset + windowHeight) {
-    return true;
-  } else {
-    return false;
-  }
+  pop()
 }
