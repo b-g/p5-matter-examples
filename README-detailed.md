@@ -24,8 +24,8 @@ p5.js × matter.js
 * [5-attractor-duo](https://b-g.github.io/p5-matter-examples/5-attractor-duo/)
 * [5-hit-sound](https://b-g.github.io/p5-matter-examples/5-hit-sound/)
 * [6-add-remove-bodies](https://b-g.github.io/p5-matter-examples/6-add-remove-bodies/)
-* [6-scroll-follow](https://b-g.github.io/p5-matter-examples/6-scroll-follow/)
-* [6-scroll-follow-html](https://b-g.github.io/p5-matter-examples/6-scroll-follow-html/)
+* [6-camera-follow-canvas](https://b-g.github.io/p5-matter-examples/6-camera-follow-canvas/)
+* [6-camera-follow-scroll-html](https://b-g.github.io/p5-matter-examples/6-camera-follow-scroll-html/)
 * [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
 * [6-parallax](https://b-g.github.io/p5-matter-examples/6-parallax/)
 
