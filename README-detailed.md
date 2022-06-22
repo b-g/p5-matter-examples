@@ -4,6 +4,7 @@ p5.js × matter.js
 ## Examples
 * [1-basics](https://b-g.github.io/p5-matter-examples/1-basics/)
 * [1-mouse](https://b-g.github.io/p5-matter-examples/1-mouse/)
+* [1-polygon](https://b-g.github.io/p5-matter-examples/1-polygon/)
 * [1-sprites](https://b-g.github.io/p5-matter-examples/1-sprites/)
 * [1-stacks](https://b-g.github.io/p5-matter-examples/1-stacks/)
 * [1-wrap-coordinates](https://b-g.github.io/p5-matter-examples/1-wrap-coordinates/)
