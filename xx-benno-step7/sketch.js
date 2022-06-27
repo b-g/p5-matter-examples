@@ -42,7 +42,7 @@ function setup() {
     color: 'blue',
     trigger: (ball, block) => {
       // console.log("Trigger ", ball, block, puzzle);
-      puzzle.attrs.color = 'magenta';
+      puzzle.attributes.color = 'magenta';
     }
   }, { isStatic: false, density: 0.5 }
   ));
