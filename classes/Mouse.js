@@ -11,16 +11,16 @@ let mouse = new Mouse(engine, canvas, { stroke: 'blue', strokeWeight: 3 })
 @tutorial
 <h3>1 - Mouse Example</h3>
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/1-mouse/">Open preview</a>
-, 
+,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/1-mouse/sketch.js">open code</a>
 */
 
 class Mouse {
   constructor(engine, canvas, attributes) {
     this.attributes = attributes || {stroke: "magenta", strokeWeight: 2};
-
+    this.mouse = Matter.Mouse.create(canvas.elt);
     const mouseOptions = {
-      mouse: Matter.Mouse.create(canvas.elt),
+      mouse: this.mouse,
       constraint: {
         stiffness: 0.05,
         angularStiffness: 0
@@ -34,6 +34,10 @@ class Mouse {
 
   on(event, action) {
     Matter.Events.on(this.mouseConstraint, event, action);
+  }
+
+  setOffset(offset) {
+    Matter.Mouse.setOffset(this.mouse, offset)
   }
 
   draw() {

@@ -14,7 +14,7 @@ let blocks = [];
 let murmel;
 
 let canvasElem;
-let off = {x: 0, y: 0};
+let off = { x: 0, y: 0 };
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -61,12 +61,12 @@ function setup() {
     world, {
       x: windowWidth,
       y: 1200,
-      w: windowWidth * 2 ,
+      w: windowWidth * 2,
       h: 20,
       color: 'blue',
       trigger: (ball, block) => {
         // alert('HIT')
-        Matter.Body.applyForce(ball.body, ball.body.position, { x: -0.1, y: -0.5  });
+        Matter.Body.applyForce(ball.body, ball.body.position, { x: -0.1, y: -0.5 });
       }
     }, { isStatic: true }
   ));
@@ -116,7 +116,7 @@ function setup() {
 
 function scrollEndless(point) {
   // wohin muss verschoben werden damit point wenn möglich in der Mitte bleibt
-  off = {x: Math.max(0, point.x - windowWidth / 2), y: Math.max(0, point.y - windowHeight / 2)};
+  off = { x: Math.max(0, point.x - windowWidth / 2), y: Math.max(0, point.y - windowHeight / 2) };
   // plaziert den Canvas im aktuellen Viewport
   canvasElem.style.left = Math.round(off.x) + 'px';
   canvasElem.style.top = Math.round(off.y) + 'px';
@@ -124,6 +124,8 @@ function scrollEndless(point) {
   translate(-off.x, -off.y);
   // verschiebt den ganzen Viewport
   window.scrollTo(off.x, off.y);
+  // verschiebt den ganzen Viewport
+  mouse.setOffset(off);
 }
 
 function keyPressed(event) {
@@ -131,7 +133,7 @@ function keyPressed(event) {
     case 32:
       console.log("Space");
       event.preventDefault();
-      Matter.Body.applyForce(murmel.body, murmel.body.position, { x: 0.2 , y: -0.0 });
+      Matter.Body.applyForce(murmel.body, murmel.body.position, { x: 0.2, y: -0.0 });
       // Matter. Body.scale(murmel.body, 1.5, 1.5);
       break;
     default:
