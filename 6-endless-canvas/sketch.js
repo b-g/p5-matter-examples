@@ -124,7 +124,7 @@ function scrollEndless(point) {
   translate(-off.x, -off.y);
   // verschiebt den ganzen Viewport
   window.scrollTo(off.x, off.y);
-  // verschiebt den ganzen Viewport
+  // Matter mouse needs the offset as well
   mouse.setOffset(off);
 }
 
