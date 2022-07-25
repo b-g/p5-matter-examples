@@ -8,6 +8,12 @@ let ball;
 let polygon;
 let polygonImage;
 
+function preload() {
+  // Load the image
+  polygonImage = loadImage('renderShape.svg');
+  console.log(polygonImage);
+}
+
 function setup() {
   createCanvas(800, 700);
 
@@ -15,12 +21,9 @@ function setup() {
   const engine = Matter.Engine.create();
   const world = engine.world;
 
-  // Load the image
-  polygonImage = loadImage('renderShape.svg');
-
   // use svg file to create the corresponding polygon
   polygon = new PolygonFromSVG(world,
-    { x: 400, y: 400, fromFile: './collisionShape.svg', scale: 0.5, image: polygonImage, color: 'white'},
+    { x: 400, y: 400, fromFile: './collisionShape.svg', scale: 0.75, offset: {x: -12, y: -16}, image: polygonImage, color: 'white' },
     { isStatic: true, friction: 0.0 }
   );
 

@@ -88,8 +88,8 @@ class PolygonFromSVG extends Block {
     }
     if (this.attributes.image) {
       this.offset = {
-        x: this.attributes.image.width / 2 - (this.body.position.x - this.body.bounds.min.x),
-        y: this.attributes.image.height / 2 - (this.body.position.y - this.body.bounds.min.y)
+        x: this.offset.x + (this.attributes.image.width / 2) * this.attributes.scale - (this.body.position.x - this.body.bounds.min.x),
+        y: this.offset.y + (this.attributes.image.height / 2) * this.attributes.scale - (this.body.position.y - this.body.bounds.min.y)
       }
     }
   }

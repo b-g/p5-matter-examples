@@ -44,12 +44,13 @@ class Block extends BlockCore {
     this.collisions = [];
     this.constraints = [];
     this.offset = this.attributes.offset || { x: 0, y: 0 };
+    this.attributes.scale = this.attributes.scale || 1.0;
   }
 
   draw() {
     if (this.body) {
       this.update();
-      if (this.attributes.color) {
+      if (this.attributes.color || this.attributes.stroke) {
         super.draw();
       }
       if (this.attributes.image) {
@@ -149,7 +150,7 @@ class Block extends BlockCore {
     translate(pos.x, pos.y);
     rotate(angle);
     imageMode(CENTER);
-    image(this.attributes.image, this.offset.x, this.offset.y);
+    image(this.attributes.image, this.offset.x, this.offset.y, this.attributes.image.width * this.attributes.scale, this.attributes.image.height * this.attributes.scale);
     pop();
   }
 
