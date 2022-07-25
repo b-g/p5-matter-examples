@@ -3,6 +3,7 @@ Matter.use('matter-wrap');
 let ball;
 let obstacle;
 let slide;
+let characterTouchingASurface = false
 
 
 function setup() {
@@ -21,7 +22,7 @@ function setup() {
   // create cirle, slide and obstacle
   ball = new Ball(world,
     { x: 300, y: 50, r: 40, color: 'white' },
-    { restitution: 0, plugin: { wrap: wrap } }
+    { restitution: 0, plugin: { wrap: wrap }, label: 'character'}
   );
   slide = new Block(world,
     { x: 400, y: 350, w: 800, h: 40, color: 'grey' },
@@ -31,6 +32,25 @@ function setup() {
     { x: 400, y: 310, w: 40, h: 40, color: 'grey' },
     { isStatic: true, angle: PI * 0.1 }
   );
+
+  // Check if character is touching a surface (e.g. the ground) so we know when it should be able to jump
+  Matter.Events.on(engine, 'collisionStart', function(event) {
+    const pairs = event.pairs[0];
+    const bodyA = pairs.bodyA;
+    const bodyB = pairs.bodyB;
+    if (bodyA.label === "character" || bodyB.label === "character") {
+      characterTouchingASurface = true
+    }
+  });
+
+  Matter.Events.on(engine, 'collisionEnd', function(event) {
+    const pairs = event.pairs[0];
+    const bodyA = pairs.bodyA;
+    const bodyB = pairs.bodyB;
+    if (bodyA.label === "character" || bodyB.label === "character") {
+      characterTouchingASurface = false
+    }
+  });
 
   // setup mouse
   mouse = new Mouse(engine, canvas);
@@ -53,8 +73,8 @@ function draw() {
 }
 
 function keyPressed() {
-  // is SPACE pressed?
-  if (keyCode === 32) {
+  // is SPACE pressed and character touching a surface?
+  if (keyCode === 32 && characterTouchingASurface === true) {
     let direction = 1; // ball runs left to right ->
     if ((ball.body.position.x - ball.body.positionPrev.x) < 0) {
       direction = -1; // ball runs right to left <-
