@@ -17,7 +17,7 @@ class Magnet extends Ball {
   addAttracted(obj) {
     if (obj.length) {
       this.attracted = this.attracted.concat(obj);
-    } else  {
+    } else {
       this.attracted.push(obj);
     }
   }
@@ -34,6 +34,24 @@ class Magnet extends Ball {
         }
         //Matter.Body.applyForce(ball, ball.position, Matter.Vector.neg(force));
         Matter.Body.applyForce(obj, obj.position, Matter.Vector.mult(force, this.attributes.attraction));
+      })
+    }
+  }
+
+  gravity() {
+    if (this.isActive) {
+      this.attracted.forEach(obj => {
+        if (obj.body) {
+          obj = obj.body;
+        }
+        // use Newton's law of gravitation
+        let bToA = Matter.Vector.sub(obj.position, this.body.position);
+        let distanceSq = Matter.Vector.magnitudeSquared(bToA) || 0.0001;
+        let normal = Matter.Vector.normalise(bToA);
+        let magnitude = -this.attributes.attraction * (this.body.mass * obj.mass / distanceSq);
+        let force = Matter.Vector.mult(normal, magnitude);
+        // Matter.Body.applyForce(this.body, this.body.position, Matter.Vector.neg(force));
+        Matter.Body.applyForce(obj, obj.position, force);
       })
     }
   }

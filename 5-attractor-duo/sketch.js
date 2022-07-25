@@ -24,14 +24,14 @@ function setup() {
   // add magnets
   magnetA = new Magnet(
     world,
-    { x: 200, y: height/2, r: 75, color: 'grey', attraction: 0.50e-5 },
-    { isStatic: true }
+    { x: 200, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
+    { isStatic: true, mass: 10 }
   );
   magnetA.addAttracted(boxes.body.bodies);
   magnetB = new Magnet(
     world,
-    { x: 600, y: height/2, r: 75, color: 'grey', attraction: 0.40e-5 },
-    { isStatic: true }
+    { x: 600, y: height/2, r: 75, color: 'grey', attraction: 0.1 },
+    { isStatic: true, mass: 10 }
   );
   magnetB.addAttracted(boxes.body.bodies);
 
@@ -45,8 +45,8 @@ function setup() {
 function draw() {
   background(0);
 
-  magnetA.attract();
-  magnetB.attract();
+  magnetA.gravity();
+  magnetB.gravity();
   magnetA.draw();
   magnetB.draw();
   boxes.draw();
