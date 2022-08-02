@@ -1,9 +1,10 @@
 /**
-Used to create a magnet. A magnet is a ball that attracts or repels other objects.
+Create a magnet. A magnet is a ball that attracts or repels other bodies.
 
 @param {world} world - Pass the Matter.js world
 @param {object} attributes - Visual properties e.g. position, radius and color
-@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends Ball
 */
 
 class Magnet extends Ball {
@@ -14,6 +15,11 @@ class Magnet extends Ball {
     this.isActive = this.attributes.attraction;
   }
 
+  /**
+   * Adds a body to the internal attracted array of the magnet.
+   * @param {body} obj
+   * @memberof Magnet
+   */
   addAttracted(obj) {
     if (obj.length) {
       this.attracted = this.attracted.concat(obj);
@@ -22,6 +28,10 @@ class Magnet extends Ball {
     }
   }
 
+  /**
+   * Update the positions of all attracted boddies of the magnet.
+   * @memberof Magnet
+   */
   attract() {
     if (this.isActive) {
       this.attracted.forEach(obj => {
@@ -38,6 +48,10 @@ class Magnet extends Ball {
     }
   }
 
+  /**
+   * Update the positions of all attracted boddies of the magnet, while using Newton's law of gravitation.
+   * @memberof Magnet
+   */
   gravity() {
     if (this.isActive) {
       this.attracted.forEach(obj => {

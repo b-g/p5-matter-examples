@@ -1,11 +1,13 @@
 /**
-Creates a stack of stack of blocks. Define block parts via cols, rows, colGap, rowGap and create attributes.
+Creates a stack of blocks.
+Each block is defined via the cols, rows, colGap, rowGap attributes and the create function.
 
 @param {world} world - Pass the Matter.js world
 @param {object} attributes - Visual properties e.g. position, radius and color
-@param {object} options - (Optional) defines the behaviour e.g. mass, bouncyness or whether it can move
-@example
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends Block
 
+@example
 const attributes = {
   x: 550,
   y: 100,
@@ -20,9 +22,9 @@ const attributes = {
 let block = new CompositeBlock(world, attributes)
 
 @tutorial
-<h3>1 - Stacks Example</h3>
+1 - Stacks Example
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/1-stacks/">Open example</a>
-, 
+,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/1-stacks/sketch.js">open code</a>
 */
 

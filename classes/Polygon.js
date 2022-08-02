@@ -1,15 +1,16 @@
 /**
-Creates a new polygon
+Creates a new rigid body model with a regular polygon hull with the given number of sides and radius.
 
 @param {world} world - The Matter.js world object
 @param {object} attributes - Visual properties e.g. position, radius and color
-@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends Block
 
 @example
 let polygon = new Polygon(world, {x: 300, y: 200, s: 5, r: 100, color: 'white'})
 
 @tutorial
-<h3>3 - Constraints Example</h3>
+3 - Constraints Example
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/3-constraints/">Open example</a>
 ,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/3-constraints/sketch.js">open code</a>

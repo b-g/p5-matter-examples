@@ -1,15 +1,10 @@
 /**
-Used to create a chain from other objects passed though the attributes property
+Creates a chain of blocks, as defined in the attributes.
 
 @param {world} world - The Matter.js world object
 @param {object} attributes - Visual properties e.g. position and color
-@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
-
-@tutorial
-<h3>WIP Bridge</h3>
-<a target="_blank" href="https://b-g.github.io/p5-matter-examples/WIP-bridge/">Open example</a>
-, 
-<a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/WIP-bridge/sketch.js">open code</a>
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends Block
 */
 
 class Chain extends Block {
@@ -30,8 +25,12 @@ class Chain extends Block {
     );
   }
 
+  /**
+   * Adds an constraint to the internal constraints array.
+   * @param {constraint} constraint
+   * @memberof Chain
+   */
   addConstraint(constraint) {
     this.constraints.push(constraint);
-    //atter.Composite.addConstraint(this.composite, constraint);
   }
 }

@@ -1,12 +1,14 @@
 /**
-Creates a new polygon from an SVG. Either from inside the HTML file or from a file.
+Creates a new rigid body model with a regular polygon hull based on a SVG.
+The SVG parameter can either be an external SVG file, or an id of an embedded inline SVG element e.g. in index.html.
 
 @param {world} world - The Matter.js world object
 @param {object} attributes - Visual properties e.g. position, radius and color
-@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends Block
 
 @example
-// SVG embedded in HTML path defined via elem attribute
+// SVG via the element id attribute, SVG is embedded in HTML.
 const attributes = {
   x: 300,
   y: 500,
@@ -23,7 +25,7 @@ const options = {
 let block = new PolygonFromSVG(world, attributes, options);
 
 @example
-// SVG in separate file path defined via file attribute
+// SVG via an external SVG file
 const attributes = {
   x: 580,
   y: 710,
@@ -40,7 +42,7 @@ const options = {
 let block = new PolygonFromSVG(world, attributes, options)
 
 @tutorial
-<h3>5 - Complex path SVG Example</h3>
+5 - Complex path SVG Example
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/5-complex-path-svg/">Open preview</a>
 ,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/5-complex-path-svg/sketch.js">open code</a>

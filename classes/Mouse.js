@@ -1,5 +1,5 @@
 /**
-Used to add mouse interaction with physics objects.
+Creates a representation of the user's mouse for being able to interact with the Matter.js world.
 
 @param {engine} world - Pass the Matter.js engine
 @param {canvas} canvas - Pass the drawing canvas
@@ -9,7 +9,7 @@ Used to add mouse interaction with physics objects.
 let mouse = new Mouse(engine, canvas, { stroke: 'blue', strokeWeight: 3 })
 
 @tutorial
-<h3>1 - Mouse Example</h3>
+1 - Mouse Example
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/1-mouse/">Open preview</a>
 ,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/1-mouse/sketch.js">open code</a>
@@ -32,14 +32,29 @@ class Mouse {
     Matter.World.add(engine.world, this.mouseConstraint);
   }
 
+  /**
+   * Subscribes a callback function to the given object's eventName
+   * @param {string} eventName
+   * @param {function} action
+   * @memberof Mouse
+   */
   on(event, action) {
-    Matter.Events.on(this.mouseConstraint, event, action);
+    Matter.Events.on(this.mouseConstraint, eventName, action);
   }
 
+  /**
+   * Sets the mouse position offset e.g. { x: 0, y: 0 }
+   * @param {object} offset
+   * @memberof Mouse
+   */
   setOffset(offset) {
     Matter.Mouse.setOffset(this.mouse, offset)
   }
 
+  /**
+   * Draws the mouse constraints to the p5 canvas
+   * @memberof Mouse
+   */
   draw() {
     push();
     stroke(this.attributes.stroke);

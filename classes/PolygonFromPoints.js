@@ -1,9 +1,10 @@
 /**
-Creates a polygon from a points array. Define shape via points array attribute.
+Creates a new rigid body model with a regular polygon hull based on a list of points.
 
 @param {world} world - The Matter.js world object
 @param {object} attributes - Visual properties e.g. position, points and color
-@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends Block
 
 @example
 const points = [
@@ -28,7 +29,7 @@ const options = {
 let polygonBlock = new PolygonFromPoints(world, attributes, options)
 
 @tutorial
-<h3>XX - Benno Step 7</h3>
+XX - Benno Step 7
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/xx-benno-step7/">Open example</a>
 ,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/xx-benno-step7/sketch.js">open code</a>

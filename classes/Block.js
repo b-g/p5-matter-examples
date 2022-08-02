@@ -1,9 +1,16 @@
 /**
-Used to create a block (a rectangular box)
+Creates a new rigid body model with a rectangular hull.  <br/>
+<br/>
+This class allows the block <br/>
+- to be constrained to other blocks or to the scene itself <br/>
+- to apply a force from other blocks it collides with <br/>
+- to rotate around its center via attribute rotate <br/>
+- trigger an actions from other blocks it collides with <br/>
 
 @param {world} world - The Matter.js world
 @param {object} attributes - Visual properties e.g. position, dimensions and color
-@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends BlockCore
 
 @example
 const attributes = {
@@ -22,20 +29,10 @@ const options = {
 let box = new Block(world, attributes, options)
 
 @tutorial
-<h3>1 - Mouse Example</h3>
+1 - Mouse Example
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/1-mouse/">Open preview</a>
 ,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/1-mouse/sketch.js">open code</a>
-*/
-
-/*
-
-This class allows the block
-- to be constrained to other blocks or to the scene itself
-- to apply a force from other blocks it collides with
-- to rotate around its center via attribute rotate
-- trigger an actions from other blocks it collides with
-
 */
 
 class Block extends BlockCore {
@@ -64,6 +61,11 @@ class Block extends BlockCore {
     }
   }
 
+  /**
+   * Draws the constraints (if any) of the matter body to the p5 canvas
+   * @method drawConstraints
+   * @memberof Block
+   */
   drawConstraints() {
     if (this.constraints.length > 0) {
       for (let c of this.constraints) {
@@ -115,6 +117,15 @@ class Block extends BlockCore {
     this.collisions = [];
   }
 
+  /**
+   * Constrains this block to another block.
+   * Constraints are used for specifying that a fixed distance must be maintained between two blocks (or a block and a fixed world-space position).
+   * The stiffness of constraints can be modified via the options to create springs or elastic.
+   * @param {block} block
+   * @param {object} [options]
+   * @return {contraint}
+   * @memberof Block
+   */
   constrainTo(block, options) {
     options.bodyA = this.body;
     if (block) {
@@ -137,12 +148,22 @@ class Block extends BlockCore {
     return contraint;
   }
 
+  /**
+   * Adds a block to an internal collisions array, to check whether this block colides with another block
+   * @param {block} block
+   * @memberof Block
+   */
   collideWith(block) {
     if (block) {
       this.collisions.push(block);
     }
   }
 
+  /**
+   * Draw an image "sprite" instead of the shape of the block.
+   * Make sure to set attributes.image so that there is an image to draw.
+   * @memberof Block
+   */
   drawSprite() {
     const pos = this.body.position;
     const angle = this.body.angle;

@@ -1,23 +1,19 @@
 /**
-Used to create a BlockCore.
+Creates a basic class to hold a new rigid body model with a rectangular hull. <br/>
+<br/>
+This class allows the block <br/>
+- to be drawn with various attributes <br/>
+- to be placed as a rectangle "block" in the world as a physical Matter body <br/>
 
 @param {world} world - The Matter.js world object
 @param {object} attributes - Visual properties e.g. position, dimensions and color
-@param {object} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
 
 @tutorial
-<h3>XX - Benno Step 7</h3>
+XX - Benno Step 7
 <a target="_blank" href="https://b-g.github.io/p5-matter-examples/xx-benno-step7/">Open example</a>
-, 
+,
 <a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/xx-benno-step7/sketch.js">open code</a>
-*/
-
-/*
-
-This class allows the block
-- to drawn with various attributes
-- to be placed as a rectangle in the world as a physical Matter body
-
 */
 
 class BlockCore {
@@ -40,6 +36,10 @@ class BlockCore {
     this.body = Matter.Bodies.rectangle(this.attributes.x, this.attributes.y, this.attributes.w, this.attributes.h, this.options);
   }
 
+  /**
+   * Draws the matter body to the p5 canvas
+   * @memberof BlockCore
+   */
   draw() {
     if (this.body) {
       if (this.attributes.color) {

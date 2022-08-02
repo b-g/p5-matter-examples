@@ -1,10 +1,11 @@
 /**
-Used to create blocks from a SVG-file
+Creates rigid body models based on a SVG-file.
+Currently the SVG Elements of rect, circle and path are supported.
 
-@param {world} world - Pass the Matter.js world
-@param {file} file - Pass a path or URL to a SVG-file
+@param {world} world - The Matter.js world
+@param {file} file - Path or URL to a SVG-file
 @param {array} blocks - Some blocks
-@param {BodyOptions} options - (Optional) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {BodyOptions} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
 */
 
 class BlocksFromSVG {

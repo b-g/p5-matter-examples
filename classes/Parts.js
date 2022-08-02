@@ -1,9 +1,10 @@
 /**
-Creates Parts. Define block parts via the options
+Creates Parts (group of bodies) as defined by the required options.parts.
 
 @param {world} world - The Matter.js world object
 @param {object} attributes - Visual properties e.g. position and color
 @param {object} options - (Required) Defines the behaviour e.g. mass, bouncyness or whether it can move
+@extends Block
 
 @example
 const parts = [
@@ -35,5 +36,4 @@ class Parts extends Block {
     this.body = Matter.Body.create(this.options);
     Matter.Body.setPosition(this.body, this.attributes);
   }
-
 }
