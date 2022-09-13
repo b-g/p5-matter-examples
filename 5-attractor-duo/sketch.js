@@ -22,6 +22,7 @@ function setup() {
   );
 
   // add magnets
+  // NOTE: Adding a "mass" is important, otherwise mass will default to infinite which makes for weird behaviour
   magnetA = new Magnet(
     world,
     { x: 200, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
