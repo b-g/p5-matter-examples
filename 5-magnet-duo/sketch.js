@@ -16,22 +16,23 @@ function setup() {
   // add a group of identical boxes
   boxes = new Stack(
     world,
-    { x: width/2, y: 100, cols: 10, rows: 10, colGap: 5, rowGap: 5, color: 'white',
+    { x: 240, y: 100, cols: 10, rows: 10, colGap: 5, rowGap: 5, color: 'white',
       create: (x, y) => Matter.Bodies.rectangle(x, y, 25, 10, { restitution: 0.9 })
     }
   );
 
   // add magnets
+  // NOTE: Adding a "mass" is important, otherwise mass will default to infinite which makes for weird behaviour
   magnetA = new Magnet(
     world,
     { x: 200, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
-    { isStatic: true, mass: 10 }
+    { isStatic: true, mass: 50 }
   );
   magnetA.addAttracted(boxes.body.bodies);
   magnetB = new Magnet(
     world,
-    { x: 600, y: height/2, r: 75, color: 'grey', attraction: 0.1 },
-    { isStatic: true, mass: 10 }
+    { x: 600, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
+    { isStatic: true, mass: 50 }
   );
   magnetB.addAttracted(boxes.body.bodies);
 
