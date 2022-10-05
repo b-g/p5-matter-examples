@@ -3,18 +3,20 @@ Creates multiple rigid body models based on a SVG-file.
 Currently the SVG Elements of rect, circle and path are supported.
 
 This is best be used with a figma sketch, where the shapes are drawn over an backdrop image (room.png) and exported separately
-as SVG (furniture.svg) to define the physics relevant parts. The backdrop is used inside the html - style and div using the style:
-  .backdrop {
-    position: absolute;
-    top: 0;
-    width: 1600px;
-    height: 469px;
-    background-size: cover;
-    background-image: url('./room.png');
-    pointer-events: none;
-  }
-
-<div class="backdrop">
+as SVG (furniture.svg) to define the physics relevant parts.
+<br> 
+<br>The backdrop is used inside the html - a style definition and a div using the style:
+<br>.backdrop {
+<br>&nbsp;&nbsp;position: absolute;
+<br>&nbsp;&nbsp;top: 0;
+<br>&nbsp;&nbsp;width: 1600px;
+<br>&nbsp;&nbsp;height: 469px;
+<br>&nbsp;&nbsp;background-size: cover;
+<br>&nbsp;&nbsp;background-image: url('./room.png');
+<br>&nbsp;&nbsp;pointer-events: none;
+<br>}
+<br>
+<br>&lt;div class="backdrop"&gt;
 
 @param {world} world - The Matter.js world
 @param {file} file - Path or URL to a SVG-file with multiple SVG Elements of type rect, circle or path
@@ -22,11 +24,10 @@ as SVG (furniture.svg) to define the physics relevant parts. The backdrop is use
 @param {BodyOptions} [options] - Defines the common behaviour of all created blocks e.g. mass, bouncyness or whether it can move
 
 @example
-  // Adding the furniture and accessories to the blocks array and into the matter world
-  // with the coordinates perfectly matching the backdrop image.
-  new BlocksFromSVG(world, "furniture.svg", blocks, {
-    isStatic: true, restitution: 0.0
-  })
+// Adding the furniture and accessories to the blocks array and into the matter world with coordinates perfectly matching the backdrop image.
+new BlocksFromSVG(world, "furniture.svg", blocks, {
+  isStatic: true, restitution: 0.0
+})
 */
 
 class BlocksFromSVG {
