@@ -1,11 +1,32 @@
 /**
-Creates rigid body models based on a SVG-file.
+Creates multiple rigid body models based on a SVG-file.
 Currently the SVG Elements of rect, circle and path are supported.
 
+This is best be used with a figma sketch, where the shapes are drawn over an backdrop image (room.png) and exported separately
+as SVG (furniture.svg) to define the physics relevant parts. The backdrop is used inside the html - style and div using the style:
+  .backdrop {
+    position: absolute;
+    top: 0;
+    width: 1600px;
+    height: 469px;
+    background-size: cover;
+    background-image: url('./room.png');
+    pointer-events: none;
+  }
+
+<div class="backdrop">
+
 @param {world} world - The Matter.js world
-@param {file} file - Path or URL to a SVG-file
-@param {array} blocks - Some blocks
-@param {BodyOptions} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {file} file - Path or URL to a SVG-file with multiple SVG Elements of type rect, circle or path
+@param {array} blocks - All created blocks will be added to this array
+@param {BodyOptions} [options] - Defines the common behaviour of all created blocks e.g. mass, bouncyness or whether it can move
+
+@example
+  // Adding the furniture and accessories to the blocks array and into the matter world
+  // with the coordinates perfectly matching the backdrop image.
+  new BlocksFromSVG(world, "furniture.svg", blocks, {
+    isStatic: true, restitution: 0.0
+  })
 */
 
 class BlocksFromSVG {

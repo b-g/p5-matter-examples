@@ -38,7 +38,7 @@ class Mouse {
    * @param {function} action
    * @memberof Mouse
    */
-  on(event, action) {
+  on(eventName, action) {
     Matter.Events.on(this.mouseConstraint, eventName, action);
   }
 
