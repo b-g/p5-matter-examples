@@ -10,7 +10,14 @@
         "verbose": true,
         "template": "./node_modules/clean-jsdoc-theme",
         "theme_opts": {
-            "title": "docs"
+            "title": "Docs",
+            "menu": [
+                {
+                  "title": "Code (Github)",
+                  "link": "https://github.com/b-g/p5-matter-examples",
+                  "target": "_blank"
+                }
+            ]
         }
     }
 }
