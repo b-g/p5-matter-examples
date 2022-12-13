@@ -20,6 +20,7 @@ p5.js × matter.js
 * [4-jumping-ball](https://b-g.github.io/p5-matter-examples/4-jumping-ball/)
 * [4-mass-centre-weeble](https://b-g.github.io/p5-matter-examples/4-mass-centre-weeble/)
 * [4-reverse-gravity](https://b-g.github.io/p5-matter-examples/4-reverse-gravity/)
+* [5-svg-with-multiple-shapes](https://b-g.github.io/p5-matter-examples/5-svg-with-multiple-shapes/)
 * [5-complex-path-svg](https://b-g.github.io/p5-matter-examples/5-complex-path-svg/)
 * [5-magnet](https://b-g.github.io/p5-matter-examples/5-magnet/)
 * [5-magnet-duo](https://b-g.github.io/p5-matter-examples/5-magnet-duo/)

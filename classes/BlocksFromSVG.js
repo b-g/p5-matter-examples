@@ -28,6 +28,12 @@ as SVG (furniture.svg) to define the physics relevant parts.
 new BlocksFromSVG(world, "furniture.svg", blocks, {
   isStatic: true, restitution: 0.0
 })
+
+@tutorial
+5 - SVG with multiple shapes
+<a target="_blank" href="https://b-g.github.io/p5-matter-examples/5-svg-with-multiple-shapes/">Open preview</a>
+,
+<a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/5-svg-with-multiple-shapes/sketch.js">open code</a>
 */
 
 class BlocksFromSVG {
