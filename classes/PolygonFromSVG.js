@@ -83,7 +83,7 @@ class PolygonFromSVG extends Block {
 
   addBodyVertices(vertices) {
     this.body = Matter.Bodies.fromVertices(0, 0, Matter.Vertices.scale(vertices, this.attributes.scale, this.attributes.scale), this.options);
-    if (this.attributes.x) {
+    if (typeof this.attributes.x !== undefined) {
       Matter.Body.setPosition(this.body, this.attributes);
     } else {
       Matter.Body.setPosition(this.body, this.getCenter(vertices));

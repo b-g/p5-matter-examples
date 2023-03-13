@@ -149,6 +149,19 @@ class Block extends BlockCore {
   }
 
   /**
+   * Remove a constraint of this block to another block.
+   * @param {contraint} constraint
+   * @memberof Block
+   */
+  removeConstraint(contraint) {
+    const idx = this.constraints.indexOf(constraint)
+    if (idx > -1) {
+      this.constraints.splice(idx, 1)
+      Matter.World.remove(constraint)
+    }
+  }
+
+  /**
    * Adds a block to an internal collisions array, to check whether this block colides with another block
    * @param {block} block
    * @memberof Block
