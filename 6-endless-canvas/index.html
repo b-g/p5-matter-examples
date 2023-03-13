@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="../libraries/matter.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/BlockCore.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Block.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Ball.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Mouse.js"></script>
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    canvas, #thecanvas {
+      position: absolute;
+      top: 0;
+    }
+    #sprite-background {
+      position: absolute;
+      width: 2560px;
+      height: 1440px;
+      background: url('./backdrop.jpg') no-repeat;
+      z-index: -1;
+    }
+
+    #sprite-foreground {
+      position: absolute;
+      width: 2560px;
+      height: 1440px;
+      background: url('./overlay.png') no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="sprite-background"></div>
+  <!-- p5 canvas is generated on run time -->
+  <div id="thecanvas"></div>
+  <div id="sprite-foreground"></div>
+</body>
+
+</html>
