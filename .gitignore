@@ -1,2 +1,8 @@
-/node_modules
+/node_modules/*
+/node_modules/@types/linkify-it/*
+/node_modules/@types/markdown-it/*
+/node_modules/@types/mdurl/*
 .DS_Store
+
+# Only include the declaration files for matter and p5.js
+!/node_modules/@types/

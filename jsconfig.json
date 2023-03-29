@@ -1,0 +1,9 @@
+{
+  "include": [
+    "*.js",
+    "**/*.js",
+    "./@types/classes/index.d.ts",
+    "./node_modules/@types/matter-js/index.d.ts",
+    "./node_modules/@types/p5/global.d.ts"
+  ]
+}
