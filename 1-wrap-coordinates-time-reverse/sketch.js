@@ -46,6 +46,10 @@ function draw() {
   }else{
     recordPosition(ball.body.position, ball.body.angle, ball.body.velocity)
   }
+
+  fill(0);
+  textAlign(CENTER, CENTER);
+  text('Reverse time: hold SPACE', width/2, 50);
 }
 
 function restoreLastPositionAndDeleteHistory(){
@@ -91,10 +95,14 @@ function drawWhiteBars(){
   rect(width - barThickness, 0, barThickness, height)
 }
 
-function mouseReleased() {
-  reverseTime = false;
+function keyPressed() {
+  if (keyCode === 32) {
+    reverseTime = true;
+  }
 }
 
-function mousePressed() {
-  reverseTime = true;
+function keyReleased() {
+  if (keyCode === 32) {
+    reverseTime = false;
+  }
 }
