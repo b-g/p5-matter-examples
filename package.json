@@ -1,7 +1,8 @@
 {
   "name": "p5-matter-examples",
   "scripts": {
-    "docs": "node_modules/.bin/jsdoc --configure jsdoc.json --verbose"
+    "docs": "node_modules/.bin/jsdoc --configure jsdoc.json --verbose",
+    "hooks": "./sample/script.bash"
   },
   "dependencies": {
     "clean-jsdoc-theme": "^3.3.4",

@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Author: Ron Eros Mandic (@ron-mandic)
+# Repository: b-g/p5-matter-examples
+# Path: sample/post-commit.bash.sample
+# Last reviewed: 2023-05-25 15:20 CEST (by @ron-mandic)
+
+# ------------------------------------------------------------------------------------------
+# A VARIABLES ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------
+# vgl. https://stackoverflow.com/a/28938235
+NC='\033[0m'
+GREEN='\033[0;32m'
+LIGHT_BLUE='\033[1;34m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+
+success() {
+    local message=$1
+    echo -e "${GREEN}${message}${NC}"
+}
+info() {
+    local message=$1
+    echo -e "${LIGHT_BLUE}${message}${NC}"
+}
+warning() {
+    local message=$1
+    echo -e "${YELLOW}${message}${NC}"
+}
+error() {
+    local message=$1
+    echo -e "${RED}${message}${NC}"
+}
+
+# ------------------------------------------------------------------------------------------
+# B GUARD CLAUSES --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------
+if [ "$SHELL" = "/bin/sh" ]; then
+    error "\nThis script is not compatible with the /bin/sh shell. Exiting script ..."
+    exit 1
+fi
+
+# ------------------------------------------------------------------------------------------
+# C MAIN PROGRAM ---------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------
+success "\npost-commit: Successful commit\n"
