@@ -18,10 +18,10 @@ as SVG (furniture.svg) to define the physics relevant parts.
 <br>
 <br>&lt;div class="backdrop"&gt;
 
-@param {world} world - The Matter.js world
-@param {file} file - Path or URL to a SVG-file with multiple SVG Elements of type rect, circle or path
-@param {array} blocks - All created blocks will be added to this array
-@param {BodyOptions} [options] - Defines the common behaviour of all created blocks e.g. mass, bouncyness or whether it can move
+@param {Matter.World} world - The Matter.js world
+@param {string} file - Path or URL to a SVG-file with multiple SVG Elements of type rect, circle or path
+@param {Block[]} blocks - All created blocks will be added to this array
+@param {Matter.IChamferableBodyDefinition} [options] - Defines the common behaviour of all created blocks e.g. mass, bouncyness or whether it can move
 
 @example
 // Adding the furniture and accessories to the blocks array and into the matter world with coordinates perfectly matching the backdrop image.
@@ -37,6 +37,12 @@ new BlocksFromSVG(world, "furniture.svg", blocks, {
 */
 
 class BlocksFromSVG {
+  /**
+   * @param {Matter.World} world 
+   * @param {string} file 
+   * @param {Block[]} blocks 
+   * @param {Matter.IChamferableBodyDefinition} options 
+   */
   constructor(world, file, blocks, options) {
     this.blocks = blocks;
     this.world = world;
