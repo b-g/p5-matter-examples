@@ -91,16 +91,20 @@ class PolygonFromSVG extends Block {
     // TODO: Das Argument vom Typ "Vector[]" kann dem Parameter vom Typ "Vector[][]" nicht zugewiesen werden. (...) ts(2345)
     // TODO: 4 Argumente wurden erwartet, empfangen wurden aber 3. ts(2554)
     this.body = Matter.Bodies.fromVertices(0, 0, Matter.Vertices.scale(vertices, this.attributes.scale, this.attributes.scale), this.options);
-    if (typeof this.attributes.x !== undefined) {
-      Matter.Body.setPosition(this.body, this.attributes);
-    } else {
-      Matter.Body.setPosition(this.body, this.getCenter(vertices));
-    }
-    if (this.attributes.image) {
-      this.offset = {
-        x: this.offset.x + (this.attributes.image.width / 2) * this.attributes.scale - (this.body.position.x - this.body.bounds.min.x),
-        y: this.offset.y + (this.attributes.image.height / 2) * this.attributes.scale - (this.body.position.y - this.body.bounds.min.y)
+    if (this.body) {
+      if (this.attributes.x !== undefined) {
+        Matter.Body.setPosition(this.body, this.attributes);
+      } else {
+        Matter.Body.setPosition(this.body, this.getCenter(vertices));
       }
+      if (this.attributes.image) {
+        this.offset = {
+          x: this.offset.x + (this.attributes.image.width / 2) * this.attributes.scale - (this.body.position.x - this.body.bounds.min.x),
+          y: this.offset.y + (this.attributes.image.height / 2) * this.attributes.scale - (this.body.position.y - this.body.bounds.min.y)
+        }
+      }        
+    } else {
+      console.log('Cound not construct body for path: ', this.attributes.fromPath)
     }
   }
 
