@@ -70,8 +70,8 @@ class BlocksFromSVG {
       if (type == 'rect') {
         block = new Block(
           this.world, {
-            x: attributes.x + attributes.width / 2,
-            y: attributes.y + attributes.height / 2,
+            x: (attributes.x || 0) + attributes.width / 2,
+            y: (attributes.y || 0) + attributes.height / 2,
             w: attributes.width,
             h: attributes.height,
             color: attributes.fill,
@@ -105,8 +105,6 @@ class BlocksFromSVG {
       if (type == 'path') {
         block = new PolygonFromSVG(
           this.world, {
-            x: 0,
-            y: 0,
             scale: 1.0,
             fromPath: list[r],
             color: attributes.fill,
