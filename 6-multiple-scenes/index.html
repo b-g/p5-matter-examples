@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
@@ -24,25 +23,23 @@
       margin: 0;
     }
 
-    canvas,
-    #thecanvas {
+    canvas, #thecanvas {
       position: absolute;
       top: 0;
     }
 
-    #sprite-background {
+    #scene-background {
       position: absolute;
       width: 3840px;
       height: 2160px;
-      background: url('./backdrop.jpg') no-repeat;
+      background: url('./scene1.jpg') no-repeat;
       z-index: -1;
     }
 
-    #sprite-foreground {
+    #scene-foreground {
       position: absolute;
       width: 3840px;
       height: 2160px;
-      background: url('./overlay.png') no-repeat;
       z-index: 1;
       pointer-events: none;
     }
@@ -51,10 +48,10 @@
 </head>
 
 <body>
-  <div id="sprite-background"></div>
+  <div id="scene-background"></div>
   <!-- p5 canvas is generated on run time -->
   <div id="thecanvas"></div>
-  <div id="sprite-foreground"></div>
+  <div id="scene-foreground"></div>
 </body>
 
 </html>
