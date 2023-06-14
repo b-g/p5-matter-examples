@@ -105,12 +105,22 @@ class Block extends BlockCore {
     if (constraint.bodyB) {
       posB = constraint.bodyB.position;
     }
-    line(
-      posA.x + offsetA.x,
-      posA.y + offsetA.y,
-      posB.x + offsetB.x,
-      posB.y + offsetB.y
-    );
+    if (constraint.image) {
+      push();
+      translate(this.body.position.x, this.body.position.y);
+      const angle = Math.atan2( (posB.y + offsetB.y) - (posA.y + offsetA.y), (posB.x + offsetB.x) - (posA.x + offsetA.x) )
+      rotate(angle + Math.PI / 2);
+      imageMode(CENTER);
+      image(constraint.image, this.offset.x, this.offset.y, constraint.image.width * this.attributes.scale, constraint.image.height * this.attributes.scale);
+      pop();
+    } else {
+      line(
+        posA.x + offsetA.x,
+        posA.y + offsetA.y,
+        posB.x + offsetB.x,
+        posB.y + offsetB.y
+      );
+    }
   }
 
   update() {
