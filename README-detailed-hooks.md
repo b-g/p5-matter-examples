@@ -18,7 +18,7 @@
   - [] sh (macOS)
   - [x] bash (macOS)
   - [x] zsh (macOS)
-  - [x] git bash (Windows)
+  - [] Git Bash (Windows)
 - [x] Tested compatibility with operating systems
   - [] Windows
   - [] Linux
@@ -31,7 +31,7 @@
   - [] sh (macOS)
   - [x] bash (macOS)
   - [x] zsh (macOS)
-  - [x] git bash (Windows)
+  - [] Git Bash (Windows)
 - [x] Tested compatibility with operating systems
   - [] Windows
   - [] Linux

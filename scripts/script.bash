@@ -2,11 +2,11 @@
 
 # Author: Ron Eros Mandic (@ron-mandic)
 # Repository: b-g/p5-matter-examples
-# Path: sample/pre-commit.bash.sample
-# Last reviewed: 2023-05-29 20:37 CEST (by @ron-mandic)
+# Path: ./sample/script.bash
+# Last reviewed: 2023-06-16 19:53 CEST (by @ron-mandic)
 
 # ------------------------------------------------------------------------------------------
-# A VARIABLES AND FUNCTIONS ----------------------------------------------------------------
+# A VARIABLES ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------
 # vgl. https://stackoverflow.com/a/28938235
 NC='\033[0m'
@@ -47,10 +47,19 @@ version() {
     fi
 }
 
+function label() {
+    local file=$1
+    local date=$(date)
+    # Append current date and time (e.g Do 25 Mai 2023 14:07:51 CEST) to the file without overwriting it
+    echo -e "\n\n# ./sample/script.bash - Last created: $date" >> $file
+}
+
+alias quit="exit 1"
+
 # ------------------------------------------------------------------------------------------
 # B INFO -----------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------
-info "\nInfo: Shell and script environment"
+info "Info: Shell and script environment"
 echo "\$0: $0" # The filename of the current script
 echo "\$\$: $$" # The process ID of the current shell
 echo "\$SHELL: $SHELL" # The current shell
@@ -61,37 +70,43 @@ echo "\$SHELL: $SHELL" # The current shell
 # a Check if the script will be run in a shell other than sh
 SH_LOCATION="$(which sh)"
 if [ "$SHELL" = "$SH_LOCATION" ]; then
-    error "\nThis script is not compatible with the $SH_LOCATION shell. Exiting script ..."
+    error "\nError: This script is not compatible with the $SH_LOCATION shell. Exiting script ...\n"
+    quit
 
-# b Check if there are even any JavaScript files in the ./classes directory
+# b Check if ./classes directory exists
+elif [[ ! -d "classes" ]]; then
+    error "\nError: There is no directory called ./classes"
+    error "Error: npx cannout run later without the JavaScript source files (error TS6053)\n"
+    quit
+
+# c Check if there are even any JavaScript files in the ./classes directory
 elif [[ -z $(find ./classes -name "*.js" 2>/dev/null) ]]; then
-    error "\nThere are no JavaScript files in the ./classes directory"
-    error "npx cannout run later without the JavaScript source files (error TS6053)"
+    error "\nError: There are no JavaScript files in the ./classes directory"
+    error "Error: npx cannout run later without the JavaScript source files (error TS6053)\n"
+    quit
 
-# c Check if the root directory is capable of running npm and other Node.js commands
+# d Check if the root directory is capable of running npm and other Node.js commands
 elif [[ ! -f package.json || ! -f package-lock.json ]]; then
-    error "\nThere is no package.json or package-lock.json file. They are later required for npm and npx"
-    error "Please run 'npm init' first and try again"
-
-# d Check if there are any new changes in the ./classes directory
-elif ! [[ $(git status --porcelain ./classes) ]]; then 
-    warning "\npre-commit: There are no new changes in the ./classes directory. Keep on coding"
+    error "\nError: There is no package.json or package-lock.json file. They are later required for npm and npx"
+    info "Info: Please run 'npm init' first and try again\n"
+    quit
 else 
     # ------------------------------------------------------------------------------------------
-    # D MAIN PROGRAM ---------------------------------------------------------------------------
+    # D PROGRAM --------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------------
-    success "\npre-commit: There are new changes in the ./classes directory! \n"
+    echo -e "\n"
 
-    # Delete old type declaration files in the @types directory for a rebuild
+    # --- a) Delete old type declaration files in the @types directory for a rebuild
     if [ -d "@types" ]; then
         rm -r "@types"
     fi
 
-    # 1 ---------------------------------------------
+    # --------------------------------------------- 001 ---------------------------------------------
     # see https://stackoverflow.com/a/677212
+    # --- b) Try to install the type declaration files for the classes in the ./classes directory
     if ! command -v npx &> /dev/null; then
-        error "npx could not be found. Exiting script ...\n"
-        exit 1
+        error "Error: npx could not be found. Exiting script ...\n"
+        quit
     else
         info "1. Create type declaration files in @types ..."
         # bash: ./classes/*.js      Only files in the current directory
@@ -100,50 +115,41 @@ else
         # Premise: The JavaScript files in the ./classes directory already exist since we checked for them earlier in the guard clause (see c)
         # Result: The type declaration files (*.d.ts) will be created in the new ./@types directory
         npx -p typescript tsc ./classes/*.js --declaration --allowJs --emitDeclarationOnly --outDir ./@types
-    fi    
+    fi
 
-    # 2 ---------------------------------------------
-    info "2. Create index.d.ts in @types ..."
     # Guard clause #1
-    if ! [ -d "./@types" ]; then
-        warning "There is no @types directory. Exiting script ...\n"
-        exit 1
-    fi
-    # Guard clause #2
     if [[ -z $(find ./@types -name "*.d.ts" 2>/dev/null) ]]; then
-        warning "There are no type declaration files (*.d.ts) in the @types directory. Exiting script ...\n"
-        exit 1
+        warning "Warning: No type declaration files (*.d.ts) in the @types directory. Exiting script ...\n"
+        quit
     fi
 
-    # Hint: 'cat: ./@types/index.d.ts: input file is output file' only happens if index.d.ts already exists
+    # --------------------------------------------- 002 ---------------------------------------------
+    # --- d) Merge all type declaration files into one single index.d.ts file
+    info "2. Create index.d.ts in @types ..."
     cat ./@types/*.d.ts > ./@types/index.d.ts
-
-    # 3 ---------------------------------------------
-    # see https://unix.stackexchange.com/a/154067
-    info "3. Clean up individual type declaration files ..."
     cd @types
 
-    # ls | grep -xv "index.d.ts" | xargs rm
-
-    # or
-
-    # find . -type f ! -name "*.d.ts" -delete
+    # --------------------------------------------- 003 ---------------------------------------------
+    # --- e) Now delete all rudimentary type declaration files except the index.d.ts file
+    info "3. Clean up individual type declaration files ..."
     find . -type f -name "*.d.ts" ! -name "index.d.ts" -exec rm {} + #-delete
-
     cd ..
 
-    # 4 ---------------------------------------------
+    # --------------------------------------------- 004 ---------------------------------------------
+    # --- f) Move index.d.ts into the new ./@types/classes directory
     info "4. Create a new subdirectory called ./@types/classes ..."
     mkdir ./@types/classes
     mv ./@types/index.d.ts ./@types/classes/index.d.ts
 
-    # 5 ---------------------------------------------
-    info "5. Install and extract type declaration files for p5.js and matter.js ..."
-
+    # Guard clause #2
     if ! command -v npm &> /dev/null; then
-        error "npm could not be found. Exiting script ...\n"
-        exit 1
+        error "Error: npm could not be found. Exiting script ...\n"
+        quit
     fi
+
+    # --------------------------------------------- 005 ---------------------------------------------
+    # --- g) Install the type declaration files for other libraries
+    info "5. Install and extract type declaration files for p5.js and matter.js ...\n"
 
     # matter.js
     if ! [[ -f "$LIBRARIES_DIR/matter.js" ]]; then
@@ -159,8 +165,8 @@ else
 
             # Only if the latest version is not available yet
             if [ $? -ne 0 ]; then
-                warning "\nThere was an error installing the type declaration files for matter.js or the version $VERSION_MATTER_JS simply is not available yet"
-                warning "Installing the latest available version instead ..."
+                error "\nError: There was an error installing the type declarations for matter.js due to version $VERSION_MATTER_JS"
+                warning "Warning: Installing the latest available version instead ..."
                 npm --save-dev install @types/matter-js
             fi
         fi
@@ -180,22 +186,23 @@ else
 
             # Only if the latest version is not available yet
             if [ $? -ne 0 ]; then
-                warning "\nThere was an error installing the type declaration files for p5.js or the version $VERSION_P5_JS simply is not available yet"
-                warning "Installing the latest available version instead ..."
+                error "\Error: There was an error installing the type declarations for p5.js due to version $VERSION_P5_JS"
+                warning "Warning: Installing the latest available version instead ..."
                 npm --save-dev install @types/p5
             fi
         fi
     fi
 
-    # Guard clause
+    # Guard clause #3
     if ! [ -d "node_modules" ]; then
-        warning "There is no node_modules folder and thus no @types folder"
-        warning "Please make sure that the folder is preserved during the script. Please try again. Exiting script ...\n"
-        exit 1
+        warning "Warning: There is no node_modules folder and thus there will be no @types folder"
+        warning "Warning: Please make sure that the folder is preserved during the script. Exiting script ...\n"
+        quit
     else
         cd node_modules/@types
     fi
 
+    # --- h) Move the type declaration files for other libraries into the new ./@types directory 
     if [ -d "p5" ]; then
         # Premise: The JavaScript files in the ./classes directory already exist since we checked for them earlier in the guard clause
         # Result: @types/p5 will and can be created along side @types/classes
@@ -209,37 +216,13 @@ else
         # mkdir ../../@types/matter-js
         cp -r matter-js ../../@types/matter-js
     fi
-
     cd ../../
 
-    # 6 ---------------------------------------------
-    info "\n6. Do you want to delete the node_modules directory? [y/n]"
-    # see https://stackoverflow.com/a/1885534
-    # /dev/tty -> ensure that the user input is read directly from the terminal rather than from any redirected input stream
-    read reply < /dev/tty
-    echo
-    if [[ $reply =~ ^[Yy]$ ]]; then
-
-        # if node_modules folder exits
-        if [ -d "node_modules" ]; then
-            rm -rf node_modules
-            echo "The ./node_modules directory has been deleted"
-        else
-            echo "The ./node_modules directory no longer exists. There is no need to delete"
-        fi
-
-        warning "Please make sure you re-install the node_modules before running the script again"
-    else
-        echo "The ./node_modules directory will not be touched"
-    fi
-
-    # End ---------------------------------------------
-    clear
-
-    # Present a summary of the changes
+    # --------------------------------------------- 006 ---------------------------------------------
+    success "\nSuccess: Installation was completed"
+    # --- i) Present a summary of the changes
     info "\nGit: General overview"
     git status -s
 
-    # Add the new type declaration files to the staging area that were not included in the previous commit
-    git add @types
+    echo -e "\n"
 fi
