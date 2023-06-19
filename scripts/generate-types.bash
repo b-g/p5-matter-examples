@@ -51,7 +51,7 @@ function label() {
     local file=$1
     local date=$(date)
     # Append current date and time (e.g Do 25 Mai 2023 14:07:51 CEST) to the file without overwriting it
-    echo -e "\n\n# ./sample/script.bash - Last created: $date" >> $file
+    echo -e "\n\n# ./sample/generate_types.bash - Last created: $date" >> $file
 }
 
 alias quit="exit 1"
@@ -90,7 +90,7 @@ elif [[ ! -f package.json || ! -f package-lock.json ]]; then
     error "\nError: There is no package.json or package-lock.json file. They are later required for npm and npx"
     info "Info: Please run 'npm init' first and try again\n"
     quit
-else 
+else
     # ------------------------------------------------------------------------------------------
     # D PROGRAM --------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ else
         cd node_modules/@types
     fi
 
-    # --- h) Move the type declaration files for other libraries into the new ./@types directory 
+    # --- h) Move the type declaration files for other libraries into the new ./@types directory
     if [ -d "p5" ]; then
         # Premise: The JavaScript files in the ./classes directory already exist since we checked for them earlier in the guard clause
         # Result: @types/p5 will and can be created along side @types/classes
@@ -220,9 +220,5 @@ else
 
     # --------------------------------------------- 006 ---------------------------------------------
     success "\nSuccess: Installation was completed"
-    # --- i) Present a summary of the changes
-    info "\nGit: General overview"
-    git status -s
-
     echo -e "\n"
 fi
