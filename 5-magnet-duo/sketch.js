@@ -4,7 +4,7 @@ let boxes;
 
 
 function setup() {
-  const canvas = createCanvas(800, 600);
+  const canvas = createCanvas(windowWidth, windowHeight);
 
   // create an engine
   let engine = Matter.Engine.create();
@@ -16,7 +16,8 @@ function setup() {
   // add a group of identical boxes
   boxes = new Stack(
     world,
-    { x: 240, y: 100, cols: 10, rows: 10, colGap: 5, rowGap: 5, color: 'white',
+    {
+      x: width / 2 - 150, y: 0, cols: 10, rows: 10, colGap: 5, rowGap: 5, color: 'black',
       create: (x, y) => Matter.Bodies.rectangle(x, y, 25, 10, { restitution: 0.9 })
     }
   );
@@ -25,13 +26,13 @@ function setup() {
   // NOTE: Adding a "mass" is important, otherwise mass will default to infinite which makes for weird behaviour
   magnetA = new Magnet(
     world,
-    { x: 200, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
+    { x: width/2 - 200, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
     { isStatic: true, mass: 50 }
   );
   magnetA.addAttracted(boxes.body.bodies);
   magnetB = new Magnet(
     world,
-    { x: 600, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
+    { x: width / 2 + 200, y: height/2, r: 75, color: 'grey', attraction: 0.4 },
     { isStatic: true, mass: 50 }
   );
   magnetB.addAttracted(boxes.body.bodies);
@@ -44,7 +45,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(255, 10);
 
   magnetA.gravity();
   magnetB.gravity();
