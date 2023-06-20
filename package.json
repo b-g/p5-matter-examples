@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "@types/matter-js": "^0.18.5",
-    "@types/p5": "^1.6.0",
+    "@types/p5": "^1.6.2",
     "clean-jsdoc-theme": "^3.3.4",
     "jsdoc": "^3.6.10"
   }

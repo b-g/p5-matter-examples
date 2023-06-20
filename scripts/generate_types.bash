@@ -2,7 +2,7 @@
 
 # Author: Ron Eros Mandic (@ron-mandic)
 # Repository: b-g/p5-matter-examples
-# Path: ./sample/script.bash
+# Path: ./sample/generate_types.bash
 # Last reviewed: 2023-06-16 19:53 CEST (by @ron-mandic)
 
 # ------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ function label() {
     local file=$1
     local date=$(date)
     # Append current date and time (e.g Do 25 Mai 2023 14:07:51 CEST) to the file without overwriting it
-    echo -e "\n\n# ./sample/generate-types.bash - Last created: $date" >> $file
+    echo -e "\n\n# ./sample/generate_types.bash - Last created: $date" >> $file
 }
 
 alias quit="exit 1"

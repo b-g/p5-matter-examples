@@ -137,9 +137,9 @@ declare class BlockCore {
     constructor(world: Matter.World, attributes: object, options: Matter.IChamferableBodyDefinition);
     world: Matter.World;
     attributes: any;
-    options: any;
+    options: Matter.IChamferableBodyDefinition;
     addBody(): void;
-    body: any;
+    body: Matter.Body;
     /**
      * Draws the matter body to the p5 canvas
      * @memberof BlockCore
@@ -199,7 +199,7 @@ declare class BlocksFromSVG {
     constructor(world: Matter.World, file: string, blocks: Block[], options: Matter.IChamferableBodyDefinition);
     blocks: Block[];
     world: Matter.World;
-    options: any;
+    options: Matter.IChamferableBodyDefinition;
     promise: any;
     createBlocks(type: any, list: any): void;
     attributes2object(elem: any): {};
@@ -214,8 +214,7 @@ Creates a chain of blocks, as defined in the attributes.
 */
 declare class Chain extends Block {
     constructor(world: any, attributes: any, options: any);
-    constraints: any;
-    composite: any;
+    composite: Matter.Composite;
     /**
      * Adds an constraint to the internal constraints array.
      * @param {constraint} constraint
@@ -271,8 +270,8 @@ let mouse = new Mouse(engine, canvas, { stroke: 'blue', strokeWeight: 3 })
 declare class Mouse {
     constructor(engine: any, canvas: any, attributes: any);
     attributes: any;
-    mouse: any;
-    mouseConstraint: any;
+    mouse: Matter.Mouse;
+    mouseConstraint: Matter.MouseConstraint;
     /**
      * Subscribes a callback function to the given object's eventName
      * @param {string} eventName
@@ -473,3 +472,6 @@ let block = new CompositeBlock(world, attributes)
 declare class Stack extends Block {
     constructor(world: any, attributes: any, options: any);
 }
+
+
+// ./sample/generate-types.bash - Last created: Di 20 Jun 2023 17:24:11 CEST
