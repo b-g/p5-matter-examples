@@ -3,7 +3,6 @@
     "*.js",
     "**/*.js",
     "./@types/classes/index.d.ts",
-    "./@types/matter-js/index.d.ts",
     "./@types/p5/global.d.ts"
   ]
 }
