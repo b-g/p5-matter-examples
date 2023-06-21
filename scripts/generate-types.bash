@@ -80,10 +80,10 @@ function label() {
 # ------------------------------------------------------------------------------------------
 # B INFO -----------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------
-info "Info: Shell and script environment"
-echo "\$0: $0" # The filename of the current script
-echo "\$\$: $$" # The process ID of the current shell
-echo "\$SHELL: $SHELL" # The current shell
+# info "Info: Shell and script environment"
+# echo "\$0: $0" # The filename of the current script
+# echo "\$\$: $$" # The process ID of the current shell
+# echo "\$SHELL: $SHELL" # The current shell
 
 # ------------------------------------------------------------------------------------------
 # C PROGRAM --------------------------------------------------------------------------------
