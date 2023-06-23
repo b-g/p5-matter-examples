@@ -473,3 +473,6 @@ let block = new CompositeBlock(world, attributes)
 declare class Stack extends Block {
     constructor(world: any, attributes: any, options: any);
 }
+
+
+// ./sample/generate-types.bash - Last created: Mi 21 Jun 2023 19:44:34 CEST
