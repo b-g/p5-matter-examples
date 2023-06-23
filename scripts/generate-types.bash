@@ -94,12 +94,6 @@ cd ./@types/classes
 find . -type f -name "*.d.ts" ! -name "index.d.ts" -exec rm {} + #-delete
 cd ../..
 
-# Guard clause #2
-if ! command -v npm &> /dev/null; then
-    error "Error: npm could not be found. Exiting script ...\n"
-    exit 1
-fi
-
 # --------------------------------------------- 004 ---------------------------------------------
 # --- g) Install the type declaration files for other libraries
 info "4. Retrieve and extract type declaration files for p5.js ..."
@@ -128,7 +122,7 @@ if [ -d "p5" ]; then
         rm -rf ../../@types/p5/*
     fi
 
-    cp -r p5/* ../../@types/p5      
+    cp -r p5/* ../../@types/p5
 fi
 
 # --------------------------------------------- 005 ---------------------------------------------
