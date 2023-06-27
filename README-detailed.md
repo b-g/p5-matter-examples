@@ -31,6 +31,7 @@ p5.js × matter.js
 * [6-endless-canvas](https://b-g.github.io/p5-matter-examples/6-endless-canvas/)
 * [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
 * [6-parallax](https://b-g.github.io/p5-matter-examples/6-parallax/)
+* [6-custom-class](https://b-g.github.io/p5-matter-examples/6-custom-class/)
 * [xx-benno-step7](https://b-g.github.io/p5-matter-examples/xx-benno-step7/)
 
 ## Class reference
