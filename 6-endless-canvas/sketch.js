@@ -16,7 +16,8 @@ let murmel;
 let canvasElem;
 let off = { x: 0, y: 0 };
 
-let active = -1;
+ // das ist die Dimension des kompletten Levels 
+const dim = { w: 3840, h: 2160 };
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -28,57 +29,21 @@ function setup() {
   engine = Engine.create();
   world = engine.world;
 
-  // create some blocks
-  // the red box triggers a function on collisions
-  blocks.push(new BlockCore(
-    world, {
-      x: 200,
-      y: 200,
-      w: 60,
-      h: 60,
-      color: 'red',
-      trigger: (ball, block) => {
-        // alert('HIT')
-        ball.attributes.color = color(Math.random() * 256, Math.random() * 256, Math.random() * 256);
-      }
-    }, { isStatic: false, density: 0.05, restitution: 0.5, frictionAir: 0.01 }
-  ));
+  new BlocksFromSVG(world, 'static.svg', blocks, { isStatic: true });
 
-  blocks.push(new BlockCore(
-    world, {
-      x: windowWidth / 2,
-      y: 380,
-      w: windowWidth - 300,
-      h: 20,
-      color: 'green',
-      trigger: (ball, block) => {
-        // Flame sichtbar
-      }
-    }, { isStatic: true }
-  ));
-
-  blocks.push(new BlockCore(
-    world, {
-      x: windowWidth,
-      y: 1200,
-      w: windowWidth * 2,
-      h: 40,
-      color: 'blue',
-      trigger: (ball, block) => {
-        // alert('HIT')
-        Matter.Body.applyForce(ball.body, ball.body.position, { x: -0.1, y: -0.5 });
-      }
-    }, { isStatic: true }
+  // the box triggers a function on collisions
+  blocks.push(new BlockCore(world,
+    {
+      x: 200, y: 200, w: 60, h: 60, color: 'blue',
+      trigger: (ball, block) => { ball.attributes.color = color(Math.random() * 256, Math.random() * 256, Math.random() * 256); }
+    },
+    { isStatic: false, density: 0.05, restitution: 0.5, frictionAir: 0.01 }
   ));
 
   // the ball has a label and can react on collisions
-  murmel = new Ball(
-    world, {
-      x: 300,
-      y: 100,
-      r: 30,
-      color: 'magenta'
-    }, { label: "Murmel", density: 0.004, frictionAir: 0.0, frictionAir: 0.0 }
+  murmel = new Ball(world,
+    { x: 300, y: 100, r: 25, color: 'green' },
+    { label: "Murmel", density: 0.004, restitution: 0.5, friction: 0.0, frictionAir: 0.0 }
   );
   blocks.push(murmel);
 
@@ -98,7 +63,7 @@ function setup() {
   });
 
   // process collisions - check whether block "Murmel" hits another Block
-  Events.on(engine, 'collisionStart', function(event) {
+  Events.on(engine, 'collisionStart', function (event) {
     var pairs = event.pairs;
     pairs.forEach((pair, i) => {
       if (pair.bodyA.label == 'Murmel') {
@@ -116,7 +81,7 @@ function setup() {
 
 function scrollEndless(point) {
   // wohin muss verschoben werden damit point wenn möglich in der Mitte bleibt
-  off = { x: Math.max(0, point.x - windowWidth / 2), y: Math.max(0, point.y - windowHeight / 2) };
+  off = { x: Math.min(Math.max(0, point.x - windowWidth / 2), dim.w -  windowWidth), y: Math.min(Math.max(0, point.y - windowHeight / 2), dim.h -  windowHeight) };
   // plaziert den Canvas im aktuellen Viewport
   canvasElem.style.left = Math.round(off.x) + 'px';
   canvasElem.style.top = Math.round(off.y) + 'px';
@@ -131,15 +96,9 @@ function scrollEndless(point) {
 function keyPressed(event) {
   switch (keyCode) {
     case 32:
-      if (active == -1) {
-        active = 0;
-      } else {
-        
-      }
-          
       console.log("Space");
       event.preventDefault();
-      Matter.Body.applyForce(murmel.body, murmel.body.position, { x: 0.2, y: -0.0 });
+      Matter.Body.applyForce(murmel.body, murmel.body.position, { x: 0.2, y: -0.2   });
       // Matter. Body.scale(murmel.body, 1.5, 1.5);
       break;
     default:
@@ -148,11 +107,6 @@ function keyPressed(event) {
 }
 
 function draw() {
-  //background(0,1)
-
-  if (active < -1) {
-    
-  }
   clear();
 
   // position canvas and translate coordinates

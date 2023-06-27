@@ -7,9 +7,9 @@ This class allows the block <br/>
 - to rotate around its center via attribute rotate <br/>
 - trigger an actions from other blocks it collides with <br/>
 
-@param {world} world - The Matter.js world
+@param {Matter.World} world - The Matter.js world
 @param {object} attributes - Visual properties e.g. position, dimensions and color
-@param {object} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
+@param {Matter.IChamferableBodyDefinition} [options] - Defines the behaviour e.g. mass, bouncyness or whether it can move
 @extends BlockCore
 
 @example
@@ -36,6 +36,13 @@ let box = new Block(world, attributes, options)
 */
 
 class Block extends BlockCore {
+  /** @type {Matter.Constraint[]} */ constraints;
+
+  /**
+   * @param {Matter.World} world 
+   * @param {object} attributes 
+   * @param {Matter.IChamferableBodyDefinition} options 
+   */
   constructor(world, attributes, options) {
     super(world, attributes, options);
     this.collisions = [];
@@ -47,7 +54,7 @@ class Block extends BlockCore {
   draw() {
     if (this.body) {
       this.update();
-      if (this.attributes.color || this.attributes.stroke) {
+      if (this.attributes.color || this.attributes.stroke) {
         super.draw();
       }
       if (this.attributes.image) {
@@ -55,6 +62,7 @@ class Block extends BlockCore {
       }
       if (this.constraints.length > 0) {
         for (let c of this.constraints) {
+          // TODO: Die Eigenschaft "draw" ist für den Typ "Constraint" nicht vorhanden. ts(2339)
           if (c.draw === true) this.drawConstraint(c);
         }
       }
@@ -97,12 +105,22 @@ class Block extends BlockCore {
     if (constraint.bodyB) {
       posB = constraint.bodyB.position;
     }
-    line(
-      posA.x + offsetA.x,
-      posA.y + offsetA.y,
-      posB.x + offsetB.x,
-      posB.y + offsetB.y
-    );
+    if (constraint.image) {
+      push();
+      translate(this.body.position.x, this.body.position.y);
+      const angle = Math.atan2( (posB.y + offsetB.y) - (posA.y + offsetA.y), (posB.x + offsetB.x) - (posA.x + offsetA.x) )
+      rotate(angle + Math.PI / 2);
+      imageMode(CENTER);
+      image(constraint.image, this.offset.x, this.offset.y, constraint.image.width * this.attributes.scale, constraint.image.height * this.attributes.scale);
+      pop();
+    } else {
+      line(
+        posA.x + offsetA.x,
+        posA.y + offsetA.y,
+        posB.x + offsetB.x,
+        posB.y + offsetB.y
+      );
+    }
   }
 
   update() {
@@ -121,9 +139,9 @@ class Block extends BlockCore {
    * Constrains this block to another block.
    * Constraints are used for specifying that a fixed distance must be maintained between two blocks (or a block and a fixed world-space position).
    * The stiffness of constraints can be modified via the options to create springs or elastic.
-   * @param {block} block
-   * @param {object} [options]
-   * @return {contraint}
+   * @param {Block} block
+   * @param {Matter.IConstraintDefinition} [options]
+   * @return {Matter.Constraint}
    * @memberof Block
    */
   constrainTo(block, options) {
@@ -142,28 +160,29 @@ class Block extends BlockCore {
         };
       }
     }
-    const contraint = Matter.Constraint.create(options);
-    this.constraints.push(contraint);
-    Matter.World.add(this.world, contraint);
-    return contraint;
+    const constraint = Matter.Constraint.create(options);
+    this.constraints.push(constraint);
+    Matter.World.add(this.world, constraint);
+    return constraint;
   }
 
   /**
    * Remove a constraint of this block to another block.
-   * @param {contraint} constraint
+   * @param {Matter.Constraint} constraint
    * @memberof Block
    */
-  removeConstraint(contraint) {
+  removeConstraint(constraint) {
     const idx = this.constraints.indexOf(constraint)
     if (idx > -1) {
       this.constraints.splice(idx, 1)
-      Matter.World.remove(constraint)
+      // TODO: 2-3 Argumente wurden erwartet, empfangen wurden aber 1. ts(2554)
+      Matter.World.remove(constraint) // Matter.World.remove(this.world, constraint)
     }
   }
 
   /**
    * Adds a block to an internal collisions array, to check whether this block colides with another block
-   * @param {block} block
+   * @param {Block} block
    * @memberof Block
    */
   collideWith(block) {
