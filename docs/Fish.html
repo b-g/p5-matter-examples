@@ -31,7 +31,7 @@
 
 
     <title>
-      PolygonFromPoints
+      Fish
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        PolygonFromPoints
+        Fish
       </h1>
       
 
@@ -115,12 +115,12 @@
         
         <h2>
         
-        PolygonFromPoints
+        Fish
         
         </h2>
         
         
-            <div class="class-description">Creates a new rigid body model with a regular polygon hull based on a list of points.</div>
+            <div class="class-description">Example of a custom class using badly drawn fish.</div>
         
     
 </header>
@@ -135,9 +135,9 @@
         <h2>Constructor</h2>
     
 
-    <h4 class="name" id="PolygonFromPoints">
-        <a href="#PolygonFromPoints">#</a>
-        <span class="type-signature"></span>new PolygonFromPoints<span class="signature">(world, attributes, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+    <h4 class="name" id="Fish">
+        <a href="#Fish">#</a>
+        <span class="type-signature"></span>new Fish<span class="signature">(world, attributes, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
     </h4>
 
     
@@ -235,7 +235,7 @@
 
             
 
-            <td class="description last">Visual properties e.g. position, points and color</td>
+            <td class="description last">Visual properties e.g. position, radius and color</td>
         </tr>
 
     
@@ -313,23 +313,11 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="PolygonFromPoints.js.html">PolygonFromPoints.js</a>, <a href="PolygonFromPoints.js.html#line38">line 38</a>
+                <a href="Fish.js.html">Fish.js</a>, <a href="Fish.js.html#line23">line 23</a>
             </li></ul></dd>
         </div>
     
 
-    
-        <div class="details-item-container">
-            <dt class="tag-tutorial">Tutorials:</dt>
-            <dd class="tag-tutorial">
-                <ul>
-                    <li><em class="disabled">Tutorial: XX - Benno Step 7
-<a target="_blank" href="https://b-g.github.io/p5-matter-examples/xx-benno-step7/">Open example</a>
-,
-<a target="_blank" href="https://github.com/b-g/p5-matter-examples/blob/master/xx-benno-step7/sketch.js">open code</a></em></li>
-                </ul>
-            </dd>
-        </div>
     
 
     
@@ -357,26 +345,17 @@
         <strong>Example</strong>
         
     <div class="rel">
-    <pre class="prettyprint"><code>const points = [
-  { x: 0, y: 0 },
-  { x: 20, y: 10 },
-  { x: 200, y: 30 },
-  { x: 220, y: 50 },
-  { x: 10, y: 20 }
-]
-
-const attributes = {
-  x: 600,
-  y: 580,
-  points: points,
-  color: "olive"
+    <pre class="prettyprint"><code>const attributes = {
+  x: 300,
+  y: 300,
+  type: "catfish",
 }
 
 const options = {
-  isStatic: true
+  isStatic: true,
 }
 
-let polygonBlock = new PolygonFromPoints(world, attributes, options)</code></pre>
+let fish = new Fish(world, attributes, options)</code></pre>
     
     
     </div>
