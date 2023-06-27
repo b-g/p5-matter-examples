@@ -26,8 +26,8 @@ class Fish extends Block {
     }
   
     addBody() {
-      // The load fish data depending on the fish type
-      const fishData = this.getFishData(this.attributes.type)
+      // The load fish data depending on the fish species
+      const fishData = this.getSpeciesData(this.attributes.species)
 
       // Apply the data
       this.attributes.image = fishData.image
@@ -38,19 +38,19 @@ class Fish extends Block {
       this.body = Matter.Bodies.rectangle(this.attributes.x, this.attributes.y, this.attributes.w, this.attributes.h, this.options);
     }
 
-    getFishData(fishType){
+    getSpeciesData(species){
         // Path is a bit annoying because it's not relative to this file, but the HTML it's loaded with
-        switch(fishType){
+        switch(species){
           case 'catfish':
               return {
-                image: loadImage('../classes/Fish_CatFish.png'),
+                image: loadImage('./custom-class-fish/Fish_CatFish.png'),
                 w: 162,
                 h: 77
               }
 
           case 'herring':
               return {
-                image: loadImage('../classes/Fish_Herring.png'),
+                image: loadImage('./custom-class-fish/Fish_Herring.png'),
                 w: 105,
                 h: 44
               }
@@ -58,7 +58,7 @@ class Fish extends Block {
 
         // Use catfish as fallback
         return {
-          image: loadImage('../classes/Fish_CatFish.png'),
+          image: loadImage('./custom-class-fish/Fish_CatFish.png'),
           w: 162,
           h: 77
         } 
