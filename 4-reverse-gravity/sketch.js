@@ -14,7 +14,7 @@ function setup() {
   let world = engine.world;
 
   // reverse gravity
-  engine.world.gravity.y *= -1;
+  engine.gravity.y *= -1;
 
   // add block and ground
   box = new Block(world, { x: 600, y: 500, w: 50, h: 50, color: 'white' });
