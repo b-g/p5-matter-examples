@@ -33,10 +33,9 @@ function setup() {
 function draw() {
   background('black');
 
-  // ForEach is like a for loop but easier to read (https://www.geeksforgeeks.org/difference-between-foreach-and-for-loop-in-javascript/)
   importedShapes.forEach((shape) => {
     shape.draw();
-  })
+  });
 
   mouse.draw();
   ground.draw();

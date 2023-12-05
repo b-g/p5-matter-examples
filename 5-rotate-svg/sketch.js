@@ -41,6 +41,10 @@ function draw() {
   ground.draw();
   polygon.draw();
   mouse.draw();
+
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text('Press R to rotate shape', width / 2, 50);
 }
 
 function keyPressed() {
