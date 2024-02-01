@@ -28,6 +28,8 @@ class BlockCore {
     this.options = options || {};
     this.options.plugin = this.options.plugin || {};
     this.options.plugin.block = this;
+    this.offset = this.attributes.offset || { x: 0, y: 0 };
+    this.attributes.scale = this.attributes.scale || 1.0;
     this.addBody();
     if (this.body) {
       Matter.World.add(this.world, this.body);

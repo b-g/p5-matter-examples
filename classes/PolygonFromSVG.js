@@ -56,35 +56,51 @@ class PolygonFromSVG extends Block {
    */
   constructor(world, attributes, options) {
     super(world, attributes, options);
+    this.attributes.sample = this.attributes.sample || 10;
   }
 
   addBody() {
-    if (this.attributes.fromPath) {
-        // use a path provided directly
-        let vertices = Matter.Svg.pathToVertices(this.attributes.fromPath, 10);
-        this.addBodyVertices(vertices)
+    if (this.attributes.fromVertices) {
+      // use list of vertices/points
+      this.addBodyVertices(this.attributes.fromVertices)
     } else {
-      if (this.attributes.fromId) {
-        // use a path of SVG embedded in current HTML page
-        let path = document.getElementById(this.attributes.fromId);
-        if (null != path) {
-          // TODO: Das Argument vom Typ "HTMLElement" kann dem Parameter vom Typ "SVGPathElement" nicht zugewiesen werden. (...) ts(2345)
-          let vertices = Matter.Svg.pathToVertices(path, 10);
-          this.addBodyVertices(vertices)
-        }
+      if (this.attributes.fromPath) {
+        // use a path provided directly
+        let vertices = Matter.Svg.pathToVertices(this.attributes.fromPath, this.attributes.sample);
+        this.addBodyVertices(vertices)
       } else {
-        // use a path in separate SVG file
-        let that = this;
-        const request = new XMLHttpRequest();
-        request.open("GET", this.attributes.fromFile, false); // `false` makes the request synchronous
-        request.send(null);
-        const response = request.responseText;
-        const parser = new DOMParser();
-        const svgDoc = parser.parseFromString(response, "image/svg+xml");
-        const path = svgDoc.querySelector("path");
-        let vertices = Matter.Svg.pathToVertices(path, 10);
-        that.addBodyVertices(vertices)
-        Matter.World.add(that.world, [that.body]);
+        if (this.attributes.fromId) {
+          // use a path of SVG embedded in current HTML page
+          let path = document.getElementById(this.attributes.fromId);
+          if (null != path) {
+            let vertices = Matter.Svg.pathToVertices(path, this.attributes.sample);
+            this.addBodyVertices(vertices)
+          }
+        } else {
+          // use a path in separate SVG file
+          let that = this;
+          if (this.attributes.async) {
+            httpGet(this.attributes.fromFile, "text", false, function (response) {
+              const parser = new DOMParser();
+              const svgDoc = parser.parseFromString(response, "image/svg+xml");
+              const path = svgDoc.querySelector("path");
+              let vertices = Matter.Svg.pathToVertices(path, that.attributes.sample);
+              that.addBodyVertices(vertices)
+              Matter.World.add(that.world, [that.body]);
+            });
+          } else {
+            const request = new XMLHttpRequest();
+            request.open("GET", this.attributes.fromFile, false); // `false` makes the request synchronous
+            request.send(null);
+            const response = request.responseText;
+            const parser = new DOMParser();
+            const svgDoc = parser.parseFromString(response, "image/svg+xml");
+            const path = svgDoc.querySelector("path");
+            let vertices = Matter.Svg.pathToVertices(path, that.attributes.sample);
+            that.addBodyVertices(vertices)
+            Matter.World.add(that.world, [that.body]);
+          }
+        }
       }
     }
   }
@@ -116,8 +132,8 @@ class PolygonFromSVG extends Block {
    * @memberof PolygonFromSVG
    */
   getCenter(vertices) {
-    let min = {x: 999999, y: 999999};
-    let max = {x: -999999, y: -999999};
+    let min = { x: 999999, y: 999999 };
+    let max = { x: -999999, y: -999999 };
     vertices.forEach((v, _) => {
       min.x = min.x > v.x ? v.x : min.x;
       min.y = min.y > v.y ? v.y : min.y;

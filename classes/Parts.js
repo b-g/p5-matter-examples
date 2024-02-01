@@ -35,5 +35,8 @@ class Parts extends Block {
   addBody() {
     this.body = Matter.Body.create(this.options);
     Matter.Body.setPosition(this.body, this.attributes);
+if (this.options.angle) {
+      Matter.Body.setAngle(this.body, this.options.angle);
+    }
   }
 }

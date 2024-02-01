@@ -47,8 +47,6 @@ class Block extends BlockCore {
     super(world, attributes, options);
     this.collisions = [];
     this.constraints = [];
-    this.offset = this.attributes.offset || { x: 0, y: 0 };
-    this.attributes.scale = this.attributes.scale || 1.0;
   }
 
   draw() {
@@ -175,8 +173,7 @@ class Block extends BlockCore {
     const idx = this.constraints.indexOf(constraint)
     if (idx > -1) {
       this.constraints.splice(idx, 1)
-      // TODO: 2-3 Argumente wurden erwartet, empfangen wurden aber 1. ts(2554)
-      Matter.World.remove(constraint) // Matter.World.remove(this.world, constraint)
+      Matter.World.remove(world, constraint)
     }
   }
 
