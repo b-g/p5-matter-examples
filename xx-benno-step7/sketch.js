@@ -1,17 +1,23 @@
 const Engine = Matter.Engine;
 const Runner = Matter.Runner;
-const Bodies = Matter.Bodies;
-const Events = Matter.Events;
 const World = Matter.World;
+const Events = Matter.Events;
+const Bodies = Matter.Bodies;
 
 // the Matter engine to animate the world
-let engine;
-let world;
-let mouse;
+let engine, runner, world, mouse;
 let isDrag = false;
+
+// some sizes to allow view follow and endless scrolling
+const dim = { w: 3840, h: 2160 }
+let off = { x: 0, y: 0 }
+let canvasElem
+
 // an array to contain all the blocks created
 let blocks = [];
 
+// the "Murmel"
+let murmel;
 let propeller, riesenrad;
 let angleProp = 0;
 let angleRad = 0;
@@ -26,11 +32,65 @@ function preload() {
 }
 
 function setup() {
+  canvasElem = document.getElementById('thecanvas')
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('thecanvas');
 
   engine = Engine.create();
+  runner = Runner.create({ isFixed: true, delta: 1000 / 60 })
   world = engine.world;
+
+  // Während der Enticklung der Murmelbahn kan man mit der Maus eingreifen
+  mouse = new Mouse(engine, canvas, { stroke: 'blue', strokeWeight: 3 });
+
+  // Oder auch Test-Murmeln in Spiel bringen
+  mouse.on("startdrag", evt => {
+    isDrag = true;
+  });
+  mouse.on("mouseup", evt => {
+    if (!isDrag) {
+      let ball = new Ball(world,
+        { x: evt.mouse.position.x, y: evt.mouse.position.y, r: 15, color: 'yellow' },
+        { isStatic: false, restitution: 0.9, label: 'Murmel' });
+      blocks.push(ball);
+    }
+    isDrag = false;
+  });
+
+  // Hier wird registriert, ob die Murmel mit etwas kollidiert und
+  // dann die trigger-Funktion des getroffenen Blocks ausgelöst
+  // Dieser Code ist DON'T TOUCH IT - wenn das Bedürfnis besteht, bitte mit Benno reden!!!
+  Events.on(engine, 'collisionStart', function (event) {
+    var pairs = event.pairs;
+    pairs.forEach((pair, i) => {
+      if (pair.bodyA.label == 'Murmel') {
+        pair.bodyA.plugin.block.collideWith(pair.bodyB.plugin.block)
+      }
+      if (pair.bodyB.label == 'Murmel') {
+        pair.bodyB.plugin.block.collideWith(pair.bodyA.plugin.block)
+      }
+    })
+  })
+
+  Events.on(engine, 'collisionActive', function (event) {
+    var pairs = event.pairs;
+    pairs.forEach((pair, i) => {
+      if (pair.bodyA.label == 'Murmel' && pair.bodyB.label == 'Active') {
+        pair.bodyA.plugin.block.collideWith(pair.bodyB.plugin.block)
+      }
+      if (pair.bodyB.label == 'Murmel' && pair.bodyA.label == 'Active') {
+        pair.bodyB.plugin.block.collideWith(pair.bodyA.plugin.block)
+      }
+    })
+  })
+
+  // Die Murmelbahn erzeugen
+  createScene();
+  // Den Motor von Matter starten: die Physik wird berechnet
+  Runner.run(runner, engine);
+}
+
+function createScene() {
 
   // create some blocks
   // the blue box triggers a function on collisions
@@ -83,11 +143,12 @@ function setup() {
   ));
 
   // the ball has a label and can react on collisions
-  blocks.push(new Ball(
+  murmel = new Ball(
     world,
     { x: 300, y: 300, r: 30, color: 'magenta' },
     { label: "Murmel" }
-  ));
+  )
+  blocks.push(murmel);
 
   // create a rotating block - propeller
   propeller = new Block(
@@ -130,7 +191,6 @@ function setup() {
 
   blocks.push(new PolygonFromSVG(
     world,
-
     { x: 580, y: 710, fromFile: './path.svg', scale: 0.6, color: 'yellow' },
     { isStatic: true, friction: 0.0 }
   ));
@@ -207,14 +267,14 @@ function setup() {
 
     const gondel = new PolygonFromSVG(
       world,
-      { x: pos.x + x, y: pos.y + 30 + y, fromFile: './gondel.svg', color: 'yellow', sample: 10 },
+      {
+        x: pos.x + x, y: pos.y + 30 + y, fromFile: './gondel.svg', color: 'yellow', sample: 10, done: (added, isSync) => {
+          // console.log('DONE', added, isSync)
+          added.constrainTo(riesenrad, { pointA: { x: 0, y: -10 }, pointB: { x: x, y: y }, stiffness: 1.0, damping: 0.9, color: 'yellow', draw: true, });
+        }
+      },
       { isStatic: false }
     )
-
-    // for some reason, the constraints need to be added "later"
-    setTimeout(() => {
-      gondel.constrainTo(riesenrad, { pointA: { x: 0, y: -10 }, pointB: { x: x, y: y }, length: 50,  stiffness: 1.0, damping: 0.9, color: 'yellow', draw: true, });
-    }, 100)
     blocks.push(gondel);
   }
 
@@ -224,49 +284,34 @@ function setup() {
     { x: 800, y: 100, points: [{ x: 0, y: 0 }, { x: 20, y: 10 }, { x: 200, y: 30 }, { x: 220, y: 50 }, { x: 10, y: 20 }], color: 'olive' },
     { isStatic: true, angle: 0.1 }));
 
-    setInterval(() => {
+  setInterval(() => {
     blocks.push(new Ball(world,
-      { x: 800, y: 80, r: 15, color: 'magenta' },
+      { x: 800, y: 80, r: 15, color: 'lime' },
       { isStatic: false, restitution: 0.9, friction: 0.0 }))
   }, 5000)
 
-  // add a mouse so that we can manipulate Matter objects
-  mouse = new Mouse(engine, canvas, { stroke: 'blue', strokeWeight: 3 });
-  // const mouseScale = 1 + (1 / (scale / (1 - scale)))
-  // Mouse.setScale(mouse, { x: mouseScale, y: mouseScale });
+}
 
-  // process mouseup events in order to drag objects or add more balls
-  mouse.on("startdrag", evt => {
-    isDrag = true;
-  });
-  mouse.on("mouseup", evt => {
-    if (!isDrag) {
-      let ball = new Ball(world,
-        { x: evt.mouse.position.x, y: evt.mouse.position.y, r: 15, color: 'yellow' },
-        { isStatic: false, restitution: 0.9, label: 'Murmel' });
-      blocks.push(ball);
-    }
-    isDrag = false;
-  });
-
-  // process collisions - check whether block "Murmel" hits another Block
-  Events.on(engine, 'collisionStart', function (event) {
-    var pairs = event.pairs;
-    pairs.forEach((pair, i) => {
-      if (pair.bodyA.label == 'Murmel') {
-        pair.bodyA.plugin.block.collideWith(pair.bodyB.plugin.block)
-      }
-      if (pair.bodyB.label == 'Murmel') {
-        pair.bodyB.plugin.block.collideWith(pair.bodyA.plugin.block)
-      }
-    })
-  })
-  // run the engine
-  Runner.run(engine);
+function scrollEndless(point) {
+  // wohin muss verschoben werden damit point wenn möglich in der Mitte bleibt
+  off = { x: Math.min(Math.max(0, point.x - window.innerWidth / 2), dim.w - window.innerWidth), y: Math.min(Math.max(0, point.y - window.innerHeight / 2), dim.h - window.innerHeight) }
+  // plaziert den Canvas im aktuellen Viewport
+  canvasElem.style.left = Math.round(off.x) + 'px'
+  canvasElem.style.top = Math.round(off.y) + 'px'
+  // korrigiert die Koordinaten
+  translate(-off.x, -off.y)
+  // verschiebt den ganzen Viewport
+  window.scrollTo(off.x, off.y)
+  mouse.setOffset(off)
 }
 
 function draw() {
-  background(0, 60);
+  clear();
+
+  if (murmel) {
+    scrollEndless(murmel.body.position)
+  }
+
   // animate attracted blocks
   magnet.attract();
 
