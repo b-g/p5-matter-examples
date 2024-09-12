@@ -89,7 +89,9 @@ class PolygonFromSVG extends Block {
             let vertices = Matter.Svg.pathToVertices(path, this.attributes.sample);
             this.addBodyVertices(vertices)
             Matter.World.add(this.world, [this.body]);
-            console.log('DONE')
+            if (this.attributes.done) {
+              this.attributes.done(this, true)
+            }
           } else {
             let that = this;
             httpGet(this.attributes.fromFile, "text", false, function (response) {
@@ -99,6 +101,9 @@ class PolygonFromSVG extends Block {
               let vertices = Matter.Svg.pathToVertices(path, that.attributes.sample);
               that.addBodyVertices(vertices)
               Matter.World.add(that.world, [that.body]);
+              if (that.attributes.done) {
+                that.attributes.done(that, false)
+              }
             });
           }
         }

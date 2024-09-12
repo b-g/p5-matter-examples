@@ -43,18 +43,20 @@ class BlocksFromSVG {
    * @param {Block[]} blocks
    * @param {Matter.IChamferableBodyDefinition} options
    */
-  constructor(world, file, blocks, options, save) {
+  constructor(world, file, blocks, options, config) {
     this.blocks = blocks;
+    this.added = {}
     this.world = world;
     this.options = options || {};
-    this.options.sample = this.options.sample || 10;
+    this.config = config || {}
+    this.config.sample = this.config.sample || 10;
+    this.config.offset = this.config.offset || { x: 0, y: 0 };
     let that = this;
     this.beg = new Date();
-    this.save = save
     this.file = file
     this.data = { rect: [], circle: [], path: [] }
     const saved = localStorage.getItem(this.file)
-    if (this.save && saved) {
+    if (this.config.save && saved) {
       let block;
       const data = JSON.parse(saved)
       data.rect.forEach(r => {
@@ -70,7 +72,10 @@ class BlocksFromSVG {
           });
         }
         this.blocks.push(block);
-      })
+        if (r.attrs.id) {
+          this.added[r.attrs.id] = block
+        }
+        })
       data.circle.forEach(c => {
         block = new Ball(
           this.world,
@@ -88,6 +93,9 @@ class BlocksFromSVG {
           });
         }
         this.blocks.push(block);
+        if (c.attrs.id) {
+          this.added[c.attrs.id] = block
+        }
       })
       data.path.forEach(p => {
         block = new PolygonFromSVG(
@@ -96,8 +104,13 @@ class BlocksFromSVG {
           p.options
         );
         this.blocks.push(block);
+        if (p.attrs.id) {
+          this.added[p.attrs.id] = block
+        }
       })
-      console.log("DONE", new Date() - that.beg);
+      if (this.config.done) {
+        this.config.done(this.added, new Date() - that.beg, true)
+      }
     } else {
       localStorage.removeItem(file);
       this.promise = httpGet(file, "text", false, (response) => {
@@ -107,10 +120,13 @@ class BlocksFromSVG {
         that.createBlocks("rect", svgDoc.getElementsByTagName("rect"));
         that.createBlocks("circle", svgDoc.getElementsByTagName("circle"));
         that.createBlocks("path", svgDoc.getElementsByTagName("path"));
-        if (that.save) {
+        if (that.config.save) {
+          console.log(that.data)
           localStorage.setItem(that.file, JSON.stringify(that.data))
         }
-        console.log("DONE", new Date() - that.beg);
+        if (that.config.done) {
+          that.config.done(that.added, new Date() - that.beg, false)
+        }
       });
     }
   }
@@ -121,42 +137,63 @@ class BlocksFromSVG {
       let options = {
         ...this.options
       }
+      // console.log(type, list[r])
       let attributes = this.attributes2object(list[r])
+      if (type == 'rect') {
+        attributes.x = (attributes.x || 0) + this.config.offset.x
+        attributes.y = (attributes.y || 0) + this.config.offset.y
+      }
+      if (type == 'circle') {
+        attributes.cx = (attributes.cx || 0) + this.config.offset.x
+        attributes.cy = (attributes.cy || 0) + this.config.offset.y
+      }
+      if (attributes["fill-opacity"]) {
+        attributes.fill += (Math.round(attributes["fill-opacity"] * 255)).toString(16).toUpperCase()
+      }
+      let points = null
+      let center = null
+      let attrs
       if (attributes.transform) {
-        this.trans = attributes.transform.split(/[ \(\)]/)
-        if (this.trans[0] == 'rotate') {
+        let trans = attributes.transform.split(/[ \(\)]/)
+        if (trans[0] == 'rotate') {
           // options.angle = radians(trans[1]);
-          this.pts = this.rotate(attributes.x || 0, attributes.y || 0, attributes.width, attributes.height, +this.trans[1])
-          this.center = this.rotatePoint((attributes.x || 0) + attributes.width / 2, (attributes.y || 0) + attributes.height / 2, attributes.x || 0, attributes.y || 0, +this.trans[1])
-        } else if (this.trans[0] == 'matrix') {
-          this.pts = this.matrix(attributes.x || 0, attributes.y || 0, attributes.width, attributes.height, +this.trans[1], +this.trans[2], +this.trans[3], +this.trans[4], +this.trans[5], +this.trans[6])
-          this.center = this.matrixPoint((attributes.x || 0) + attributes.width / 2, (attributes.y || 0) + attributes.height / 2, +this.trans[1], +this.trans[2], +this.trans[3], +this.trans[4], +this.trans[5], +this.trans[6])
+          points = this.rotate(attributes.x, attributes.y, attributes.width, attributes.height, +trans[1])
+          center = this.rotatePoint(attributes.x + attributes.width / 2, attributes.y + attributes.height / 2, attributes.x, attributes.y, +trans[1])
+        } else if (trans[0] == 'matrix') {
+          points = this.matrix(attributes.x, attributes.y, attributes.width, attributes.height, +trans[1], +trans[2], +trans[3], +trans[4], +trans[5], +trans[6])
+          center = this.matrixPoint(attributes.x + attributes.width / 2, attributes.y + attributes.height / 2, +trans[1], +trans[2], +trans[3], +trans[4], +trans[5], +trans[6])
         }
       }
       if (type == 'rect') {
-        if (this.pts) {
-          // console.log(this.center, this.pts)
-          block = new PolygonFromPoints(
-            this.world, {
-            x: this.center.x,
-            y: this.center.y,
+        if (points) {
+          // console.log(center, points)
+          attrs = {
+            x: center.x,
+            y: center.y,
             scale: 1.0,
-            points: this.pts,
+            points: points,
             color: attributes.fill,
-            stroke: attributes.stroke
-          },
+            stroke: attributes.stroke,
+            id: attributes.id
+          }
+          block = new PolygonFromPoints(
+            this.world,
+            attrs,
             options
           );
         } else {
-          block = new Block(
-            this.world, {
-            x: (attributes.x || 0) + attributes.width / 2,
-            y: (attributes.y || 0) + attributes.height / 2,
+          attrs = {
+            x: attributes.x + attributes.width / 2,
+            y: attributes.y + attributes.height / 2,
             w: attributes.width,
             h: attributes.height,
             color: attributes.fill,
-            stroke: attributes.stroke
-          },
+            stroke: attributes.stroke,
+            id: attributes.id
+          }
+          block = new Block(
+            this.world,
+            attrs,
             options
           );
           if (options.angle) {
@@ -166,16 +203,23 @@ class BlocksFromSVG {
             });
           }
         }
+        if (this.config.save) {
+          delete options.plugin.block
+          this.data.rect.push({ attrs: attrs, options: options })
+        }
       } else {
         if (type == 'circle') {
-          block = new Ball(
-            this.world, {
+          attrs = {
             x: attributes.cx,
             y: attributes.cy,
             r: attributes.r,
             color: attributes.fill,
-            stroke: attributes.stroke
-          },
+            stroke: attributes.stroke,
+            id: attributes.id
+          }
+          block = new Ball(
+            this.world,
+            attrs,
             options
           );
           if (options.angle) {
@@ -184,21 +228,27 @@ class BlocksFromSVG {
               y: attributes.height * Math.sin(options.angle) + attributes.width * Math.sin(1 - options.angle)
             });
           }
+          if (this.config.save) {
+            delete options.plugin.block
+            this.data.circle.push({ attrs: attrs, options: options })
+          }
         } else {
           if (type == 'path') {
+            const vertices = Matter.Svg.pathToVertices(list[r], this.config.sample).map(v => ({ x: v.x + this.config.offset.x, y: v.y + this.config.offset.y }));
             const attrs = {
               scale: 1.0,
-              fromVertices: Matter.Svg.pathToVertices(list[r], this.options.sample),
+              fromVertices: vertices,
               color: attributes.fill,
               stroke: attributes.stroke,
-              sample: this.options.sample
-          }
+              sample: this.config.sample,
+              id: attributes.id
+            }
             block = new PolygonFromSVG(
               this.world,
               attrs,
               options
             );
-            if (this.save) {
+            if (this.config.save) {
               delete options.plugin.block
               this.data.path.push({ attrs: attrs, options: options })
             }
@@ -206,6 +256,9 @@ class BlocksFromSVG {
         }
       }
       this.blocks.push(block);
+      if (attributes.id) {
+        this.added[attributes.id] = block
+      }
     }
   }
 
@@ -228,7 +281,7 @@ class BlocksFromSVG {
   }
 
   rotate(x, y, w, h, a) {
-    console.log(x, y, w, h, a)
+    // console.log(x, y, w, h, a)
     let cx = x,
       cy = y
     let pts = [

@@ -106,7 +106,7 @@ class Block extends BlockCore {
     if (constraint.image) {
       push();
       translate(this.body.position.x, this.body.position.y);
-      const angle = Math.atan2( (posB.y + offsetB.y) - (posA.y + offsetA.y), (posB.x + offsetB.x) - (posA.x + offsetA.x) )
+      const angle = Math.atan2((posB.y + offsetB.y) - (posA.y + offsetA.y), (posB.x + offsetB.x) - (posA.x + offsetA.x))
       rotate(angle + Math.PI / 2);
       imageMode(CENTER);
       image(constraint.image, this.offset.x, this.offset.y, constraint.image.width * this.attributes.scale, constraint.image.height * this.attributes.scale);
@@ -183,7 +183,7 @@ class Block extends BlockCore {
    * @memberof Block
    */
   collideWith(block) {
-    if (block) {
+    if (block && !this.collisions.includes(block)) {
       this.collisions.push(block);
     }
   }
