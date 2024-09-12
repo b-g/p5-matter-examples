@@ -1,0 +1,26 @@
+<svg width="1280" height="2304" viewBox="0 0 1280 2304" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="switches">
+<rect id="passE" x="887" y="231" width="66" height="17" fill="#FF00FF"/>
+<rect id="passK" x="768" y="257" width="66" height="17" fill="#FF00FF"/>
+<rect id="passU" x="649" y="257" width="66" height="17" fill="#FF00FF"/>
+<rect id="passP" x="530" y="231" width="66" height="17" fill="#FF00FF"/>
+<rect id="switch6" x="699" y="422" width="85" height="20" fill="#2400FF"/>
+<rect id="switch5A" x="699.887" y="754.731" width="20" height="125" transform="rotate(-27 699.887 754.731)" fill="#2400FF"/>
+<rect id="switch5D" x="606.887" y="800.731" width="20" height="125" transform="rotate(-27 606.887 800.731)" fill="#2400FF"/>
+<rect id="switch4A" x="217" y="748.546" width="125" height="20" transform="rotate(-17 217 748.546)" fill="#2400FF"/>
+<rect id="switch4D" x="250" y="845.546" width="125" height="20" transform="rotate(-17 250 845.546)" fill="#2400FF"/>
+<rect id="switch7" x="1034" y="1800" width="80" height="20" fill="#2400FF"/>
+<rect id="switch7_2" x="84" y="1800" width="80" height="20" fill="#2400FF"/>
+<rect id="targetT" x="657.695" y="1256.86" width="71" height="13.8559" rx="6.92795" transform="rotate(70.6621 657.695 1256.86)" fill="#FF00FF"/>
+<rect id="targetI" x="629.695" y="1179.86" width="71" height="13.8559" rx="6.92795" transform="rotate(70.6621 629.695 1179.86)" fill="#FF00FF"/>
+<rect id="targetH" x="601.074" y="1102" width="71" height="13.8559" rx="6.92795" transform="rotate(70.6621 601.074 1102)" fill="#FF00FF"/>
+<rect id="targetM" x="520.492" y="787" width="71" height="13.8559" rx="6.92795" transform="rotate(18.9132 520.492 787)" fill="#FF00FF"/>
+<rect id="switch3" x="382" y="773.237" width="100" height="20" transform="rotate(-17 382 773.237)" fill="#2400FF"/>
+<rect id="switch1A" x="1156.17" y="555" width="125" height="20" transform="rotate(21 1156.17 555)" fill="#2400FF"/>
+<rect id="switch1D" x="1199" y="1395.07" width="71" height="20" fill="#2400FF"/>
+<rect id="loop1BB" x="671" y="917.369" width="139.995" height="40" transform="rotate(-27.3738 671 917.369)" fill="#00FF00" fill-opacity="0.75"/>
+<rect id="loop1BR" x="790" y="688" width="40" height="170" fill="#00FF00" fill-opacity="0.75"/>
+<rect id="loop1BT" x="659.484" y="727.369" width="139.995" height="40" transform="rotate(-27.3738 659.484 727.369)" fill="#00FF00" fill-opacity="0.75"/>
+<rect id="loop1BL" x="655" y="756" width="40" height="210" fill="#00FF00" fill-opacity="0.75"/>
+</g>
+</svg>

@@ -1,0 +1,8 @@
+<svg width="1520" height="2664" viewBox="0 0 1520 2664" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect id="frameT" width="1520" height="120" fill="black"/>
+<rect id="frameB" y="2544" width="1520" height="120" fill="black"/>
+<rect id="frameL" y="120" width="120" height="2424" fill="black"/>
+<rect id="frameR" x="1480" y="120" width="40" height="2424" fill="black"/>
+<path id="frameRB" d="M1400 1930L1480 1830V2544H1400V1930Z" fill="black"/>
+<path id="frameRT" d="M1400 120H1480V1702.33L1400 1800V120Z" fill="black"/>
+</svg>
