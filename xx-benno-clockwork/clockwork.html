@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="ByronStar">
+
+  <title>Clockwork</title>
+
+  <!-- p5js -->
+  <script src="../libraries/p5.js" type="text/javascript"></script>
+  <script src="../libraries/p5.sound.js" type="text/javascript"></script>
+
+  <!-- matter.js -->
+  <script type="text/javascript" src="../libraries/decomp.min.js"></script>
+  <script type="text/javascript" src="../libraries/pathseg.js"></script>
+  <script type="text/javascript" src="../libraries/matter.js"></script>
+
+  <!-- Javascript Klassen -->
+  <script type="text/javascript" src="../classes/Mouse.js"></script>
+  <script type="text/javascript" src="../classes/BlockCore.js"></script>
+  <script type="text/javascript" src="../classes/Block.js"></script>
+  <script type="text/javascript" src="../classes/BlocksFromSVG.js"></script>
+  <script type="text/javascript" src="../classes/Ball.js"></script>
+  <script type="text/javascript" src="../classes/Magnet.js"></script>
+  <script type="text/javascript" src="../classes/Parts.js"></script>
+  <script type="text/javascript" src="../classes/Polygon.js"></script>
+  <script type="text/javascript" src="../classes/PolygonFromPoints.js"></script>
+  <script type="text/javascript" src="../classes/Stack.js"></script>
+  <script type="text/javascript" src="../classes/PolygonFromSVG.js"></script>
+
+  <!-- Javascript Programm in separater Datei -->
+  <script type="text/javascript" src="clockwork.js" id="homework"></script>
+
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: gray;
+    }
+
+    canvas,
+    #thecanvas {
+      position: absolute;
+      top: 0;
+    }
+
+    .overlay {
+      position: relative;
+      margin: 0 0 0 5px;
+    }
+
+    #sprite-background {
+      position: absolute;
+      width: 2560px;
+      height: 1600px;
+      background: url('./background.png') no-repeat;
+      z-index: -1;
+    }
+
+    #sprite-foreground {
+      position: absolute;
+      width: 2560px;
+      height: 1600px;
+      background: url('./foreground.png') no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+  <title>Pinball</title>
+</head>
+
+</head>
+
+<body>
+  <div id="sprite-background"></div>
+  <div id="thecanvas">
+    <canvas id="canvas">
+  </div>
+  <div class="overlay">
+    <input id="color" style="display: none;" type="text" value="#00800080" data-coloris>
+  </div>
+  <!-- <div id="sprite-foreground"></div> -->
+</body>
+
+</html>
