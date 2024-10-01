@@ -28,10 +28,13 @@ p5.js × matter.js
 * [5-hit-sound](https://b-g.github.io/p5-matter-examples/5-hit-sound/)
 * [6-add-remove-bodies](https://b-g.github.io/p5-matter-examples/6-add-remove-bodies/)
 * [6-camera-follow-canvas](https://b-g.github.io/p5-matter-examples/6-camera-follow-canvas/)
-* [6-endless-canvas](https://b-g.github.io/p5-matter-examples/6-endless-canvas/)
-* [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
-* [6-parallax](https://b-g.github.io/p5-matter-examples/6-parallax/)
 * [6-custom-class](https://b-g.github.io/p5-matter-examples/6-custom-class/)
+* [6-endless-canvas](https://b-g.github.io/p5-matter-examples/6-endless-canvas/)
+* [6-multiple-scenes](https://b-g.github.io/p5-matter-examples/6-multiple-scenes/)
+* [6-parallax](https://b-g.github.io/p5-matter-examples/6-parallax/)
+* [6-small-canvas-pixel](https://b-g.github.io/p5-matter-examples/6-small-canvas-pixel/)
+* [6-sprites-canvas-sandwich](https://b-g.github.io/p5-matter-examples/6-sprites-canvas-sandwich/)
+* [7-clock-polar](https://b-g.github.io/p5-matter-examples/7-clock-polar/)
 * [xx-benno-step7](https://b-g.github.io/p5-matter-examples/xx-benno-step7/)
 
 ## Class reference
