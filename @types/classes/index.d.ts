@@ -73,7 +73,6 @@ let box = new Block(world, attributes, options)
 declare class Block extends BlockCore {
     /** @type {Matter.Constraint[]} */ constraints: Matter.Constraint[];
     collisions: any[];
-    offset: any;
     /**
      * Draws the constraints (if any) of the matter body to the p5 canvas
      * @method drawConstraints
@@ -104,6 +103,50 @@ declare class Block extends BlockCore {
      * @memberof Block
      */
     collideWith(block: Block): void;
+    /**
+     * Rotates the block to a specific angle (absolute)
+     * set the angle of the block to the given angle
+     * @param {number} rotation - The angle in radians
+     * @param {Matter.Vector} [point] - The point to rotate around
+     * @param {boolean} [updateVelocity] - Whether to update the velocity of the block
+     * @memberof Block
+     * @example
+     * // Rotate the block to 45 degrees
+     * block.rotateTo(PI / 4)
+     *
+     * // Rotate the block to 45 degrees around a specific point
+     * block.rotateTo(PI / 4, { x: 100, y: 100 })
+     *
+     * // Rotate the block to 45 degrees around a specific point and update the velocity
+     * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+     *
+     * // Rotate the block to 45 degrees around a specific point and update the velocity
+     * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+     */
+    rotateTo(rotation: number, point?: Matter.Vector, updateVelocity?: boolean): void;
+    /**
+     * Rotates the block by a specific angle (relative)
+     * adds the angle to the current angle of the block
+     * @param {number} rotation - The angle in radians
+     * @param {Matter.Vector} [point] - The point to rotate around
+     * @param {boolean} [updateVelocity] - Whether to update the velocity of the block
+     * @memberof Block
+     * @example
+     * // Rotate the block by 45 degrees
+     * block.rotate(PI / 4)
+     *
+     * // Rotate the block by 45 degrees around a specific point
+     * block.rotate(PI / 4, { x: 100, y: 100 })
+     */
+    rotate(rotation: number, point?: Matter.Vector, updateVelocity?: boolean): void;
+    /**
+     * Sets the mass centre of the block to a specific offset
+     * the offset is relative to the current mass centre
+     * @param {Block} block
+     * @param {Matter.Vector} offset
+     * @memberof Block
+     */
+    setMassCentre(offset: Matter.Vector): void;
     /**
      * Draw an image "sprite" instead of the shape of the block.
      * Make sure to set attributes.image so that there is an image to draw.
@@ -138,6 +181,7 @@ declare class BlockCore {
     world: Matter.World;
     attributes: any;
     options: any;
+    offset: any;
     addBody(): void;
     body: any;
     /**
@@ -196,12 +240,37 @@ declare class BlocksFromSVG {
      * @param {Block[]} blocks
      * @param {Matter.IChamferableBodyDefinition} options
      */
-    constructor(world: Matter.World, file: string, blocks: Block[], options: Matter.IChamferableBodyDefinition);
+    constructor(world: Matter.World, file: string, blocks: Block[], options: Matter.IChamferableBodyDefinition, config: any);
     blocks: Block[];
+    added: {};
     world: Matter.World;
     options: any;
+    config: any;
+    beg: Date;
+    file: string;
+    data: {
+        rect: any[];
+        circle: any[];
+        path: any[];
+    };
     promise: any;
     createBlocks(type: any, list: any): void;
+    matrix(x: any, y: any, w: any, h: any, a: any, b: any, c: any, d: any, e: any, f: any): {
+        x: number;
+        y: number;
+    }[];
+    matrixPoint(x: any, y: any, a: any, b: any, c: any, d: any, e: any, f: any): {
+        x: number;
+        y: number;
+    };
+    rotate(x: any, y: any, w: any, h: any, a: any): {
+        x: number;
+        y: number;
+    }[];
+    rotatePoint(x: any, y: any, cx: any, cy: any, a: any): {
+        x: number;
+        y: number;
+    };
     attributes2object(elem: any): {};
 }
 /**
@@ -435,10 +504,10 @@ let block = new PolygonFromSVG(world, attributes, options)
 declare class PolygonFromSVG extends Block {
     addBodyVertices(vertices: any): void;
     /**
-     * @param {Matter.Vector[]} vertices
-     * @returns {Matter.Vector}
-     * @memberof PolygonFromSVG
-     */
+       * @param {Matter.Vector[]} vertices
+       * @returns {Matter.Vector}
+       * @memberof PolygonFromSVG
+       */
     getCenter(vertices: Matter.Vector[]): Matter.Vector;
 }
 /**
@@ -475,4 +544,4 @@ declare class Stack extends Block {
 }
 
 
-// ./sample/generate-types.bash - Last created: Mi 21 Jun 2023 19:44:34 CEST
+// ./sample/generate-types.bash - Last created: Tue Oct  1 10:50:40 CEST 2024
