@@ -39,9 +39,9 @@ class Block extends BlockCore {
   /** @type {Matter.Constraint[]} */ constraints;
 
   /**
-   * @param {Matter.World} world 
-   * @param {object} attributes 
-   * @param {Matter.IChamferableBodyDefinition} options 
+   * @param {Matter.World} world
+   * @param {object} attributes
+   * @param {Matter.IChamferableBodyDefinition} options
    */
   constructor(world, attributes, options) {
     super(world, attributes, options);
@@ -186,6 +186,94 @@ class Block extends BlockCore {
     if (block && !this.collisions.includes(block)) {
       this.collisions.push(block);
     }
+  }
+
+  /**
+   * Rotates the block to a specific angle (absolute)
+   * set the angle of the block to the given angle
+   * @param {number} rotation - The angle in radians
+   * @param {Matter.Vector} [point] - The point to rotate around
+   * @param {boolean} [updateVelocity] - Whether to update the velocity of the block
+   * @memberof Block
+   * @example
+   * // Rotate the block to 45 degrees
+   * block.rotateTo(PI / 4)
+   *
+   * // Rotate the block to 45 degrees around a specific point
+   * block.rotateTo(PI / 4, { x: 100, y: 100 })
+   *
+   * // Rotate the block to 45 degrees around a specific point and update the velocity
+   * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+   *
+   * // Rotate the block to 45 degrees around a specific point and update the velocity
+   * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+   */
+  rotateTo(rotation, point, updateVelocity) {
+    const body = this.body;
+    if (!point) {
+      Matter.Body.setAngle(body, rotation, updateVelocity);
+    } else {
+      const currentRotation = body.angle;
+      const delta = rotation - currentRotation;
+      const cos = Math.cos(delta),
+        sin = Math.sin(delta),
+        dx = body.position.x - point.x,
+        dy = body.position.y - point.y;
+
+      Matter.Body.setPosition(body, {
+        x: point.x + (dx * cos - dy * sin),
+        y: point.y + (dx * sin + dy * cos)
+      }, updateVelocity);
+
+      Matter.Body.setAngle(body, rotation, updateVelocity);
+    }
+  };
+
+  /**
+   * Rotates the block by a specific angle (relative)
+   * adds the angle to the current angle of the block
+   * @param {number} rotation - The angle in radians
+   * @param {Matter.Vector} [point] - The point to rotate around
+   * @param {boolean} [updateVelocity] - Whether to update the velocity of the block
+   * @memberof Block
+   * @example
+   * // Rotate the block by 45 degrees
+   * block.rotate(PI / 4)
+   *
+   * // Rotate the block by 45 degrees around a specific point
+   * block.rotate(PI / 4, { x: 100, y: 100 })
+   */
+  rotate(rotation, point, updateVelocity) {
+    const body = this.body;
+    if (!point) {
+      Matter.Body.setAngle(body, body.angle + rotation, updateVelocity);
+    } else {
+      const cos = Math.cos(rotation),
+        sin = Math.sin(rotation),
+        dx = body.position.x - point.x,
+        dy = body.position.y - point.y;
+
+      Matter.Body.setPosition(body, {
+        x: point.x + (dx * cos - dy * sin),
+        y: point.y + (dx * sin + dy * cos)
+      }, updateVelocity);
+
+      Matter.Body.setAngle(body, body.angle + rotation, updateVelocity);
+    }
+  };
+
+  /**
+   * Sets the mass centre of the block to a specific offset
+   * the offset is relative to the current mass centre
+   * @param {Block} block
+   * @param {Matter.Vector} offset
+   * @memberof Block
+   */
+  setMassCentre(offset) {
+    this.body.position.x += offset.x;
+    this.body.position.y += offset.y;
+    this.body.positionPrev.x += offset.x;
+    this.body.positionPrev.y += offset.y;
   }
 
   /**
