@@ -197,18 +197,18 @@ class Block extends BlockCore {
    * @memberof Block
    * @example
    * // Rotate the block to 45 degrees
-   * block.rotateTo(PI / 4)
+   * block.rotate(PI / 4)
    *
    * // Rotate the block to 45 degrees around a specific point
-   * block.rotateTo(PI / 4, { x: 100, y: 100 })
+   * block.rotate(PI / 4, { x: 100, y: 100 })
    *
    * // Rotate the block to 45 degrees around a specific point and update the velocity
-   * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+   * block.rotate(PI / 4, { x: 100, y: 100 }, true)
    *
    * // Rotate the block to 45 degrees around a specific point and update the velocity
-   * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+   * block.rotate(PI / 4, { x: 100, y: 100 }, true)
    */
-  rotateTo(rotation, point, updateVelocity) {
+  rotate(rotation, point, updateVelocity) {
     const body = this.body;
     if (!point) {
       Matter.Body.setAngle(body, rotation, updateVelocity);
@@ -237,13 +237,13 @@ class Block extends BlockCore {
    * @param {boolean} [updateVelocity] - Whether to update the velocity of the block
    * @memberof Block
    * @example
-   * // Rotate the block by 45 degrees
-   * block.rotate(PI / 4)
+   * // Increments the rotation of the block by 1 degrees
+   * block.rotateBy(PI / 180)
    *
-   * // Rotate the block by 45 degrees around a specific point
-   * block.rotate(PI / 4, { x: 100, y: 100 })
+   * // Increments the rotation of the block by 1 degrees around a specific point
+   * block.rotateBy(PI / 180, { x: 100, y: 100 })
    */
-  rotate(rotation, point, updateVelocity) {
+  rotateBy(rotation, point, updateVelocity) {
     const body = this.body;
     if (!point) {
       Matter.Body.setAngle(body, body.angle + rotation, updateVelocity);
@@ -269,7 +269,7 @@ class Block extends BlockCore {
    * @param {Matter.Vector} offset
    * @memberof Block
    */
-  setMassCentre(offset) {
+  offsetMassCentre(offset) {
     this.body.position.x += offset.x;
     this.body.position.y += offset.y;
     this.body.positionPrev.x += offset.x;

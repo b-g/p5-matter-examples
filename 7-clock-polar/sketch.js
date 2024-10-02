@@ -49,9 +49,9 @@ function draw() {
   const angleMin = map(minute(), 0, 60, 0, TWO_PI);
   const angleHour = map(hour(), 0, 12, 0, TWO_PI);
 
-  handSec.rotateTo(angleSec, { x: center.x, y: center.y });
-  handMin.rotateTo(angleMin, { x: center.x, y: center.y });
-  handHour.rotateTo(angleHour, { x: center.x, y: center.y });
+  handSec.rotate(angleSec, { x: center.x, y: center.y });
+  handMin.rotate(angleMin, { x: center.x, y: center.y });
+  handHour.rotate(angleHour, { x: center.x, y: center.y });
 
   handSec.draw();
   handMin.draw();

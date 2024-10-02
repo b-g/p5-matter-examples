@@ -58,7 +58,7 @@ function draw() {
   background('black');
 
   // animate angle property of propeller
-  propeller.rotate(0.07, { x: 400, y: 300}, true);
+  propeller.rotateBy(0.07, { x: 400, y: 300}, true);
 
   // visualize collision
   const collided = Matter.Collision.collides(propeller.body, ball.body);

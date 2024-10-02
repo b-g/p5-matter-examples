@@ -18,7 +18,7 @@ function setup() {
     { x: 350, y: 50, r: 100, color: 'white', image: spriteImg },
     { restitution: 0.5, frictionAir: 0.001 } // bouncy
   );
-  ball.setMassCentre({ x: 0, y: 50 });
+  ball.offsetMassCentre({ x: 0, y: 50 });
 
   ground = new Block(
     world,
