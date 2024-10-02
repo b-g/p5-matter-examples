@@ -112,18 +112,18 @@ declare class Block extends BlockCore {
      * @memberof Block
      * @example
      * // Rotate the block to 45 degrees
-     * block.rotateTo(PI / 4)
+     * block.rotate(PI / 4)
      *
      * // Rotate the block to 45 degrees around a specific point
-     * block.rotateTo(PI / 4, { x: 100, y: 100 })
+     * block.rotate(PI / 4, { x: 100, y: 100 })
      *
      * // Rotate the block to 45 degrees around a specific point and update the velocity
-     * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+     * block.rotate(PI / 4, { x: 100, y: 100 }, true)
      *
      * // Rotate the block to 45 degrees around a specific point and update the velocity
-     * block.rotateTo(PI / 4, { x: 100, y: 100 }, true)
+     * block.rotate(PI / 4, { x: 100, y: 100 }, true)
      */
-    rotateTo(rotation: number, point?: Matter.Vector, updateVelocity?: boolean): void;
+    rotate(rotation: number, point?: Matter.Vector, updateVelocity?: boolean): void;
     /**
      * Rotates the block by a specific angle (relative)
      * adds the angle to the current angle of the block
@@ -132,13 +132,13 @@ declare class Block extends BlockCore {
      * @param {boolean} [updateVelocity] - Whether to update the velocity of the block
      * @memberof Block
      * @example
-     * // Rotate the block by 45 degrees
-     * block.rotate(PI / 4)
+     * // Increments the rotation of the block by 1 degrees
+     * block.rotateBy(PI / 180)
      *
-     * // Rotate the block by 45 degrees around a specific point
-     * block.rotate(PI / 4, { x: 100, y: 100 })
+     * // Increments the rotation of the block by 1 degrees around a specific point
+     * block.rotateBy(PI / 180, { x: 100, y: 100 })
      */
-    rotate(rotation: number, point?: Matter.Vector, updateVelocity?: boolean): void;
+    rotateBy(rotation: number, point?: Matter.Vector, updateVelocity?: boolean): void;
     /**
      * Sets the mass centre of the block to a specific offset
      * the offset is relative to the current mass centre
@@ -146,7 +146,7 @@ declare class Block extends BlockCore {
      * @param {Matter.Vector} offset
      * @memberof Block
      */
-    setMassCentre(offset: Matter.Vector): void;
+    offsetMassCentre(offset: Matter.Vector): void;
     /**
      * Draw an image "sprite" instead of the shape of the block.
      * Make sure to set attributes.image so that there is an image to draw.
@@ -544,4 +544,4 @@ declare class Stack extends Block {
 }
 
 
-// ./sample/generate-types.bash - Last created: Tue Oct  1 10:50:40 CEST 2024
+// ./sample/generate-types.bash - Last created: Wed Oct  2 07:54:28 CEST 2024
