@@ -1,8 +1,42 @@
 {
-  "liveServer.settings.port": 5502,
-  "liveServer.settings.https": {
-    "enable": true, //set it true to enable the feature.
-    "cert": "/Users/andipollok/localhost-cert.pem", //full path of the certificate
-    "key": "/Users/andipollok/localhost-key.pem" //full path of the private key
-  }
+  "liveServer.settings.port": 5502
+
+  // How to activate HTTPS
+  // Why? To access the motion sensors on iOS devices, you need to use HTTPS
+
+  // Step 1: Generatie HTTPS certificates (see below)
+  // Step 2: Uncomment the following settings (liveServer.settings.https)
+  //         Attention: there needs to be a comma at the end of the line above
+  // Step 3: Replace USERNAME with your MacOS username in these settings
+  // Step 4: Run the server e.g. with LiveServer Extension
+  // Step 5: Open the URL in your browser on the iPhone with https://YOURIP:5502
+
+  // ,
+  // "liveServer.settings.https": {
+  //   "enable": true, //set it true to enable the feature.
+  //   "cert": "/Users/USERNAME/localhost-cert.pem", //full path of the certificate
+  //   "key": "/Users/USERNAME/localhost-key.pem", //full path of the private key
+  //   "passphrase": "" //passphrase for the private key
+  // }
+
+  /*
+  Generate HTTPS certificates on MacOS locally
+
+  ## Step 1: Find out your IP address
+
+  > ipconfig getifaddr en0
+  
+  This will return an IP address, e.g. 172.20.23.170
+  Copy (CMD+C) this IP address to use it in the next step
+  
+  ## Step 2: Generate certificates
+  Important: paste your IP address as an additional parameter
+  
+  > mkcert -key-file ~/localhost-key.pem -cert-file ~/localhost-cert.pem -install localhost 127.0.0.1 172.20.23.170
+
+  Done!
+  Attention: each time you're on a new network, you need to generate new certificates with the new IP address
+
+  Further information on this method: https://gist.github.com/joshlawton/3e365673a09262b6604873f6cbc99bad
+  */
 }
