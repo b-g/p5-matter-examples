@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script language="javascript" type="text/javascript" src="motionsensor.js"></script>
+
+  <script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="../libraries/matter.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/BlockCore.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Block.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Ball.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Stack.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Mouse.js"></script>
+  <script language="javascript" type="text/javascript" src="../classes/Magnet.js"></script>
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+
+  <script>
+    // Fullscreen on mobile (not working yet for some reason)
+    if (document.webkitFullscreenElement) {
+      document.webkitCancelFullScreen();
+    } else {
+      const el = document.documentElement;
+      el.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  </script>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #333;
+    }
+
+    button {
+      /* center button */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      /* style button */
+      font-size: 50px;
+      padding: 20px;
+      border-radius: 10px;
+      border-width: 0;
+      z-index: 1;
+    }
+
+    canvas {
+      /* center canvas */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+</html>
