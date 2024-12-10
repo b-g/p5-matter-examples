@@ -22,7 +22,7 @@ function setup() {
     { plugin: { wrap: wrap } }
   );
   ground = new Block(world,
-    { x: width/2, y: height - 25, w: 750, h: 25, color: 'grey' },
+    { x: width / 2, y: height - 25, w: 750, h: 25, color: 'grey' },
     { isStatic: true, plugin: { wrap: wrap } }
   );
 
@@ -31,9 +31,6 @@ function setup() {
 
   // run the engine
   Matter.Runner.run(engine);
-
-  // rotate the polygon
-  Matter.Body.setAngle(polygon.body, random(0, 360));
 }
 
 function draw() {
@@ -49,6 +46,6 @@ function draw() {
 
 function keyPressed() {
   if (key === 'R' || key === 'r') {
-      Matter.Body.setAngle(polygon.body, random(0, 360));
+    Matter.Body.setAngle(polygon.body, random(0, 360));
   }
 }
