@@ -1,8 +1,0 @@
-{
-  "liveServer.settings.port": 5502,
-  "liveServer.settings.https": {
-    "enable": true, //set it true to enable the feature.
-    "cert": "/Users/andipollok/localhost-cert.pem", //full path of the certificate
-    "key": "/Users/andipollok/localhost-key.pem" //full path of the private key
-  }
-}
